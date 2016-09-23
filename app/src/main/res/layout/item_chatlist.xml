@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="70dp"
+              android:orientation="horizontal"
+              android:padding="3dp">
+
+    <com.zzy.frank.www.citylove_master.ui.RoundImageView
+        android:id="@+id/id_chatlist_pic"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:src="@mipmap/ic_launcher"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/id_chatlist_name"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:gravity="center|left"
+            android:paddingLeft="10dp"
+            android:text="孙艳艳"
+            android:textColor="@android:color/black"
+            android:textSize="16dp"
+            />
+
+        <TextView
+            android:id="@+id/id_chatlist_msg"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:gravity="center|left"
+            android:text="还啥子？"
+            android:textSize="14dp"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/id_chatlist_time"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_weight="2"
+        android:paddingTop="40dp"
+        android:textSize="14dp"
+        />
+</LinearLayout>

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="com.zzy.frank.www.citylove_master.activity.ZhengyouIfActivity">
+
+    <android.support.design.widget.AppBarLayout
+        app:elevation="12dp"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/toolbar"
+            />
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            >
+
+            <LinearLayout
+                android:id="@+id/id_zhengyou_linear_age"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="3"
+                    android:gravity="left|center"
+                    android:paddingLeft="10dp"
+                    android:text="年龄"
+                    android:textColor="@android:color/black"
+                    android:textSize="13dp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    />
+
+                <TextView
+                    android:id="@+id/id_zhengyouif_age"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="3"
+                    android:gravity="right|center"
+                    android:paddingRight="10dp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lightgrey">
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/id_zhengyou_linear_live"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:gravity="left|center"
+                    android:paddingLeft="10dp"
+                    android:text="居住地"
+                    android:textColor="@android:color/black"
+                    android:textSize="13dp"
+                    />
+
+                <TextView
+                    android:id="@+id/id_zhengyouif_local"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="3"
+                    android:gravity="right|center"
+                    android:paddingRight="10dp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lightgrey">
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/id_zhengyou_linear_heiht"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="3"
+                    android:gravity="left|center"
+                    android:paddingLeft="10dp"
+                    android:text="身高"
+                    android:textColor="@android:color/black"
+                    android:textSize="13dp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    />
+
+                <TextView
+                    android:id="@+id/id_zhengyouif_height"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="3"
+                    android:gravity="right|center"
+                    android:paddingRight="10dp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lightgrey">
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/id_zhengyou_linear_xueli"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:gravity="left|center"
+                    android:paddingLeft="10dp"
+                    android:text="学历"
+                    android:textColor="@android:color/black"
+                    android:textSize="13dp"
+                    />
+
+                <TextView
+                    android:id="@+id/id_zhengyouif_xueli"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="3"
+                    android:gravity="right|center"
+                    android:paddingRight="10dp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lightgrey">
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/id_zhengyou_linear_shouru"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:gravity="left|center"
+                    android:paddingLeft="10dp"
+                    android:text="月收入"
+                    android:textColor="@android:color/black"
+                    android:textSize="13dp"
+                    />
+
+                <TextView
+                    android:id="@+id/id_zhengyouif_money"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="3"
+                    android:gravity="right|center"
+                    android:paddingRight="10dp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
+
+            <Button
+                android:id="@+id/bt_zhengyou_sure"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/wel_rb_selector"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="@android:color/white"
+                android:textSize="18dp"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

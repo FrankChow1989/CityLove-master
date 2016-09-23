@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="120dp"
+              android:layout_height="120dp"
+              android:orientation="vertical"
+              android:padding="5dp"
+    >
+
+    <com.zzy.frank.www.citylove_master.ui.RoundImageView
+        android:id="@+id/id_item_homemm_pic"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        />
+
+    <TextView
+        android:id="@+id/id_item_homemm_name"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="洋葱的眼泪|24岁"
+        android:textColor="@android:color/black"
+        android:textSize="13dp"/>
+
+</LinearLayout>

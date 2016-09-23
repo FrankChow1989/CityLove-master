@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="300dp"
+              android:layout_height="200dp"
+              android:layout_margin="10dp"
+              android:orientation="vertical">
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_weight="1"
+        android:gravity="left|center"
+        android:text="选择照片"
+        android:paddingLeft="10dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary"/>
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_weight="1"
+        android:text="立即拍照"
+        android:textColor="@color/blacklight"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:textStyle="bold"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/blacklight"/>
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_weight="1"
+        android:text="从本地相册选取"
+        android:textColor="@color/blacklight"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:textStyle="bold"/>
+
+</LinearLayout>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="100dp"
+              android:orientation="horizontal"
+              android:padding="5dp">
+
+    <com.zzy.frank.www.citylove_master.ui.RoundImageView
+        android:id="@+id/id_visit_pic"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/id_visit_name"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:text="等你"
+            android:textColor="@android:color/black"
+            android:textSize="16dp"
+            />
+
+        <TextView
+            android:id="@+id/id_visit_content"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:text="27岁.上海市.161cm"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/id_visit_from"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_weight="2"
+        android:paddingLeft="10dp"
+        android:paddingTop="15dp"
+        android:text="5.75km"
+        />
+
+</LinearLayout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="150dp"
+              android:background="@color/colorPrimary">
+
+    <com.zzy.frank.www.citylove_master.ui.RoundImageView
+        android:id="@+id/personal_info_pic"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:layout_weight="2"
+        android:src="@drawable/a3"/>
+
+    <TextView
+        android:layout_width="120dp"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/personal_info_pic"
+        android:layout_weight="1"
+        android:gravity="center|left"
+        android:paddingLeft="10dp"
+        android:text="ID:10040"
+        android:textColor="@android:color/white"
+        android:textSize="25dp"
+        android:textStyle="bold"/>
+
+</LinearLayout>

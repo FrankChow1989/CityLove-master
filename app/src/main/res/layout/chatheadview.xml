@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="213dp"
+              android:orientation="vertical"
+              android:paddingLeft="3dp"
+              android:paddingRight="3dp"
+              android:paddingTop="3dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <com.zzy.frank.www.citylove_master.ui.RoundImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:src="@drawable/a3"
+            />
+
+        <LinearLayout
+            android:id="@+id/id_chat_hongniang"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:gravity="left|center"
+                android:paddingLeft="10dp"
+                android:text="同城送爱红娘"
+                android:textColor="@android:color/black"
+                android:textSize="16dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:gravity="left|center"
+                android:paddingLeft="10dp"
+                android:text="快速搭讪找红娘帮忙"
+                android:textColor="@android:color/holo_red_light"
+                android:textSize="14dp"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:background="@color/lightgrey"
+        ></LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/id_chat_visit"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <com.zzy.frank.www.citylove_master.ui.RoundImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:src="@drawable/a3"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:gravity="left|center"
+                android:paddingLeft="10dp"
+                android:text="最近来访"
+                android:textColor="@android:color/black"
+                android:textSize="16dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:background="@color/lightgrey"
+        ></LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/id_chat_guanzhu"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <com.zzy.frank.www.citylove_master.ui.RoundImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:src="@drawable/a3"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:gravity="left|center"
+                android:paddingLeft="10dp"
+                android:text="谁关注我"
+                android:textColor="@android:color/black"
+                android:textSize="16dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

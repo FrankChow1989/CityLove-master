@@ -1,0 +1,27 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.zzy.frank.www.citylove_master.fragment.GuanzhuIFragment">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/id_guanzhu_i_recy"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        ></android.support.v7.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/bt_guanzhu_VIPupdate"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:layout_weight="8.5"
+        android:textColor="@android:color/white"
+        android:background="@drawable/wel_rb_selector"
+        android:text="升级VIP会员，查看更多来访"/>
+
+
+</LinearLayout>

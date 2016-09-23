@@ -1,0 +1,2 @@
+include ':app', ':android_bottom_library', 'galleryfinal'
+include ':badgeView'

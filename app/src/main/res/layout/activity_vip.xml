@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.zzy.frank.www.citylove_master.activity.VIPActivity">
+
+    <include
+        layout="@layout/toolbar"/>
+
+    <LinearLayout
+        android:id="@+id/liner_vip"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/white"
+        android:padding="10dp"
+        >
+
+        <com.zzy.frank.www.citylove_master.ui.RoundImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:src="@drawable/a3"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_weight="1.2"
+                android:gravity="left|center"
+                android:paddingLeft="10dp"
+                android:text="VIP特权"
+                android:textColor="@color/red"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:gravity="left|top"
+                android:paddingLeft="10dp"
+                android:text="尊享多项霸道特权,彰显尊贵身份!"
+                android:textColor="@color/blacklight"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="310dp"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        >
+
+        <Button
+            android:id="@+id/id_bt_kefu"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/wel_rb_selector"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="客服"
+            android:textColor="@android:color/white"
+            android:textSize="18dp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="客服邮箱 kefu@tongchengsongai.net"
+            android:textColor="@color/blacklight"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

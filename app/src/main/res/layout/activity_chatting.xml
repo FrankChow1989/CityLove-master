@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/ly_chat_title"
+        android:layout_width="fill_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimary">
+
+        <include layout="@layout/toolbar"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ly_chat_bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white">
+
+        <Button
+            android:id="@+id/id_chatting_send"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:onClick="sendMessage"
+            android:text="发送"/>
+
+        <EditText
+            android:id="@+id/id_chatting_edit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:maxEms="10"
+            android:layout_toLeftOf="@id/id_chatting_send"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/id_chat_ziliao"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@id/ly_chat_title"
+        android:background="@android:color/white"
+        >
+
+        <com.zzy.frank.www.citylove_master.ui.RoundImageView
+            android:id="@+id/id_chat_round"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:src="@drawable/a3"/>
+
+        <RelativeLayout
+            android:id="@+id/id_chat_re"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_toRightOf="@id/id_chat_round">
+
+            <TextView
+                android:id="@+id/id_chat_re1"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:gravity="left|bottom"
+                android:text="27岁，上海市"/>
+
+            <TextView
+                android:id="@+id/id_chat_re2"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:layout_below="@id/id_chat_re1"
+                android:gravity="left|center"
+                android:text="未婚，5000-10000"/>
+
+            <TextView
+                android:id="@+id/id_chatting_checkweixin"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:layout_below="@id/id_chat_re2"
+                android:gravity="left|top"
+                android:text="微信号：点击查看"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/id_chatting_listview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/ly_chat_bottom"
+        android:layout_below="@id/id_chat_ziliao"
+        android:cacheColorHint="#0000"
+        android:layout_marginTop="10dp"
+        android:divider="@null"
+        android:dividerHeight="5dp"
+        android:scrollbarStyle="outsideOverlay">
+    </ListView>
+
+</RelativeLayout>
