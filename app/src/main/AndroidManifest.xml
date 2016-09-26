@@ -46,7 +46,11 @@
         </activity>
         <activity android:name=".activity.AdviseActivity">
         </activity>
-        <activity android:name=".activity.ActivityAbout">
+        <activity android:name=".activity.ActivityAboutActivity">
+        </activity>
+        <activity android:name=".activity.AboutActivity">
+        </activity>
+        <activity android:name=".activity.GirlsPhotoActivity">
         </activity>
     </application>
 

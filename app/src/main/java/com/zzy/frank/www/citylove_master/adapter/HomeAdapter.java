@@ -1,6 +1,7 @@
 package com.zzy.frank.www.citylove_master.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.zzy.frank.www.citylove_master.R;
 import com.zzy.frank.www.citylove_master.bean.Homemm;
+import com.zzy.frank.www.citylove_master.ui.RoundImageView;
 
 import java.util.List;
 
@@ -28,7 +30,8 @@ public class HomeAdapter extends RecyclerView.Adapter
     private Context context;
 
     //Onclik接口
-    public interface OnItemClickListener {
+    public interface OnItemClickListener
+    {
 
         void onItemClick(View view, int position);
 
@@ -38,7 +41,8 @@ public class HomeAdapter extends RecyclerView.Adapter
 
     private OnItemClickListener mOnItemClickListener;
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
+    public void setOnItemClickListener(OnItemClickListener listener)
+    {
         this.mOnItemClickListener = listener;
     }
 
@@ -65,16 +69,23 @@ public class HomeAdapter extends RecyclerView.Adapter
                 .load(mList.get(position).getPic())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(homemmViewHolder.idItemHomemmPic);
-        homemmViewHolder.idItemHomemmName.setText(mList.get(position).getName());
+
+//        homemmViewHolder.idItemHomemmName.setText(mList.get(position).getName());
+//        Uri uri = Uri.parse("res://" + context.getPackageName() + "/" + mList.get(position).getPic());
+//        homemmViewHolder.idItemHomemmPic.setImageURI(uri);
 
         setUpItemEvent(homemmViewHolder);
     }
 
-    protected void setUpItemEvent(final RecyclerView.ViewHolder holder) {
-        if (mOnItemClickListener != null) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
+    protected void setUpItemEvent(final RecyclerView.ViewHolder holder)
+    {
+        if (mOnItemClickListener != null)
+        {
+            holder.itemView.setOnClickListener(new View.OnClickListener()
+            {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v)
+                {
 
                     int layoutpostion = holder.getLayoutPosition();
                     mOnItemClickListener.onItemClick(holder.itemView, layoutpostion);
@@ -83,9 +94,11 @@ public class HomeAdapter extends RecyclerView.Adapter
 
             //longclick
 
-            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener()
+            {
                 @Override
-                public boolean onLongClick(View v) {
+                public boolean onLongClick(View v)
+                {
 
                     int layoutpostion = holder.getLayoutPosition();
                     mOnItemClickListener.onItemLongClick(holder.itemView, layoutpostion);
@@ -105,7 +118,7 @@ public class HomeAdapter extends RecyclerView.Adapter
     static class HomemmViewHolder extends RecyclerView.ViewHolder
     {
         @Bind(R.id.id_item_homemm_pic)
-        ImageView idItemHomemmPic;
+        RoundImageView idItemHomemmPic;
         @Bind(R.id.id_item_homemm_name)
         TextView idItemHomemmName;
 

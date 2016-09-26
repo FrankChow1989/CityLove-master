@@ -9,6 +9,7 @@ import android.widget.RemoteViews;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.zzy.frank.www.citylove_master.dao.MessageDB;
 import com.zzy.frank.www.citylove_master.dao.UserDB;
 import com.zzy.frank.www.citylove_master.util.SharePreferenceUtil;
@@ -51,6 +52,7 @@ public class PushApplication extends Application
         mApplication = this;
         initData();
         mRequestQueue = Volley.newRequestQueue(getApplicationContext());
+        Fresco.initialize(this);
     }
 
     public static RequestQueue getHttpQueues() {

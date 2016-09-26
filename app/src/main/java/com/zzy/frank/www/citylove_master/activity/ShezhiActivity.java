@@ -46,10 +46,13 @@ public class ShezhiActivity extends AppCompatActivity
                 break;
             case R.id.id_shezhi_activtyabout:
 
-                intent.setClass(this,ActivityAbout.class);
+                intent.setClass(this,ActivityAboutActivity.class);
 
                 break;
             case R.id.id_shezhi_about:
+
+                intent.setClass(this,AboutActivity.class);
+
                 break;
             case R.id.id_shezhi_cleardata:
                 break;

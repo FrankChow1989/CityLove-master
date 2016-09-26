@@ -84,7 +84,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:background="@android:color/white"
+            android:background="@drawable/bg_fujin_sayhi_normal"
             android:text="打招呼"
             android:textColor="@color/colorPrimary"
             />

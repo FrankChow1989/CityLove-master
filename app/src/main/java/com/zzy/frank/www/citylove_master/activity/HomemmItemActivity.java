@@ -1,5 +1,6 @@
 package com.zzy.frank.www.citylove_master.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -44,7 +45,6 @@ public class HomemmItemActivity extends AppCompatActivity
         setContentView(R.layout.activity_homemm_item);
         ButterKnife.bind(this);
         initView();
-
     }
 
     private void initView()
@@ -65,9 +65,11 @@ public class HomemmItemActivity extends AppCompatActivity
     @OnClick({R.id.id_homemm_photo, R.id.id_homemm_weixin, R.id.id_homemm_sendletter, R.id.id_homemm_sayhi, R.id.id_homemm_guanzhu})
     public void onClick(View view)
     {
+        Intent intent = new Intent();
         switch (view.getId())
         {
             case R.id.id_homemm_photo:
+                intent.setClass(this, GirlsPhotoActivity.class);
                 break;
             case R.id.id_homemm_weixin:
                 break;
@@ -78,5 +80,6 @@ public class HomemmItemActivity extends AppCompatActivity
             case R.id.id_homemm_guanzhu:
                 break;
         }
+        startActivity(intent);
     }
 }

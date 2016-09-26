@@ -163,7 +163,7 @@ public class FujinFragment extends Fragment
             if (isSayHi.get(id) == true)
             {
                 holder.sayhi.setText("已打过");
-                holder.sayhi.setBackgroundColor(context.getResources().getColor(R.color.lightgrey));
+                holder.sayhi.setBackgroundResource(R.drawable.bg_fujin_sayhi_done);
                 holder.sayhi.setTextColor(context.getResources().getColor(R.color.blacklight));
             }
 

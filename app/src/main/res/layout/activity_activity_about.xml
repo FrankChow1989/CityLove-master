@@ -9,7 +9,11 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:text="活动详情介绍：\n1.购买100元/季度钻石VIP服务可获得100元话费，\n2.充值30日后，可领取。\n3.本活动最终解释权归同城送爱所有。\n4.客服电话：0731-89746010 话费领取"
+        android:paddingTop="10dp"
+        android:paddingLeft="20dp"
+        />
 
 
 </LinearLayout>
