@@ -6,18 +6,37 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.android.volley.NetworkResponse;
+import com.android.volley.ParseError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.zzy.frank.www.citylove_master.MainActivity;
+import com.zzy.frank.www.citylove_master.PushApplication;
 import com.zzy.frank.www.citylove_master.R;
 import com.zzy.frank.www.citylove_master.activity.HomemmItemActivity;
 import com.zzy.frank.www.citylove_master.activity.SreachActivity;
 import com.zzy.frank.www.citylove_master.activity.VIPActivity;
 import com.zzy.frank.www.citylove_master.adapter.HomeAdapter;
 import com.zzy.frank.www.citylove_master.bean.Homemm;
+import com.zzy.frank.www.citylove_master.util.VolleyInterface;
+import com.zzy.frank.www.citylove_master.util.VolleyRequest;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,28 +64,95 @@ public class HomeFragment extends Fragment
         view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
         initViews();
+        getData();
+        return view;
+    }
 
-        mAdapter = new HomeAdapter(mList, getContext());
-        mRecyclerView.setAdapter(mAdapter);
-
-        mAdapter.setOnItemClickListener(new HomeAdapter.OnItemClickListener()
+    private void getData()
+    {
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        String url = "https://oetlj49uy.qnssl.com/home.txt";
+        JsonObjectRequest objRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject obj)
+                    {
+                        System.out.println("---sssssssssssssss---:" + obj);
+                        pasreData(obj);
+                    }
+                }, new Response.ErrorListener()
         {
             @Override
-            public void onItemClick(View view, int position)
+            public void onErrorResponse(VolleyError error)
             {
-                //Toast.makeText(getContext(), "Click" + position, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getContext(), HomemmItemActivity.class);
-                startActivity(intent);
+                error.getMessage();
+            }
+        })
+        {
+            protected Response<JSONObject> parseNetworkResponse(NetworkResponse response)
+            {
+                JSONObject jsonObject;
+                try
+                {
+                    jsonObject = new JSONObject(new String(response.data, "GBK"));
+                    return Response.success(jsonObject, HttpHeaderParser.parseCacheHeaders(response));
+                } catch (UnsupportedEncodingException e)
+                {
+                    e.printStackTrace();
+                    return Response.error(new ParseError(e));
+                } catch (JSONException e)
+                {
+                    e.printStackTrace();
+                    return Response.error(new ParseError(e));
+                }
+            }
+        };
+//        objRequest.setTag("obj");
+        queue.add(objRequest);
+    }
+
+    private void pasreData(JSONObject obj)
+    {
+        try
+        {
+            JSONArray array = obj.getJSONArray("home");
+            for (int i = 0; i < array.length(); i++)
+            {
+                JSONObject js = (JSONObject) array.opt(i);
+                Homemm homemm = new Homemm();
+                homemm.setId(js.getString("id"));
+                homemm.setName(js.getString("nickname"));
+                homemm.setPic(js.getString("pic"));
+
+                mList.add(homemm);
             }
 
-            @Override
-            public void onItemLongClick(View view, int position)
-            {
-                Toast.makeText(getContext(), "LongClick" + position, Toast.LENGTH_SHORT).show();
-            }
-        });
+            mAdapter = new HomeAdapter(mList, getContext());
+            mRecyclerView.setAdapter(mAdapter);
 
-        return view;
+            mAdapter.setOnItemClickListener(new HomeAdapter.OnItemClickListener()
+            {
+                @Override
+                public void onItemClick(View view, int position)
+                {
+                    //Toast.makeText(getContext(), "Click" + position, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getContext(), HomemmItemActivity.class);
+                    intent.putExtra("id", mList.get(position).getId());
+                    startActivity(intent);
+                }
+
+                @Override
+                public void onItemLongClick(View view, int position)
+                {
+                    Toast.makeText(getContext(), "LongClick" + position, Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        } catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     private void initViews()
@@ -81,14 +167,13 @@ public class HomeFragment extends Fragment
 //                DividerItemDecoration.VERTICAL_LIST);
 //        mRecyclerView.addItemDecoration(decor);
 
-        for (int i = 0; i < 18; i++)
-        {
-            Homemm homemm = new Homemm();
-            homemm.setPic(R.drawable.a3);
-            homemm.setName("洋葱的眼泪|24岁");
-            mList.add(homemm);
-        }
-
+//        for (int i = 0; i < 18; i++)
+//        {
+//            Homemm homemm = new Homemm();
+//            homemm.setPic(R.drawable.a3);
+//            homemm.setName("洋葱的眼泪|24岁");
+//            mList.add(homemm);
+//        }
     }
 
     @Override

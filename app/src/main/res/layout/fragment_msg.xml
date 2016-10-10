@@ -41,11 +41,11 @@
             android:textColor="@android:color/white"/>
     </LinearLayout>
 
-    <ListView
+    <com.zzy.frank.www.citylove_master.ui.ListViewCompat
         android:id="@+id/chatting_recy"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        ></ListView>
+        ></com.zzy.frank.www.citylove_master.ui.ListViewCompat>
 
 </LinearLayout>

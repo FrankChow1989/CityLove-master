@@ -70,7 +70,7 @@ public class HomeAdapter extends RecyclerView.Adapter
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(homemmViewHolder.idItemHomemmPic);
 
-//        homemmViewHolder.idItemHomemmName.setText(mList.get(position).getName());
+        homemmViewHolder.idItemHomemmName.setText(mList.get(position).getName());
 //        Uri uri = Uri.parse("res://" + context.getPackageName() + "/" + mList.get(position).getPic());
 //        homemmViewHolder.idItemHomemmPic.setImageURI(uri);
 

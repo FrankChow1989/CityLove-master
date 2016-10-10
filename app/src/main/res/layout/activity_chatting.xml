@@ -21,7 +21,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@android:color/white">
+        android:background="@android:color/white"
+        android:visibility="visible">
 
         <Button
             android:id="@+id/id_chatting_send"
@@ -40,11 +41,22 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:maxEms="10"
             android:layout_toLeftOf="@id/id_chatting_send"
+            android:maxEms="10"
             android:textSize="18sp"/>
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/ly_chat_bottom1"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimaryDark"
+        android:text="回复索要联系方式"
+        android:textColor="@android:color/white"
+        android:textSize="16dp"
+        android:gravity="center"
+        android:visibility="gone"/>
 
     <RelativeLayout
         android:id="@+id/id_chat_ziliao"
@@ -102,8 +114,8 @@
         android:layout_height="fill_parent"
         android:layout_above="@id/ly_chat_bottom"
         android:layout_below="@id/id_chat_ziliao"
-        android:cacheColorHint="#0000"
         android:layout_marginTop="10dp"
+        android:cacheColorHint="#0000"
         android:divider="@null"
         android:dividerHeight="5dp"
         android:scrollbarStyle="outsideOverlay">

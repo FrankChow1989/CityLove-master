@@ -5,17 +5,28 @@ package com.zzy.frank.www.citylove_master.bean;
  */
 public class Homemm
 {
-    private int pic;
+    private String id;
+    private String pic;
     private String name;
 
-    public int getPic()
+    public String getPic()
     {
         return pic;
     }
 
-    public void setPic(int pic)
+    public void setPic(String pic)
     {
         this.pic = pic;
+    }
+
+    public String getId()
+    {
+        return id;
+    }
+
+    public void setId(String id)
+    {
+        this.id = id;
     }
 
     public String getName()

@@ -2,13 +2,16 @@ package com.zzy.frank.www.citylove_master;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.util.TimeUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.ashokvarma.bottomnavigation.BadgeItem;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
@@ -19,6 +22,8 @@ import com.zzy.frank.www.citylove_master.fragment.MSGFragment;
 import com.zzy.frank.www.citylove_master.fragment.PersonFragment;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -27,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
 {
     @Bind(R.id.bottom_navigation_bar)
     BottomNavigationBar bottomNavigationBar;
+    @Bind(R.id.id_mian_timeup)
+    LinearLayout idMianTimeup;
     private long exitTime = 0;
     private ArrayList<Fragment> fragments;
     int lastSelectedPosition = 0;
@@ -35,17 +42,25 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     FragmentManager fm;
     FragmentTransaction ft;
 
+    private PushApplication mApplication;
+
+    Handler handler;
+    Handler handler1;
+    Runnable runnable;
+    Runnable runnable1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        mApplication = (PushApplication) this.getApplication();
+        getBadegeNum();
         bottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED);
         numberBadgeItem = new BadgeItem()
                 .setBorderWidth(4)
                 .setBackgroundColorResource(R.color.colorPrimary)
-                .setText("" + lastSelectedPosition)
                 .setHideOnSelect(false);
         bottomNavigationBar
                 .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC
@@ -62,6 +77,42 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         bottomNavigationBar.setTabSelectedListener(this);
     }
 
+    private void getBadegeNum()
+    {
+        for (int i = 0; i < mApplication.getUserDB().getUserIds().size(); i++)
+        {
+            lastSelectedPosition += mApplication.getMessageDB().getUserUnReadMsgs(mApplication.getUserDB().getUserIds()).get(mApplication.getUserDB().getUserIds().get(i));
+            System.out.println("-----------lastSelectedPosition-----------:" + lastSelectedPosition);
+        }
+    }
+
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+
+        handler = new Handler();
+        runnable = new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                idMianTimeup.setVisibility(View.VISIBLE);
+                new Handler().postDelayed(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        idMianTimeup.setVisibility(View.GONE);
+                    }
+                }, 5000);
+                handler.postDelayed(runnable, 60000);
+            }
+        };
+        handler.postDelayed(runnable, 60000);
+
+    }
+
     /**
      * 设置默认的
      */
@@ -70,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         fm = getSupportFragmentManager();
         ft = fm.beginTransaction();
         ft.add(R.id.layFrame, new HomeFragment());
+        numberBadgeItem.setText("" + lastSelectedPosition);
         ft.commit();
     }
 
@@ -124,6 +176,21 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         return super.onKeyDown(keyCode, event);
     }
 
+//    @Override
+//    protected void onRestart()
+//    {
+//        super.onRestart();
+//        if (lastSelectedPosition != 0)
+//        {
+//            lastSelectedPosition = 0;
+//            getBadegeNum();
+//            numberBadgeItem.setText("" + lastSelectedPosition);
+//        } else
+//        {
+//            numberBadgeItem.setText("" + 0);
+//        }
+//    }
+
     @Override
     public void onTabSelected(int position)
     {
@@ -136,9 +203,19 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
                 Fragment fragment = fragments.get(position);
                 if (fragment.isAdded())
                 {
+                    if (fragment == fragments.get(1))
+                    {
+                        System.out.println("sssssssssssssssssss");
+                        numberBadgeItem.setText("" + 0);
+                    }
                     ft.replace(R.id.layFrame, fragment);
                 } else
                 {
+                    if (fragment == fragments.get(1))
+                    {
+                        System.out.println("sssssssssssssssssss");
+                        numberBadgeItem.setText("" + 0);
+                    }
                     ft.add(R.id.layFrame, fragment);
                 }
                 ft.commitAllowingStateLoss();
@@ -165,6 +242,5 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     @Override
     public void onTabReselected(int position)
     {
-
     }
 }

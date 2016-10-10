@@ -1,5 +1,7 @@
 package com.zzy.frank.www.citylove_master.bean;
 
+import com.zzy.frank.www.citylove_master.ui.SlideView;
+
 import java.io.Serializable;
 
 public class User implements Serializable
@@ -11,6 +13,8 @@ public class User implements Serializable
     private String nick;//
     private int headIcon;//
     private int group;
+
+    public SlideView slideView;
 
     public String getLastMSG()
     {

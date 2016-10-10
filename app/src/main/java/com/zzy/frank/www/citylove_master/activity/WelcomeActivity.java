@@ -86,14 +86,16 @@ public class WelcomeActivity extends AppCompatActivity
         System.out.println("------mUser------:" + mUser.size());
 
 
+
+        //添加聊天MM
         if (mUserIDs.size() == 0)
         {
-            User user = new User("0000", "1", "你好", "媚儿", R.drawable.h1, 1);
-            User user1 = new User("0001", "1", "在干嘛?", "吉美", R.drawable.h0, 1);
-            User user2 = new User("0002", "1", "咋不回我了?", "月光使者", R.drawable.h2, 1);
-            User user3 = new User("0003", "1", "加个微信吧", "风一样的女子", R.drawable.h3, 1);
-            User user4 = new User("0004", "1", "给我说说吧!", "happy", R.drawable.h4, 1);
-            User user5 = new User("0005", "1", "你是做什么的?", "寂寞的星星", R.drawable.h5, 1);
+            User user = new User("0001", "1", "你好", "媚儿", R.drawable.h1, 1);
+            User user1 = new User("0002", "1", "在干嘛?", "吉美", R.drawable.h0, 1);
+            User user2 = new User("0003", "1", "咋不回我了?", "月光使者", R.drawable.h2, 1);
+            User user3 = new User("0004", "1", "加个微信吧", "风一样的女子", R.drawable.h3, 1);
+            User user4 = new User("0005", "1", "给我说说吧!", "happy", R.drawable.h4, 1);
+            User user5 = new User("0006", "1", "你是做什么的?", "寂寞的星星", R.drawable.h5, 1);
             mUser.add(user);
             mUser.add(user1);
             mUser.add(user2);
@@ -103,32 +105,26 @@ public class WelcomeActivity extends AppCompatActivity
             mApplication.getUserDB().addUser(mUser);
         }
 
-//        if (!mUserIDs.isEmpty())
-//        {
-//            for (int i = 0; i < mUserIDs.size(); i++)
-//            {
-//
-//                System.out.println("---------mUserIDs--------:"+mUserIDs.get(i));
-//
-//                if (!"0002".equals(mUserIDs.get(i)))
-//                {
-//
-//                    System.out.println("--------------add--------------");
-//
-//                    User user = new User("0002", "1", "你在干嘛?", "妮妮", R.drawable.a3, 1);
-//                    mUser.add(user);
-//                    mApplication.getUserDB().updateUser(mUser);
-//                }
-//            }
-//        }
-
         System.out.println("------mUser---1---:" + mUser.size());
 
 
-//        ChatMessage chatMessage = new ChatMessage("你好", true,
-//                "0002", R.drawable.h1, "媚儿", false,
-//                TimeUtil.getTime(System.currentTimeMillis()));
-//        mApplication.getMessageDB().add("0002", chatMessage);
+        ChatMessage chatMessage = new ChatMessage("啦啦啦啦啦啦~", true,
+                "0001", R.drawable.h1, "媚儿", false,
+                TimeUtil.getTime(System.currentTimeMillis()));
+        ChatMessage chatMessage1 = new ChatMessage("在干嘛呢？", true,
+                "0002", R.drawable.h0, "洁儿", false,
+                TimeUtil.getTime(System.currentTimeMillis()));
+        ChatMessage chatMessage2 = new ChatMessage("你喜欢我吗？", true,
+                "0003", R.drawable.h2, "月光使者", false,
+                TimeUtil.getTime(System.currentTimeMillis()));
+        ChatMessage chatMessage3 = new ChatMessage("你是做什么的？", true,
+                "0004", R.drawable.h3, "风一样的女子", false,
+                TimeUtil.getTime(System.currentTimeMillis()));
+
+        mApplication.getMessageDB().add("0001", chatMessage);
+        mApplication.getMessageDB().add("0002", chatMessage1);
+        mApplication.getMessageDB().add("0003", chatMessage2);
+        mApplication.getMessageDB().add("0004", chatMessage3);
 
     }
 
@@ -145,10 +141,10 @@ public class WelcomeActivity extends AppCompatActivity
         switch (view.getId())
         {
             case R.id.id_login_qq:
-                intent.setClass(this, MainActivity.class);
+                intent.setClass(this, TellThemActivity.class);
                 break;
             case R.id.id_login_weixin:
-                intent.setClass(this, MainActivity.class);
+                intent.setClass(this, TellThemActivity.class);
                 break;
         }
 

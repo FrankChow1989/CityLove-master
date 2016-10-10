@@ -102,7 +102,7 @@ public class MessageDB
 		return userUnReadMsgs;
 	}
 
-	private int getUnreadedMsgsCountByUserId(String userId)
+	public int getUnreadedMsgsCountByUserId(String userId)
 	{
 		createTable(userId);
 		String sql = "select count(*) as count from _" + userId + " where "

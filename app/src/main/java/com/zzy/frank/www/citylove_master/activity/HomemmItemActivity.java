@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.zzy.frank.www.citylove_master.R;
@@ -38,6 +40,11 @@ public class HomemmItemActivity extends AppCompatActivity
     @Bind(R.id.id_homemm_guanzhu)
     RoundImageView idHomemmGuanzhu;
 
+    boolean isGuanZhu = false;
+    @Bind(R.id.id_homemm_scroll)
+    ScrollView idHomemmScroll;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -60,9 +67,10 @@ public class HomemmItemActivity extends AppCompatActivity
                 onBackPressed();
             }
         });
+
     }
 
-    @OnClick({R.id.id_homemm_photo, R.id.id_homemm_weixin, R.id.id_homemm_sendletter, R.id.id_homemm_sayhi, R.id.id_homemm_guanzhu})
+    @OnClick({R.id.id_homemm_photo, R.id.id_homemm_weixin, R.id.id_homemm_sendletter, R.id.id_homemm_sayhi, R.id.id_homemm_guanzhu, R.id.homemm_head4})
     public void onClick(View view)
     {
         Intent intent = new Intent();
@@ -70,16 +78,35 @@ public class HomemmItemActivity extends AppCompatActivity
         {
             case R.id.id_homemm_photo:
                 intent.setClass(this, GirlsPhotoActivity.class);
+                startActivity(intent);
                 break;
             case R.id.id_homemm_weixin:
+                idHomemmScroll.scrollTo(0, 1600);
                 break;
             case R.id.id_homemm_sendletter:
+                // TODO: 2016/9/26 跳转聊天窗口
                 break;
             case R.id.id_homemm_sayhi:
+                idHomemmSayhi.setImageResource(R.mipmap.ic_launcher);
                 break;
             case R.id.id_homemm_guanzhu:
+
+                if (isGuanZhu == false)
+                {
+                    idHomemmGuanzhu.setImageResource(R.mipmap.ic_launcher);
+                    isGuanZhu = true;
+
+                } else if (isGuanZhu == true)
+                {
+                    idHomemmGuanzhu.setImageResource(R.drawable.a3);
+                    isGuanZhu = false;
+                }
+                break;
+            case R.id.homemm_head4:
+
+
+
                 break;
         }
-        startActivity(intent);
     }
 }

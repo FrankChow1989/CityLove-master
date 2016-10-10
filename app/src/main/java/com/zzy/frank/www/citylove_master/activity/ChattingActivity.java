@@ -1,19 +1,26 @@
 package com.zzy.frank.www.citylove_master.activity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.zzy.frank.www.citylove_master.PushApplication;
 import com.zzy.frank.www.citylove_master.R;
 import com.zzy.frank.www.citylove_master.adapter.ChatMessageAdapter;
 import com.zzy.frank.www.citylove_master.bean.ChatMessage;
+import com.zzy.frank.www.citylove_master.bean.User;
+import com.zzy.frank.www.citylove_master.dao.UserDB;
+import com.zzy.frank.www.citylove_master.util.NetUtil;
 import com.zzy.frank.www.citylove_master.util.T;
 
 import java.util.ArrayList;
@@ -34,10 +41,22 @@ public class ChattingActivity extends AppCompatActivity
     ListView idChattingListview;
     @Bind(R.id.id_chatting_edit)
     EditText idChattingEdit;
+    @Bind(R.id.ly_chat_bottom)
+    RelativeLayout lyChatTitle;
+    @Bind(R.id.ly_chat_bottom1)
+    TextView lyChatBottom1;
 
     List<ChatMessage> mData = new ArrayList<ChatMessage>();
+    String userId;
+
     private ChatMessageAdapter mAdapter;
 
+    private PushApplication mApplication;
+    private User mFromUser;
+    private UserDB mUserDB;
+
+    SharedPreferences sp;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -45,8 +64,22 @@ public class ChattingActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatting);
         ButterKnife.bind(this);
+        mApplication = (PushApplication) getApplication();
+        mUserDB = mApplication.getUserDB();
+        sp = getSharedPreferences("isSend", MODE_PRIVATE);
+        editor = sp.edit();
 
-        toolBar.setTitle("月光使者");
+        Intent intent = getIntent();
+        userId = intent.getStringExtra("userid");
+        System.out.println("---userid---" + userId);
+
+        if (TextUtils.isEmpty(userId))
+        {
+            finish();
+        }
+
+        mFromUser = mUserDB.getUser(userId);
+        toolBar.setTitle(mFromUser.getNick());
         setSupportActionBar(toolBar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolBar.setNavigationOnClickListener(new View.OnClickListener()
@@ -57,30 +90,25 @@ public class ChattingActivity extends AppCompatActivity
                 onBackPressed();
             }
         });
-
         initView();
-        initEvent();
-
-    }
-
-    private void initEvent()
-    {
-        ChatMessage chatMessage = new ChatMessage();
-        chatMessage.setComing(true);
-        chatMessage.setDate(new Date());
-        chatMessage.setMessage("你好!");
-        chatMessage.setNickname("月光使者");
-        chatMessage.setUserId("100");
-        mData.add(chatMessage);
     }
 
     private void initView()
     {
+        mData = mApplication.getMessageDB().find(mFromUser.getUserId(), 1, 10);
         mAdapter = new ChatMessageAdapter(this, mData);
         idChattingListview.setAdapter(mAdapter);
+        idChattingListview.setSelection(mData.size() - 1);
+
+        if (sp.getBoolean("isSend", true))
+        {
+            lyChatTitle.setGravity(View.GONE);
+            lyChatBottom1.setVisibility(View.VISIBLE);
+        }
+
     }
 
-    @OnClick({R.id.id_chatting_send, R.id.id_chatting_checkweixin})
+    @OnClick({R.id.id_chatting_send, R.id.id_chatting_checkweixin, R.id.ly_chat_bottom1})
     public void onClick(View view)
     {
         switch (view.getId())
@@ -94,21 +122,51 @@ public class ChattingActivity extends AppCompatActivity
                     return;
                 }
 
+                if (!NetUtil.isNetConnected(mApplication))
+                {
+                    T.showShort(mApplication, "当前无网络连接！");
+                    return;
+                }
+
                 ChatMessage chatMessage = new ChatMessage();
                 chatMessage.setComing(false);
                 chatMessage.setDate(new Date());
                 chatMessage.setMessage(msg);
                 chatMessage.setNickname("月光使者");
-                chatMessage.setUserId("100");
+                chatMessage.setUserId("1001");
 
+                //消息存入数据库
+                mApplication.getMessageDB().add(mFromUser.getUserId(), chatMessage);
                 mData.add(chatMessage);
 
                 mAdapter.notifyDataSetChanged();
                 idChattingListview.setSelection(mData.size() - 1);
                 idChattingEdit.setText("");
 
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                // 得到InputMethodManager的实例
+                if (imm.isActive())
+                {
+                    // 如果开启
+                    imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT,
+                            InputMethodManager.HIDE_NOT_ALWAYS);
+                    // 关闭软键盘，开启方法相同，这个方法是切换开启与关闭状态的
+                }
+
+                editor.putBoolean("isSendMsg", true);
+                editor.commit();
+
+                lyChatTitle.setGravity(View.GONE);
+                lyChatBottom1.setVisibility(View.VISIBLE);
+
                 break;
             case R.id.id_chatting_checkweixin:
+
+
+                break;
+            case R.id.ly_chat_bottom1:
+
+
                 break;
         }
     }

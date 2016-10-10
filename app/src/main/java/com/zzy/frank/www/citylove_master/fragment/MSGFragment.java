@@ -1,31 +1,34 @@
 package com.zzy.frank.www.citylove_master.fragment;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
+import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.jauker.widget.BadgeView;
 import com.zzy.frank.www.citylove_master.PushApplication;
 import com.zzy.frank.www.citylove_master.R;
 import com.zzy.frank.www.citylove_master.activity.ChattingActivity;
 import com.zzy.frank.www.citylove_master.activity.KefuChattingActivity;
 import com.zzy.frank.www.citylove_master.activity.VIPActivity;
 import com.zzy.frank.www.citylove_master.activity.VisitActivity;
-import com.zzy.frank.www.citylove_master.adapter.ChatAdapter;
-import com.zzy.frank.www.citylove_master.bean.ChatList;
-import com.zzy.frank.www.citylove_master.bean.FuJinMM;
 import com.zzy.frank.www.citylove_master.bean.User;
-import com.zzy.frank.www.citylove_master.util.SharePreferenceUtil;
+import com.zzy.frank.www.citylove_master.ui.ListViewCompat;
+import com.zzy.frank.www.citylove_master.ui.RoundImageView;
+import com.zzy.frank.www.citylove_master.ui.SlideView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,11 +47,13 @@ public class MSGFragment extends Fragment
 
     View view;
     @Bind(R.id.chatting_recy)
-    ListView chattingRecy;
+    ListViewCompat chattingRecy;
 
     List<User> mList;
     ChatAdapter chatAdapter;
     private PushApplication mApplication;
+
+    private SlideView mLastSlideViewWithStatusOn;
 
     /**
      * 未读消息总数
@@ -75,22 +80,13 @@ public class MSGFragment extends Fragment
     {
         super.onCreate(savedInstanceState);
         mApplication = (PushApplication) this.getActivity().getApplication();
-        mList = mApplication.getUserDB().getUser();
-
-        System.out.println("-----------size---------:" + mList.size());
-
-        for (int i = 0; i < mList.size(); i++)
-        {
-            System.out.println("---------pic----------"+mList.get(i).getHeadIcon());
-        }
-
-
-        chatAdapter = new ChatAdapter(getContext(), mList);
-
-
         // 获取数据库中所有的用户以及未读消息个数
         mUserMessages = mApplication.getMessageDB().getUserUnReadMsgs(
                 mApplication.getUserDB().getUserIds());
+
+        for (Integer val : mUserMessages.values()) {
+            mUnReadedMsgs += val;
+        }
     }
 
     @Override
@@ -101,17 +97,39 @@ public class MSGFragment extends Fragment
         view = inflater.inflate(R.layout.fragment_msg, container, false);
         ButterKnife.bind(this, view);
         initViews();
+        mList = mApplication.getUserDB().getUser();
+        chatAdapter = new ChatAdapter();
         chattingRecy.setAdapter(chatAdapter);
 
         notifyUnReadedMsg();
-        System.out.println("----------------:" + mUserMessages);
 
         chattingRecy.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
+                String userId = mList.get(position - 1).getUserId();
+                //未读消息更新为已经读取
+
+                System.out.println("-------userid-----:" + userId);
+
+                mApplication.getMessageDB().updateReaded(userId);
+                System.out.println("---------unread-------:" + mApplication.getMessageDB().getUnreadedMsgsCountByUserId(userId));
+
+                chattingRecy.setAdapter(chatAdapter);
+
+                if (mUserMessages.containsKey(userId))
+                {
+                    Integer val = mUserMessages.get(userId);
+                    mUnReadedMsgs -= val;
+                    mUserMessages.remove(userId);
+                    chatAdapter.notifyDataSetChanged();
+                    notifyUnReadedMsg();
+                }
+
                 Intent intent = new Intent();
+                intent.putExtra("userid", mList.get(position - 1).getUserId());
                 intent.setClass(getActivity(), ChattingActivity.class);
                 startActivity(intent);
             }
@@ -195,15 +213,134 @@ public class MSGFragment extends Fragment
         switch (view.getId())
         {
             case R.id.vip:
-
                 intent.setClass(getActivity(), VIPActivity.class);
-
                 break;
             case R.id.bianji:
-
                 intent.setClass(getActivity(), KefuChattingActivity.class);
                 break;
         }
         startActivity(intent);
+    }
+
+    private class ChatAdapter extends BaseAdapter
+    {
+        @Override
+        public int getCount()
+        {
+            return mList.size();
+        }
+
+        @Override
+        public Object getItem(int position)
+        {
+            return mList.get(position);
+        }
+
+        @Override
+        public long getItemId(int position)
+        {
+            return position;
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent)
+        {
+            User user = mList.get(position);
+            String userId = user.getUserId();
+
+            ViewHolder viewHolder;
+            SlideView slideView = (SlideView) convertView;
+
+            if (slideView == null)
+            {
+                View view = LayoutInflater.from(getContext()).inflate(R.layout.item_chatlist, null);
+                slideView = new SlideView(getContext());
+                slideView.setContentView(view);
+
+                viewHolder = new ViewHolder(slideView);
+                slideView.setOnSlideListener(new SlideView.OnSlideListener()
+                {
+                    @Override
+                    public void onSlide(View view, int status)
+                    {
+                        if (mLastSlideViewWithStatusOn != null && mLastSlideViewWithStatusOn != view)
+                        {
+                            mLastSlideViewWithStatusOn.shrink();
+                        }
+
+                        if (status == SLIDE_STATUS_ON)
+                        {
+                            mLastSlideViewWithStatusOn = (SlideView) view;
+                        }
+                    }
+                });
+
+                slideView.setTag(viewHolder);
+
+            } else
+            {
+                viewHolder = (ViewHolder) slideView.getTag();
+            }
+
+            user.slideView = slideView;
+            user.slideView.shrink();
+
+            Glide.with(getContext())
+                    .load(mList.get(position).getHeadIcon())
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(viewHolder.imageView);
+
+            viewHolder.name.setText(mList.get(position).getNick());
+            viewHolder.message.setText(mList.get(position).getLastMSG());
+
+            viewHolder.deleteHolder.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    mList.remove(position);
+                    mApplication.getUserDB().updateUser(mList);
+                    chatAdapter.notifyDataSetChanged();
+                }
+            });
+
+
+            if (mUserMessages.containsKey(userId))
+            {
+                if (viewHolder.mBadgeView == null)
+                {
+                    viewHolder.mBadgeView = new BadgeView(getContext());
+                    viewHolder.mBadgeView.setTargetView(viewHolder.imageView);
+                    viewHolder.mBadgeView.setBadgeGravity(Gravity.TOP
+                            | Gravity.RIGHT);
+                    viewHolder.mBadgeView.setBadgeMargin(0, 0, 0, 0);
+                    viewHolder.mBadgeView.setBadgeCount(mUserMessages.get(userId));
+                    //viewHolder.mBadgeView.setBadgeCount(0);
+                }
+            } else
+            {
+                if (viewHolder.mBadgeView != null)
+                    viewHolder.mBadgeView.setVisibility(View.GONE);
+            }
+
+            return slideView;
+        }
+
+        class ViewHolder
+        {
+            RoundImageView imageView;
+            TextView name;
+            TextView message;
+            BadgeView mBadgeView;
+            public ViewGroup deleteHolder;
+
+            public ViewHolder(View view)
+            {
+                imageView = (RoundImageView) view.findViewById(R.id.id_chatlist_pic);
+                name = (TextView) view.findViewById(R.id.id_chatlist_name);
+                message = (TextView) view.findViewById(R.id.id_chatlist_msg);
+                deleteHolder = (ViewGroup) view.findViewById(R.id.holder);
+            }
+        }
     }
 }
