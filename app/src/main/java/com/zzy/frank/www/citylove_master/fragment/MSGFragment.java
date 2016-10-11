@@ -4,8 +4,10 @@ package com.zzy.frank.www.citylove_master.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -26,6 +27,7 @@ import com.zzy.frank.www.citylove_master.activity.KefuChattingActivity;
 import com.zzy.frank.www.citylove_master.activity.VIPActivity;
 import com.zzy.frank.www.citylove_master.activity.VisitActivity;
 import com.zzy.frank.www.citylove_master.bean.User;
+import com.zzy.frank.www.citylove_master.server.SendMsgORAddFriends;
 import com.zzy.frank.www.citylove_master.ui.ListViewCompat;
 import com.zzy.frank.www.citylove_master.ui.RoundImageView;
 import com.zzy.frank.www.citylove_master.ui.SlideView;
@@ -42,7 +44,7 @@ import butterknife.OnClick;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MSGFragment extends Fragment
+public class MSGFragment extends Fragment implements SendMsgORAddFriends.onNewFriendListener, SendMsgORAddFriends.onNewMessageListener
 {
 
     View view;
@@ -50,6 +52,7 @@ public class MSGFragment extends Fragment
     ListViewCompat chattingRecy;
 
     List<User> mList;
+
     ChatAdapter chatAdapter;
     private PushApplication mApplication;
 
@@ -59,6 +62,31 @@ public class MSGFragment extends Fragment
      * 未读消息总数
      */
     private int mUnReadedMsgs;
+
+    @Override
+    public void onAttach(Context context)
+    {
+        super.onAttach(context);
+        System.out.println("-------------onAttach------------");
+        // 设置新朋友的监听
+        SendMsgORAddFriends.friendListeners.add(this);
+        // 设置新消息的监听
+        SendMsgORAddFriends.msgListeners.add(this);
+    }
+
+    @Override
+    public void onNewFriend(User u)
+    {
+        mList.add(u);
+        System.out.println("------------增加用户的mList大小------------:" + mList.size());
+        chatAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onNewMessage(Message message)
+    {
+
+    }
 
     /**
      * 提供未读消息更新的回调，比如来了一个新消息或者用户点击查看某个用户的消息
@@ -79,25 +107,38 @@ public class MSGFragment extends Fragment
     public void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        System.out.println("--------onCreate----------");
+
         mApplication = (PushApplication) this.getActivity().getApplication();
         // 获取数据库中所有的用户以及未读消息个数
         mUserMessages = mApplication.getMessageDB().getUserUnReadMsgs(
                 mApplication.getUserDB().getUserIds());
 
-        for (Integer val : mUserMessages.values()) {
+        for (Integer val : mUserMessages.values())
+        {
             mUnReadedMsgs += val;
         }
+
+        mList = new ArrayList<>();
     }
+
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState)
     {
+        super.onCreateView(inflater,container,savedInstanceState);
+        System.out.println("--------onCreateView----------");
+
         view = inflater.inflate(R.layout.fragment_msg, container, false);
         ButterKnife.bind(this, view);
         initViews();
+
         mList = mApplication.getUserDB().getUser();
+
+        System.out.println("-----onCreateView--list---:"+mList.size());
+
         chatAdapter = new ChatAdapter();
         chattingRecy.setAdapter(chatAdapter);
 
@@ -110,14 +151,6 @@ public class MSGFragment extends Fragment
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 String userId = mList.get(position - 1).getUserId();
-                //未读消息更新为已经读取
-
-                System.out.println("-------userid-----:" + userId);
-
-                mApplication.getMessageDB().updateReaded(userId);
-                System.out.println("---------unread-------:" + mApplication.getMessageDB().getUnreadedMsgsCountByUserId(userId));
-
-                chattingRecy.setAdapter(chatAdapter);
 
                 if (mUserMessages.containsKey(userId))
                 {
@@ -125,6 +158,7 @@ public class MSGFragment extends Fragment
                     mUnReadedMsgs -= val;
                     mUserMessages.remove(userId);
                     chatAdapter.notifyDataSetChanged();
+                    chattingRecy.setSelection(position);
                     notifyUnReadedMsg();
                 }
 
@@ -141,15 +175,28 @@ public class MSGFragment extends Fragment
     public void onResume()
     {
         super.onResume();
+        System.out.println("--------onResume----------");
+        // 回调未读消息个数的更新
+        notifyUnReadedMsg();
         // 更新用户列表
-        mList = mApplication.getUserDB().getUser();
-        chatAdapter.notifyDataSetChanged();
+       // mList = mApplication.getUserDB().getUser();
+        //chatAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+        System.out.println("--------onPause----------");
+        /**
+         * 当onPause时，取消监听
+         */
+        SendMsgORAddFriends.friendListeners.clear();
+        SendMsgORAddFriends.msgListeners.clear();
     }
 
     private void initViews()
     {
-        mList = new ArrayList<>();
-
         View v = LayoutInflater.from(getContext()).inflate(R.layout.chatheadview, null);
         chattingRecy.addHeaderView(v);
 
@@ -190,6 +237,8 @@ public class MSGFragment extends Fragment
     public void onDestroyView()
     {
         super.onDestroyView();
+        System.out.println("--------onDestroyView----------");
+        System.out.println("-----onDestroyView--list---:"+mList.size());
         ButterKnife.unbind(this);
     }
 
@@ -209,7 +258,6 @@ public class MSGFragment extends Fragment
     public void onClick(View view)
     {
         Intent intent = new Intent();
-
         switch (view.getId())
         {
             case R.id.vip:

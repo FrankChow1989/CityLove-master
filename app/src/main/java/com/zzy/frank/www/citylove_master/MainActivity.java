@@ -45,9 +45,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     private PushApplication mApplication;
 
     Handler handler;
-    Handler handler1;
     Runnable runnable;
-    Runnable runnable1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -205,7 +203,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
                 {
                     if (fragment == fragments.get(1))
                     {
-                        System.out.println("sssssssssssssssssss");
                         numberBadgeItem.setText("" + 0);
                     }
                     ft.replace(R.id.layFrame, fragment);
@@ -213,7 +210,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
                 {
                     if (fragment == fragments.get(1))
                     {
-                        System.out.println("sssssssssssssssssss");
                         numberBadgeItem.setText("" + 0);
                     }
                     ft.add(R.id.layFrame, fragment);
