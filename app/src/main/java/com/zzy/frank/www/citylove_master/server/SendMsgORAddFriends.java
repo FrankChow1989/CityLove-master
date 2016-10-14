@@ -12,8 +12,11 @@ import android.support.annotation.Nullable;
 
 import com.zzy.frank.www.citylove_master.PushApplication;
 import com.zzy.frank.www.citylove_master.R;
+import com.zzy.frank.www.citylove_master.bean.ChatMessage;
 import com.zzy.frank.www.citylove_master.bean.User;
+import com.zzy.frank.www.citylove_master.dao.MessageDB;
 import com.zzy.frank.www.citylove_master.dao.UserDB;
+import com.zzy.frank.www.citylove_master.util.TimeUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +29,6 @@ public class SendMsgORAddFriends extends Service
 {
 
     PushApplication mApplication;
-    List<User> mUser = new ArrayList<>();
     List<String> mUserIDs = new ArrayList<>();
     final int ADDUSERTIME = 1;
 
@@ -35,12 +37,14 @@ public class SendMsgORAddFriends extends Service
 
     Random random = new Random();
 
+    int id;
+
     User user;
-    User user1;
+    ChatMessage msgs;
 
     public static interface onNewMessageListener
     {
-        public abstract void onNewMessage(Message message);
+        public abstract void onNewMessage(ChatMessage message);
     }
 
     public static interface onNewFriendListener
@@ -52,17 +56,20 @@ public class SendMsgORAddFriends extends Service
     {
         public void handleMessage(Message msg)
         {
-            switch (msg.what)
+            if (msg.what == 0)
             {
-                case 0:
-                    for (onNewFriendListener listener : friendListeners)
-                        listener.onNewFriend(user1);
-                    break;
+                for (onNewFriendListener listener : friendListeners)
+                {
+                    listener.onNewFriend(user);
+                }
+                for (onNewMessageListener listener : msgListeners)
+                {
+                    listener.onNewMessage(msgs);
+                }
             }
             super.handleMessage(msg);
         }
     };
-
 
     @Nullable
     @Override
@@ -77,7 +84,6 @@ public class SendMsgORAddFriends extends Service
         super.onCreate();
         System.out.println("---------------OnCreate----------------");
         mApplication = (PushApplication) this.getApplication();
-        mUser = mApplication.getUserDB().getUser();
         mUserIDs = mApplication.getUserDB().getUserIds();
     }
 
@@ -85,34 +91,28 @@ public class SendMsgORAddFriends extends Service
     public int onStartCommand(Intent intent, int flags, int startId)
     {
 
-        System.out.println("---------------StartService----------------");
-
         new Thread(new Runnable()
         {
             @Override
             public void run()
             {
                 System.out.println("------------执行-------------");
+                id = random.nextInt(10);
                 UserDB userDB = PushApplication.getInstance().getUserDB();
-                user = userDB.selectInfo("0001");
-                user1 = userDB.selectInfo("000" + random.nextInt(10));
+                user = userDB.selectInfo("000" + id);
+
+                System.out.println("-------------id----------------:" + id);
 
                 // 漏网之鱼
                 if (user == null)
                 {
-                    user = new User("0001", "1", "你好", "媚儿", R.drawable.h1, 1);
+                    user = new User("000" + id, "1", "哈哈", "媚儿", R.drawable.a3, 1);
                     userDB.addUser(user);
-                    // 通知监听的面板
+                    // 将新来的消息进行存储
+                    msgs = new ChatMessage("哈哈", "https://oetlj49uy.qnssl.com/ce.jpg", "", true, "000" + id, R.drawable.h1, "1", "媚儿", false, TimeUtil.getTime(System.currentTimeMillis()));
+                    PushApplication.getInstance().getMessageDB()
+                            .add("000" + id, msgs);
 
-                    Message message = new Message();
-                    message.what = 0;
-                    myHandler.sendMessage(message);
-                }
-
-                if (user1 == null)
-                {
-                    user1 = new User("000" + random.nextInt(10), "1", "在干嘛?", "喵喵", R.drawable.h2, 1);
-                    userDB.addUser(user1);
                     // 通知监听的面板
                     Message message = new Message();
                     message.what = 0;

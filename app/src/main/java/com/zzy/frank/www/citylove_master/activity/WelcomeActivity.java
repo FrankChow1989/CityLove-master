@@ -1,11 +1,8 @@
 package com.zzy.frank.www.citylove_master.activity;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
@@ -16,16 +13,9 @@ import android.widget.TextView;
 import com.zzy.frank.www.citylove_master.MainActivity;
 import com.zzy.frank.www.citylove_master.PushApplication;
 import com.zzy.frank.www.citylove_master.R;
-import com.zzy.frank.www.citylove_master.bean.ChatMessage;
-import com.zzy.frank.www.citylove_master.bean.User;
-import com.zzy.frank.www.citylove_master.server.AlarmReceiver;
 import com.zzy.frank.www.citylove_master.server.SendMsgORAddFriends;
 import com.zzy.frank.www.citylove_master.util.ObjectAnim;
-import com.zzy.frank.www.citylove_master.util.TimeUtil;
 import com.zzy.frank.www.citylove_master.util.ValueAnim;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -39,16 +29,10 @@ public class WelcomeActivity extends AppCompatActivity
     TextView startTitle;
     @Bind(R.id.start_content)
     TextView startContent;
-    @Bind(R.id.id_login_qq)
-    RadioButton idLoginQq;
-    @Bind(R.id.id_login_weixin)
-    RadioButton idLoginWeixin;
     @Bind(R.id.id_wel_rg)
     RadioGroup idWelRg;
 
     private int width;
-    List<User> mUser = new ArrayList<>();
-    List<String> mUserIDs = new ArrayList<>();
 
     PushApplication mApplication;
 
@@ -86,6 +70,7 @@ public class WelcomeActivity extends AppCompatActivity
         }, 1000);
 
 
+        //开启服务;ss
         Intent intent = new Intent(this, SendMsgORAddFriends.class);
         startService(intent);
 
@@ -140,18 +125,15 @@ public class WelcomeActivity extends AppCompatActivity
     @OnClick({R.id.id_login_qq, R.id.id_login_weixin})
     public void onClick(View view)
     {
-        Intent intent = new Intent();
         switch (view.getId())
         {
             case R.id.id_login_qq:
-                intent.setClass(this, TellThemActivity.class);
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
                 break;
             case R.id.id_login_weixin:
-                intent.setClass(this, TellThemActivity.class);
                 break;
         }
-
-        startActivity(intent);
         finish();
     }
 }

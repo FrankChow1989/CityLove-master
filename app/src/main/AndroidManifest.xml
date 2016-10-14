@@ -20,6 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <activity android:name=".activity.VisitActivity">
         </activity>
         <activity android:name=".activity.GuanZhuActivity">
@@ -38,9 +39,14 @@
         </activity>
         <activity android:name=".activity.StartVIPActivity">
         </activity>
-        <activity android:name=".activity.KefuChattingActivity">
+        <activity
+            android:name=".activity.KefuChattingActivity"
+            android:windowSoftInputMode="stateHidden">
         </activity>
-        <activity android:name=".activity.ChattingActivity">
+        <activity
+            android:name=".activity.ChattingActivity"
+            android:windowSoftInputMode="stateHidden"
+            >
         </activity>
         <activity android:name=".activity.SreachActivity">
         </activity>
@@ -60,7 +66,7 @@
         <service
             android:name=".server.SendMsgORAddFriends"
             />
-
+        
         <receiver
             android:name=".server.AlarmReceiver"
             android:label="@string/app_name">

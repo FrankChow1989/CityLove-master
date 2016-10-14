@@ -37,7 +37,6 @@
             android:layout_weight="3"
             android:gravity="center"
             android:padding="3dp"
-            android:text="编辑"
             android:textColor="@android:color/white"/>
     </LinearLayout>
 

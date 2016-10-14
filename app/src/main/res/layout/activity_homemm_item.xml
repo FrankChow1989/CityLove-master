@@ -40,11 +40,11 @@
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:id="@+id/id_homemm_pic"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1.2"
-                            android:layout_margin="5dp"
-                            android:background="@drawable/a3"/>
+                            android:layout_margin="5dp"/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -195,6 +195,7 @@
                             />
 
                         <TextView
+                            android:id="@+id/id_homemm_focus"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -271,6 +272,7 @@
                                 android:textSize="14dp"/>
 
                             <TextView
+                                android:id="@+id/id_homemm_date"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_weight="1"
@@ -302,6 +304,7 @@
                                 android:textSize="14dp"/>
 
                             <TextView
+                                android:id="@+id/id_homemm_whatfor"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_weight="1"
@@ -333,6 +336,7 @@
                                 android:textSize="14dp"/>
 
                             <TextView
+                                android:id="@+id/id_homemm_guannian"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_weight="1"
@@ -364,6 +368,7 @@
                                 android:textSize="14dp"/>
 
                             <TextView
+                                android:id="@+id/id_homemm_firstmeet"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_weight="1"
@@ -395,6 +400,7 @@
                                 android:textSize="14dp"/>
 
                             <TextView
+                                android:id="@+id/id_homemm_aiaiplace"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_weight="1"
@@ -452,6 +458,7 @@
                                 android:textSize="14dp"/>
 
                             <TextView
+                                android:id="@+id/id_homemm_nicname1"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_weight="1"
@@ -509,6 +516,38 @@
                                 android:layout_weight="1"
                                 android:gravity="left|center"
                                 android:paddingLeft="10dp"
+                                android:text="昵称"
+                                android:textColor="@android:color/black"
+                                android:textSize="14dp"/>
+
+                            <TextView
+                                android:id="@+id/id_homemm_age"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_weight="1"
+                                android:gravity="right|center"
+                                android:paddingRight="10dp"
+                                android:text=""
+                                android:textSize="14dp"
+                                />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#ededed"
+                            />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_weight="1"
+                                android:gravity="left|center"
+                                android:paddingLeft="10dp"
                                 android:text="居中地"
                                 android:textColor="@android:color/black"
                                 android:textSize="14dp"/>
@@ -545,6 +584,7 @@
                                 android:textSize="14dp"/>
 
                             <TextView
+                                android:id="@+id/id_homemm_tall"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_weight="1"
@@ -576,6 +616,7 @@
                                 android:textSize="14dp"/>
 
                             <TextView
+                                android:id="@+id/id_homemm_shouru"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_weight="1"
@@ -607,6 +648,7 @@
                                 android:textSize="14dp"/>
 
                             <TextView
+                                android:id="@+id/id_homemm_marrie"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_weight="1"
@@ -752,6 +794,7 @@
                                 android:textSize="14dp"/>
 
                             <TextView
+                                android:id="@+id/id_homemm_xueli"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_weight="1"
@@ -783,6 +826,7 @@
                                 android:textSize="14dp"/>
 
                             <TextView
+                                android:id="@+id/id_homemm_zhiye"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_weight="1"
@@ -814,6 +858,7 @@
                                 android:textSize="14dp"/>
 
                             <TextView
+                                android:id="@+id/id_homemm_brith"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_weight="1"
@@ -845,6 +890,7 @@
                                 android:textSize="14dp"/>
 
                             <TextView
+                                android:id="@+id/id_homemm_wigth"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_weight="1"
@@ -876,6 +922,7 @@
                                 android:textSize="14dp"/>
 
                             <TextView
+                                android:id="@+id/id_homemm_xingzuo"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_weight="1"
@@ -933,6 +980,7 @@
                                 android:textSize="14dp"/>
 
                             <TextView
+                                android:id="@+id/id_homemm_friendage"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_weight="1"
@@ -964,6 +1012,7 @@
                                 android:textSize="14dp"/>
 
                             <TextView
+                                android:id="@+id/id_homemm_friendwhere"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_weight="1"
@@ -995,6 +1044,7 @@
                                 android:textSize="14dp"/>
 
                             <TextView
+                                android:id="@+id/id_homemm_friendtall"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_weight="1"
@@ -1026,6 +1076,7 @@
                                 android:textSize="14dp"/>
 
                             <TextView
+                                android:id="@+id/id_homemm_friendxueli"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_weight="1"
@@ -1057,6 +1108,7 @@
                                 android:textSize="14dp"/>
 
                             <TextView
+                                android:id="@+id/id_homemm_friendshouru"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_weight="1"

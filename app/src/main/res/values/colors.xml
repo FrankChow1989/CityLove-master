@@ -23,4 +23,9 @@
     <color name="floralwhite">#FFFAF0</color>
     <color name="popup_bg">#8f000000</color>
     <color name="line_bg">#CDCDCD</color>
+
+    <color name="livstview_item_bg">#dfdfdf</color>
+    <color name="txtcoloc">#ffffff</color>
+
+
 </resources>

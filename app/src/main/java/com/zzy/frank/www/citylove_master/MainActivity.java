@@ -1,12 +1,12 @@
 package com.zzy.frank.www.citylove_master;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.util.TimeUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
@@ -20,24 +20,26 @@ import com.zzy.frank.www.citylove_master.fragment.FujinFragment;
 import com.zzy.frank.www.citylove_master.fragment.HomeFragment;
 import com.zzy.frank.www.citylove_master.fragment.MSGFragment;
 import com.zzy.frank.www.citylove_master.fragment.PersonFragment;
+import com.zzy.frank.www.citylove_master.server.SendMsgORAddFriends;
+import com.zzy.frank.www.citylove_master.ui.RoundImageView;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationBar.OnTabSelectedListener
+public class MainActivity extends AppCompatActivity implements BottomNavigationBar.OnTabSelectedListener, MSGFragment.OnUnReadMessageUpdateListener
 {
     @Bind(R.id.bottom_navigation_bar)
     BottomNavigationBar bottomNavigationBar;
     @Bind(R.id.id_mian_timeup)
     LinearLayout idMianTimeup;
-    private long exitTime = 0;
+    @Bind(R.id.id_mian_timeup_pic)
+    RoundImageView idMianTimeupPic;
     private ArrayList<Fragment> fragments;
     int lastSelectedPosition = 0;
-    BadgeItem numberBadgeItem;
+    public BadgeItem numberBadgeItem;
 
     FragmentManager fm;
     FragmentTransaction ft;
@@ -54,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         mApplication = (PushApplication) this.getApplication();
-        getBadegeNum();
         bottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED);
         numberBadgeItem = new BadgeItem()
                 .setBorderWidth(4)
@@ -73,15 +74,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         fragments = getFragments();
         setDefaultFragment();
         bottomNavigationBar.setTabSelectedListener(this);
-    }
-
-    private void getBadegeNum()
-    {
-        for (int i = 0; i < mApplication.getUserDB().getUserIds().size(); i++)
-        {
-            lastSelectedPosition += mApplication.getMessageDB().getUserUnReadMsgs(mApplication.getUserDB().getUserIds()).get(mApplication.getUserDB().getUserIds().get(i));
-            System.out.println("-----------lastSelectedPosition-----------:" + lastSelectedPosition);
-        }
     }
 
     @Override
@@ -119,7 +111,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         fm = getSupportFragmentManager();
         ft = fm.beginTransaction();
         ft.add(R.id.layFrame, new HomeFragment());
-        numberBadgeItem.setText("" + lastSelectedPosition);
         ft.commit();
     }
 
@@ -174,21 +165,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         return super.onKeyDown(keyCode, event);
     }
 
-//    @Override
-//    protected void onRestart()
-//    {
-//        super.onRestart();
-//        if (lastSelectedPosition != 0)
-//        {
-//            lastSelectedPosition = 0;
-//            getBadegeNum();
-//            numberBadgeItem.setText("" + lastSelectedPosition);
-//        } else
-//        {
-//            numberBadgeItem.setText("" + 0);
-//        }
-//    }
-
     @Override
     public void onTabSelected(int position)
     {
@@ -201,17 +177,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
                 Fragment fragment = fragments.get(position);
                 if (fragment.isAdded())
                 {
-                    if (fragment == fragments.get(1))
-                    {
-                        numberBadgeItem.setText("" + 0);
-                    }
                     ft.replace(R.id.layFrame, fragment);
                 } else
                 {
-                    if (fragment == fragments.get(1))
-                    {
-                        numberBadgeItem.setText("" + 0);
-                    }
                     ft.add(R.id.layFrame, fragment);
                 }
                 ft.commitAllowingStateLoss();
@@ -238,5 +206,31 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     @Override
     public void onTabReselected(int position)
     {
+    }
+
+    @OnClick({R.id.id_mian_timeup_bt_whatever, R.id.id_mian_timeup_bt_sayhi, R.id.id_mian_timeup_bt_chat})
+    public void onClick(View view)
+    {
+        Intent intent = new Intent();
+        switch (view.getId())
+        {
+            case R.id.id_mian_timeup_bt_whatever:
+                break;
+            case R.id.id_mian_timeup_bt_sayhi:
+                break;
+            case R.id.id_mian_timeup_bt_chat:
+                break;
+        }
+
+        startActivity(intent);
+    }
+
+    @Override
+    public void unReadMessageUpdate(int count)
+    {
+        if (count == 0)
+            numberBadgeItem.setText("" + 0);
+        int i = count + 1;
+        numberBadgeItem.setText("" + i);
     }
 }

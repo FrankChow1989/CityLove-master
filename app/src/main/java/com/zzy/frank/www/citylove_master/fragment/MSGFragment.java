@@ -1,13 +1,11 @@
 package com.zzy.frank.www.citylove_master.fragment;
 
 
-import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,12 +18,14 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.jauker.widget.BadgeView;
+import com.zzy.frank.www.citylove_master.MainActivity;
 import com.zzy.frank.www.citylove_master.PushApplication;
 import com.zzy.frank.www.citylove_master.R;
 import com.zzy.frank.www.citylove_master.activity.ChattingActivity;
 import com.zzy.frank.www.citylove_master.activity.KefuChattingActivity;
 import com.zzy.frank.www.citylove_master.activity.VIPActivity;
 import com.zzy.frank.www.citylove_master.activity.VisitActivity;
+import com.zzy.frank.www.citylove_master.bean.ChatMessage;
 import com.zzy.frank.www.citylove_master.bean.User;
 import com.zzy.frank.www.citylove_master.server.SendMsgORAddFriends;
 import com.zzy.frank.www.citylove_master.ui.ListViewCompat;
@@ -48,31 +48,21 @@ public class MSGFragment extends Fragment implements SendMsgORAddFriends.onNewFr
 {
 
     View view;
+    //聊天列表
     @Bind(R.id.chatting_recy)
     ListViewCompat chattingRecy;
-
+    // 用户集合
     List<User> mList;
-
     ChatAdapter chatAdapter;
     private PushApplication mApplication;
 
+    //未读消息标志位
     private SlideView mLastSlideViewWithStatusOn;
 
     /**
      * 未读消息总数
      */
-    private int mUnReadedMsgs;
-
-    @Override
-    public void onAttach(Context context)
-    {
-        super.onAttach(context);
-        System.out.println("-------------onAttach------------");
-        // 设置新朋友的监听
-        SendMsgORAddFriends.friendListeners.add(this);
-        // 设置新消息的监听
-        SendMsgORAddFriends.msgListeners.add(this);
-    }
+    int mUnReadedMsgs;
 
     @Override
     public void onNewFriend(User u)
@@ -80,13 +70,34 @@ public class MSGFragment extends Fragment implements SendMsgORAddFriends.onNewFr
         mList.add(u);
         System.out.println("------------增加用户的mList大小------------:" + mList.size());
         chatAdapter.notifyDataSetChanged();
+        chattingRecy.setSelection(mList.size() - 1);
     }
 
     @Override
-    public void onNewMessage(Message message)
+    public void onNewMessage(ChatMessage message)
     {
+        // 如果该用户已经有未读消息，更新未读消息的个数，并通知更新未读消息接口，最后notifyDataSetChanged
 
+        System.out.println("------------增加message------------:" + message.isReaded());
+
+        String userId = message.getUserId();
+        if (mUserMessages.containsKey(userId))
+        {
+            mUserMessages.put(userId, mUserMessages.get(userId) + 1);
+        } else
+        {
+            mUserMessages.put(userId, 1);
+        }
+        mUnReadedMsgs++;
+        notifyUnReadedMsg();
+        // 将新来的消息进行存储
+        // 通知listview数据改变
+        chatAdapter.notifyDataSetChanged();
+        chattingRecy.setSelection(mList.size() - 1);
+
+        System.out.println("---------------mUnReadedMsgs-------回调---------" + mUnReadedMsgs);
     }
+
 
     /**
      * 提供未读消息更新的回调，比如来了一个新消息或者用户点击查看某个用户的消息
@@ -108,38 +119,29 @@ public class MSGFragment extends Fragment implements SendMsgORAddFriends.onNewFr
     {
         super.onCreate(savedInstanceState);
         System.out.println("--------onCreate----------");
-
         mApplication = (PushApplication) this.getActivity().getApplication();
+        chatAdapter = new ChatAdapter();
+        mList = mApplication.getUserDB().getUser();
         // 获取数据库中所有的用户以及未读消息个数
         mUserMessages = mApplication.getMessageDB().getUserUnReadMsgs(
                 mApplication.getUserDB().getUserIds());
-
         for (Integer val : mUserMessages.values())
         {
             mUnReadedMsgs += val;
         }
-
         mList = new ArrayList<>();
     }
-
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState)
     {
-        super.onCreateView(inflater,container,savedInstanceState);
+        super.onCreateView(inflater, container, savedInstanceState);
         System.out.println("--------onCreateView----------");
-
         view = inflater.inflate(R.layout.fragment_msg, container, false);
         ButterKnife.bind(this, view);
         initViews();
-
-        mList = mApplication.getUserDB().getUser();
-
-        System.out.println("-----onCreateView--list---:"+mList.size());
-
-        chatAdapter = new ChatAdapter();
         chattingRecy.setAdapter(chatAdapter);
 
         notifyUnReadedMsg();
@@ -151,6 +153,7 @@ public class MSGFragment extends Fragment implements SendMsgORAddFriends.onNewFr
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 String userId = mList.get(position - 1).getUserId();
+                mApplication.getMessageDB().updateReaded(userId);
 
                 if (mUserMessages.containsKey(userId))
                 {
@@ -158,10 +161,10 @@ public class MSGFragment extends Fragment implements SendMsgORAddFriends.onNewFr
                     mUnReadedMsgs -= val;
                     mUserMessages.remove(userId);
                     chatAdapter.notifyDataSetChanged();
-                    chattingRecy.setSelection(position);
+                    //chattingRecy.setSelection(position);
                     notifyUnReadedMsg();
+                    System.out.println("---------------mUnReadedMsgs-------点击---------" + mUnReadedMsgs);
                 }
-
                 Intent intent = new Intent();
                 intent.putExtra("userid", mList.get(position - 1).getUserId());
                 intent.setClass(getActivity(), ChattingActivity.class);
@@ -178,9 +181,13 @@ public class MSGFragment extends Fragment implements SendMsgORAddFriends.onNewFr
         System.out.println("--------onResume----------");
         // 回调未读消息个数的更新
         notifyUnReadedMsg();
+        // 设置新朋友的监听
+        SendMsgORAddFriends.friendListeners.add(this);
+        // 设置新消息的监听
+        SendMsgORAddFriends.msgListeners.add(this);
         // 更新用户列表
-       // mList = mApplication.getUserDB().getUser();
-        //chatAdapter.notifyDataSetChanged();
+        mList = mApplication.getUserDB().getUser();
+        chatAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -209,6 +216,8 @@ public class MSGFragment extends Fragment implements SendMsgORAddFriends.onNewFr
             @Override
             public void onClick(View v)
             {
+                Intent intent = new Intent(getContext(), KefuChattingActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -237,8 +246,6 @@ public class MSGFragment extends Fragment implements SendMsgORAddFriends.onNewFr
     public void onDestroyView()
     {
         super.onDestroyView();
-        System.out.println("--------onDestroyView----------");
-        System.out.println("-----onDestroyView--list---:"+mList.size());
         ButterKnife.unbind(this);
     }
 
@@ -254,19 +261,11 @@ public class MSGFragment extends Fragment implements SendMsgORAddFriends.onNewFr
         }
     }
 
-    @OnClick({R.id.vip, R.id.bianji})
+    @OnClick(R.id.vip)
     public void onClick(View view)
     {
         Intent intent = new Intent();
-        switch (view.getId())
-        {
-            case R.id.vip:
-                intent.setClass(getActivity(), VIPActivity.class);
-                break;
-            case R.id.bianji:
-                intent.setClass(getActivity(), KefuChattingActivity.class);
-                break;
-        }
+        intent.setClass(getActivity(), VIPActivity.class);
         startActivity(intent);
     }
 
@@ -295,7 +294,7 @@ public class MSGFragment extends Fragment implements SendMsgORAddFriends.onNewFr
         {
             User user = mList.get(position);
             String userId = user.getUserId();
-
+            // 获取数据库中所有的用户以及未读消息个数
             ViewHolder viewHolder;
             SlideView slideView = (SlideView) convertView;
 
@@ -352,7 +351,6 @@ public class MSGFragment extends Fragment implements SendMsgORAddFriends.onNewFr
                 }
             });
 
-
             if (mUserMessages.containsKey(userId))
             {
                 if (viewHolder.mBadgeView == null)
@@ -361,9 +359,8 @@ public class MSGFragment extends Fragment implements SendMsgORAddFriends.onNewFr
                     viewHolder.mBadgeView.setTargetView(viewHolder.imageView);
                     viewHolder.mBadgeView.setBadgeGravity(Gravity.TOP
                             | Gravity.RIGHT);
-                    viewHolder.mBadgeView.setBadgeMargin(0, 0, 0, 0);
+                    viewHolder.mBadgeView.setBadgeMargin(0, 0, 8, 0);
                     viewHolder.mBadgeView.setBadgeCount(mUserMessages.get(userId));
-                    //viewHolder.mBadgeView.setBadgeCount(0);
                 }
             } else
             {
@@ -391,4 +388,5 @@ public class MSGFragment extends Fragment implements SendMsgORAddFriends.onNewFr
             }
         }
     }
+
 }

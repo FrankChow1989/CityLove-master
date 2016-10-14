@@ -3,12 +3,16 @@ package com.zzy.frank.www.citylove_master.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.AnimationDrawable;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -16,6 +20,7 @@ import android.widget.TextView;
 
 import com.zzy.frank.www.citylove_master.PushApplication;
 import com.zzy.frank.www.citylove_master.R;
+import com.zzy.frank.www.citylove_master.Recorder.MediaManager;
 import com.zzy.frank.www.citylove_master.adapter.ChatMessageAdapter;
 import com.zzy.frank.www.citylove_master.bean.ChatMessage;
 import com.zzy.frank.www.citylove_master.bean.User;
@@ -55,6 +60,9 @@ public class ChattingActivity extends AppCompatActivity
     private User mFromUser;
     private UserDB mUserDB;
 
+    //语音播放动画
+    private View mAnimView;
+
     SharedPreferences sp;
     SharedPreferences.Editor editor;
 
@@ -91,19 +99,61 @@ public class ChattingActivity extends AppCompatActivity
             }
         });
         initView();
+
+        idChattingListview.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+
+                if ("3".equals(mData.get(position).getMsgType()))
+                {
+                    if (mAnimView != null)
+                    {
+                        mAnimView = null;
+                    }
+
+                    mAnimView = view.findViewById(R.id.id_recorder_anim);
+                    mAnimView.setBackgroundResource(R.drawable.anim_recorder_play);
+                    AnimationDrawable anim = (AnimationDrawable) mAnimView
+                            .getBackground();
+                    anim.start();
+                    MediaManager.playSound(ChattingActivity.this, mData.get(position).getRecord_path(),
+                            new MediaPlayer.OnCompletionListener()
+                            {
+                                @Override
+                                public void onCompletion(MediaPlayer mp)
+                                {
+                                    // TODO Auto-generated method stub
+                                    mAnimView.setBackgroundResource(R.drawable.adj);
+                                }
+                            });
+                }
+            }
+        });
     }
 
     private void initView()
     {
         mData = mApplication.getMessageDB().find(mFromUser.getUserId(), 1, 10);
+//        System.out.println("message:" + mData.get(0).getMessage() + "pic:" + mData.get(0).getPic_msg() + "record_path:" +
+//                mData.get(0) + "isComing:" + mData.get(0).isComing() + "userId:" + mData.get(0).getUserId() +
+//                "icon:" + mData.get(0).getIcon() + "msgType:" + mData.get(0).getMsgType() + "nickname:" + mData.get(0).getNickname()
+//                + "readed:" + mData.get(0).isReaded() + "dateStr:" + mData.get(0).getDateStr()
+//        );
+
         mAdapter = new ChatMessageAdapter(this, mData);
         idChattingListview.setAdapter(mAdapter);
         idChattingListview.setSelection(mData.size() - 1);
 
-        if (sp.getBoolean("isSend", true))
+        if (sp.getBoolean("isSend", false) == true)
         {
             lyChatTitle.setGravity(View.GONE);
             lyChatBottom1.setVisibility(View.VISIBLE);
+        } else
+        {
+            lyChatTitle.setGravity(View.VISIBLE);
+            lyChatBottom1.setVisibility(View.GONE);
         }
 
     }

@@ -139,6 +139,7 @@ public class HomeFragment extends Fragment
                     //Toast.makeText(getContext(), "Click" + position, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getContext(), HomemmItemActivity.class);
                     intent.putExtra("id", mList.get(position).getId());
+                    intent.putExtra("pic", mList.get(position).getPic());
                     startActivity(intent);
                 }
 

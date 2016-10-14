@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="80dp"
+              android:layout_height="wrap_content"
               android:layout_marginTop="10dp"
               android:orientation="vertical">
 
@@ -15,10 +15,12 @@
         android:text="2012-09-01 18:30:20"/>
 
     <RelativeLayout
+        android:id="@+id/chat_from_relative"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="right|center"
         android:layout_marginTop="10dp"
+        android:visibility="gone"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -52,7 +54,103 @@
                 android:textColor="#000"
                 android:textSize="18sp"/>
         </LinearLayout>
+    </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/chat_from_relative_pic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|center"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1">
+
+            <com.zzy.frank.www.citylove_master.ui.RoundImageView
+                android:id="@+id/chat_from_icon_pic"
+                android:layout_width="49dp"
+                android:layout_height="49dp"
+                android:src="@drawable/a3"/>
+
+            <ImageView
+                android:id="@+id/chat_from_content_pic"
+                android:layout_width="120dp"
+                android:layout_height="190dp"
+                android:layout_marginLeft="5dp"
+                android:clickable="true"
+                android:src="@drawable/ce"
+                android:focusable="true"
+                android:gravity="center_vertical"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/chat_from_relative_record"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|center"
+        android:layout_marginTop="10dp"
+        android:visibility="visible"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1">
+
+            <com.zzy.frank.www.citylove_master.ui.RoundImageView
+                android:id="@+id/chat_from_icon_record"
+                android:layout_width="49dp"
+                android:layout_height="49dp"
+                android:src="@drawable/a3"/>
+
+            <RelativeLayout
+                android:id="@+id/chat_from_content_record"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="5dp">
+
+                <FrameLayout
+                    android:id="@+id/id_recorder_length"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginBottom="10dp"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/dibg"
+                    >
+                    <View
+                        android:id="@+id/id_recorder_anim"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center_vertical|left"
+                        android:background="@drawable/adj"
+                        />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/id_recorder_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@id/id_recorder_length"
+                    android:text=""
+                    android:layout_marginRight="3dp"
+                    android:textColor="#ff777777"
+                    />
+            </RelativeLayout>
+        </LinearLayout>
     </RelativeLayout>
 
 </LinearLayout>
