@@ -66,6 +66,12 @@ public class SendMsgORAddFriends extends Service
                 {
                     listener.onNewMessage(msgs);
                 }
+            } else if (msg.what == 1)
+            {
+                for (onNewMessageListener listener : msgListeners)
+                {
+                    listener.onNewMessage(msgs);
+                }
             }
             super.handleMessage(msg);
         }
@@ -106,7 +112,7 @@ public class SendMsgORAddFriends extends Service
                 // 漏网之鱼
                 if (user == null)
                 {
-                    user = new User("000" + id, "1", "哈哈", "媚儿", R.drawable.a3, 1);
+                    user = new User("000" + id, "1", "", "媚儿", R.drawable.a3, 1);
                     userDB.addUser(user);
                     // 将新来的消息进行存储
                     msgs = new ChatMessage("哈哈", "https://oetlj49uy.qnssl.com/ce.jpg", "", true, "000" + id, R.drawable.h1, "1", "媚儿", false, TimeUtil.getTime(System.currentTimeMillis()));
@@ -117,7 +123,18 @@ public class SendMsgORAddFriends extends Service
                     Message message = new Message();
                     message.what = 0;
                     myHandler.sendMessage(message);
+                } else if (user != null)
+                {
+                    msgs = new ChatMessage("哈哈", "https://oetlj49uy.qnssl.com/ce.jpg", "", true, "000" + id, R.drawable.h3, "2", "媚儿", false, TimeUtil.getTime(System.currentTimeMillis()));
+                    PushApplication.getInstance().getMessageDB()
+                            .add("000" + id, msgs);
+
+                    // 通知监听的面板
+                    Message message = new Message();
+                    message.what = 1;
+                    myHandler.sendMessage(message);
                 }
+
             }
         }).start();
 

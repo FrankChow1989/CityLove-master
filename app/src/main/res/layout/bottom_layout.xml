@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/activity_group_radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff"
+            android:checkedButton="@+id/order_process"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="3dp"
+            android:paddingTop="3dp"
+    >
+
+    <RadioButton
+        android:id="@+id/order_process"
+        style="@style/main_tab_bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        android:drawableTop="@drawable/main_tab_1"
+        android:gravity="center"
+        android:text="主页"/>
+
+    <RadioButton
+        android:id="@+id/order_query"
+        style="@style/main_tab_bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        android:checked="false"
+        android:drawableTop="@drawable/main_tab_2"
+        android:gravity="center"
+        android:text="消息"/>
+
+    <RadioButton
+        android:id="@+id/merchant_manager"
+        style="@style/main_tab_bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        android:checked="false"
+        android:drawableTop="@drawable/main_tab_3"
+        android:gravity="center"
+        android:text="附近"/>
+
+    <RadioButton
+        android:id="@+id/setting"
+        style="@style/main_tab_bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        android:checked="false"
+        android:drawableTop="@drawable/main_tab_4"
+        android:gravity="center"
+        android:text="个人中心"/>
+
+</RadioGroup>

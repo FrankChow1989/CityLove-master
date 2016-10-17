@@ -1,2 +1,2 @@
-include ':app', ':android_bottom_library', 'galleryfinal', ':frescoimageviewer'
+include ':app', 'galleryfinal', ':frescoimageviewer'
 include ':badgeView'

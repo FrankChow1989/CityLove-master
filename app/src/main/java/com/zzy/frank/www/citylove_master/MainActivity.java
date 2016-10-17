@@ -9,45 +9,45 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
-import com.ashokvarma.bottomnavigation.BadgeItem;
-import com.ashokvarma.bottomnavigation.BottomNavigationBar;
-import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.jauker.widget.BadgeView;
 import com.zzy.frank.www.citylove_master.fragment.FujinFragment;
 import com.zzy.frank.www.citylove_master.fragment.HomeFragment;
 import com.zzy.frank.www.citylove_master.fragment.MSGFragment;
 import com.zzy.frank.www.citylove_master.fragment.PersonFragment;
-import com.zzy.frank.www.citylove_master.server.SendMsgORAddFriends;
 import com.zzy.frank.www.citylove_master.ui.RoundImageView;
-
-import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationBar.OnTabSelectedListener, MSGFragment.OnUnReadMessageUpdateListener
+public class MainActivity extends AppCompatActivity implements MSGFragment.OnUnReadMessageUpdateListener
 {
-    @Bind(R.id.bottom_navigation_bar)
-    BottomNavigationBar bottomNavigationBar;
     @Bind(R.id.id_mian_timeup)
     LinearLayout idMianTimeup;
     @Bind(R.id.id_mian_timeup_pic)
     RoundImageView idMianTimeupPic;
-    private ArrayList<Fragment> fragments;
-    int lastSelectedPosition = 0;
-    public BadgeItem numberBadgeItem;
-
-    FragmentManager fm;
-    FragmentTransaction ft;
-
-    private PushApplication mApplication;
+    @Bind(R.id.activity_group_radioGroup)
+    RadioGroup mRadioGroup;
 
     Handler handler;
     Runnable runnable;
+    BadgeView badgeView;
+
+    public static final String fragment1Tag = "fragment1";
+    public static final String fragment2Tag = "fragment2";
+    public static final String fragment3Tag = "fragment3";
+    public static final String fragment4Tag = "fragment4";
+    @Bind(R.id.bt)
+    Button bt;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -55,25 +55,115 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        mApplication = (PushApplication) this.getApplication();
-        bottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED);
-        numberBadgeItem = new BadgeItem()
-                .setBorderWidth(4)
-                .setBackgroundColorResource(R.color.colorPrimary)
-                .setHideOnSelect(false);
-        bottomNavigationBar
-                .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC
-                );
-        bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.ic_home_white_24dp, "主页").setActiveColorResource(R.color.colorPrimaryDark))
-                .addItem(new BottomNavigationItem(R.drawable.ic_book_white_24dp, "消息").setActiveColorResource(R.color.colorPrimaryDark).setBadgeItem(numberBadgeItem))
-                .addItem(new BottomNavigationItem(R.drawable.ic_music_note_white_24dp, "附近").setActiveColorResource(R.color.colorPrimaryDark))
-                .addItem(new BottomNavigationItem(R.drawable.ic_tv_white_24dp, "个人中心").setActiveColorResource(R.color.colorPrimaryDark))
-                .setFirstSelectedPosition(0)
-                .initialise();
 
-        fragments = getFragments();
-        setDefaultFragment();
-        bottomNavigationBar.setTabSelectedListener(this);
+        badgeView = new BadgeView(this);
+        badgeView.setTargetView(bt);
+        badgeView.setBadgeGravity(Gravity.TOP | Gravity.RIGHT);
+        badgeView.setBadgeMargin(0, 0, 5, 0);
+
+        mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            public void onCheckedChanged(RadioGroup group, int checkedId)
+            {
+                FragmentManager fm = getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                Fragment fragment1 = fm.findFragmentByTag(fragment1Tag);
+                Fragment fragment2 = fm.findFragmentByTag(fragment2Tag);
+                Fragment fragment3 = fm.findFragmentByTag(fragment3Tag);
+                Fragment fragment4 = fm.findFragmentByTag(fragment4Tag);
+                if (fragment1 != null)
+                {
+                    ft.hide(fragment1);
+                }
+                if (fragment2 != null)
+                {
+                    ft.hide(fragment2);
+                }
+                if (fragment3 != null)
+                {
+                    ft.hide(fragment3);
+                }
+                if (fragment4 != null)
+                {
+                    ft.hide(fragment4);
+                }
+                switch (checkedId)
+                {
+                    case R.id.order_process:
+                        if (fragment1 == null)
+                        {
+                            fragment1 = new HomeFragment();
+                            ft.add(R.id.layFrame, fragment1, fragment1Tag);
+                        } else
+                        {
+                            ft.show(fragment1);
+                        }
+                        break;
+                    case R.id.order_query:
+                        if (fragment2 == null)
+                        {
+                            fragment2 = new MSGFragment();
+                            ft.add(R.id.layFrame, fragment2, fragment2Tag);
+                        } else
+                        {
+                            ft.show(fragment2);
+                        }
+                        break;
+                    case R.id.merchant_manager:
+                        if (fragment3 == null)
+                        {
+                            fragment3 = new FujinFragment();
+                            ft.add(R.id.layFrame, fragment3, fragment3Tag);
+                        } else
+                        {
+                            ft.show(fragment3);
+                        }
+                        break;
+                    case R.id.setting:
+                        if (fragment4 == null)
+                        {
+                            fragment4 = new PersonFragment();
+                            ft.add(R.id.layFrame, fragment4, fragment4Tag);
+                        } else
+                        {
+                            ft.show(fragment4);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                ft.commit();
+            }
+        });
+
+        if (savedInstanceState == null)
+        {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            Fragment fragment = new HomeFragment();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.layFrame, fragment, fragment1Tag).commit();
+        }
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState)
+    {
+        super.onRestoreInstanceState(savedInstanceState);
+        for (int i = 0; i < mRadioGroup.getChildCount(); i++)
+        {
+            RadioButton mTab = (RadioButton) mRadioGroup.getChildAt(i);
+            FragmentManager fm = getSupportFragmentManager();
+            Fragment fragment = fm.findFragmentByTag((String) mTab.getTag());
+            FragmentTransaction ft = fm.beginTransaction();
+            if (fragment != null)
+            {
+                if (!mTab.isChecked())
+                {
+                    ft.hide(fragment);
+                }
+            }
+            ft.commit();
+        }
     }
 
     @Override
@@ -101,27 +191,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         };
         handler.postDelayed(runnable, 60000);
 
-    }
-
-    /**
-     * 设置默认的
-     */
-    private void setDefaultFragment()
-    {
-        fm = getSupportFragmentManager();
-        ft = fm.beginTransaction();
-        ft.add(R.id.layFrame, new HomeFragment());
-        ft.commit();
-    }
-
-    private ArrayList<Fragment> getFragments()
-    {
-        ArrayList<Fragment> fragments = new ArrayList<>();
-        fragments.add(new HomeFragment());
-        fragments.add(new MSGFragment());
-        fragments.add(new FujinFragment());
-        fragments.add(new PersonFragment());
-        return fragments;
     }
 
     @Override
@@ -165,49 +234,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         return super.onKeyDown(keyCode, event);
     }
 
-    @Override
-    public void onTabSelected(int position)
-    {
-        if (fragments != null)
-        {
-            if (position < fragments.size())
-            {
-                fm = getSupportFragmentManager();
-                ft = fm.beginTransaction();
-                Fragment fragment = fragments.get(position);
-                if (fragment.isAdded())
-                {
-                    ft.replace(R.id.layFrame, fragment);
-                } else
-                {
-                    ft.add(R.id.layFrame, fragment);
-                }
-                ft.commitAllowingStateLoss();
-            }
-        }
-    }
-
-    @Override
-    public void onTabUnselected(int position)
-    {
-        if (fragments != null)
-        {
-            if (position < fragments.size())
-            {
-                fm = getSupportFragmentManager();
-                ft = fm.beginTransaction();
-                Fragment fragment = fragments.get(position);
-                ft.remove(fragment);
-                ft.commitAllowingStateLoss();
-            }
-        }
-    }
-
-    @Override
-    public void onTabReselected(int position)
-    {
-    }
-
     @OnClick({R.id.id_mian_timeup_bt_whatever, R.id.id_mian_timeup_bt_sayhi, R.id.id_mian_timeup_bt_chat})
     public void onClick(View view)
     {
@@ -228,9 +254,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     @Override
     public void unReadMessageUpdate(int count)
     {
-        if (count == 0)
-            numberBadgeItem.setText("" + 0);
-        int i = count + 1;
-        numberBadgeItem.setText("" + i);
+        if (count == 0 && badgeView.getBadgeCount() == 0)
+            badgeView.setVisibility(View.GONE);
+        badgeView.setVisibility(View.VISIBLE);
+        badgeView.setBadgeCount(count);
     }
 }

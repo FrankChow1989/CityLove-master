@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CityLove-master.iml" filepath="$PROJECT_DIR$/CityLove-master.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android_bottom_library/android_bottom_library.iml" filepath="$PROJECT_DIR$/android_bottom_library/android_bottom_library.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/badgeView/badgeView.iml" filepath="$PROJECT_DIR$/badgeView/badgeView.iml" />
       <module fileurl="file://$PROJECT_DIR$/frescoimageviewer/frescoimageviewer.iml" filepath="$PROJECT_DIR$/frescoimageviewer/frescoimageviewer.iml" />
