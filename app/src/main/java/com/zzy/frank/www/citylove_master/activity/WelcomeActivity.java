@@ -128,7 +128,7 @@ public class WelcomeActivity extends AppCompatActivity
         switch (view.getId())
         {
             case R.id.id_login_qq:
-                Intent intent = new Intent(this, MainActivity.class);
+                Intent intent = new Intent(this, TellThemActivity.class);
                 startActivity(intent);
                 break;
             case R.id.id_login_weixin:
