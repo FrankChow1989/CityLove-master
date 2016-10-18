@@ -116,7 +116,7 @@ public class SendMsgORAddFriends extends Service
                     user = new User("000" + id, "1", "", "媚儿", R.drawable.a3, 1);
                     userDB.addUser(user);
                     // 将新来的消息进行存储
-                    msgs = new ChatMessage("哈哈", "https://oetlj49uy.qnssl.com/ce.jpg", "", true, "000" + id, R.drawable.h1, "0", "媚儿", false, TimeUtil.getTime(System.currentTimeMillis()));
+                    msgs = new ChatMessage("哈哈", "https://oetlj49uy.qnssl.com/ce.jpg", "", true, "000" + id, R.drawable.h1, "" + random.nextInt(3), "媚儿", false, TimeUtil.getTime(System.currentTimeMillis()));
                     PushApplication.getInstance().getMessageDB()
                             .add("000" + id, msgs);
 
