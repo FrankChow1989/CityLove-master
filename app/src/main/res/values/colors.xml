@@ -8,9 +8,10 @@
     <color name="yellow">#ede4b7</color>
     <color name="yellow_light">#e6d376</color>
     <color name="pink">#efa3e3</color>
-    <color name="green">#53c167</color>
+    <color name="green">#14da38</color>
     <color name="org">#a77206</color>
     <color name="orgine">#f4b22d</color>
+    <color name="dialog_bg">#e6b872</color>
     <color name="red">#e12003</color>
     <color name="brown">#8D6E63</color>
     <color name="blue">#60a8e1</color>
@@ -23,6 +24,7 @@
     <color name="floralwhite">#FFFAF0</color>
     <color name="popup_bg">#8f000000</color>
     <color name="line_bg">#CDCDCD</color>
+    <color name="dialog_bg_normal">#d0d4dc</color>
 
     <color name="livstview_item_bg">#dfdfdf</color>
     <color name="txtcoloc">#ffffff</color>

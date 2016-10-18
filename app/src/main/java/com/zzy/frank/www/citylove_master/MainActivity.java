@@ -2,6 +2,7 @@ package com.zzy.frank.www.citylove_master;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -18,11 +19,13 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.jauker.widget.BadgeView;
+import com.zzy.frank.www.citylove_master.activity.ChattingActivity;
 import com.zzy.frank.www.citylove_master.fragment.FujinFragment;
 import com.zzy.frank.www.citylove_master.fragment.HomeFragment;
 import com.zzy.frank.www.citylove_master.fragment.MSGFragment;
 import com.zzy.frank.www.citylove_master.fragment.PersonFragment;
 import com.zzy.frank.www.citylove_master.ui.RoundImageView;
+import com.zzy.frank.www.citylove_master.util.T;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -48,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements MSGFragment.OnUnR
     @Bind(R.id.bt)
     Button bt;
 
+    SharedPreferences sp;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -60,6 +65,13 @@ public class MainActivity extends AppCompatActivity implements MSGFragment.OnUnR
         badgeView.setTargetView(bt);
         badgeView.setBadgeGravity(Gravity.TOP | Gravity.RIGHT);
         badgeView.setBadgeMargin(0, 0, 5, 0);
+
+        sp = getSharedPreferences("isSend", MODE_PRIVATE);
+        editor = sp.edit();
+
+        editor.putBoolean("isSendMsg", false);
+        editor.commit();
+
 
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
@@ -237,18 +249,25 @@ public class MainActivity extends AppCompatActivity implements MSGFragment.OnUnR
     @OnClick({R.id.id_mian_timeup_bt_whatever, R.id.id_mian_timeup_bt_sayhi, R.id.id_mian_timeup_bt_chat})
     public void onClick(View view)
     {
-        Intent intent = new Intent();
         switch (view.getId())
         {
             case R.id.id_mian_timeup_bt_whatever:
+                idMianTimeup.setVisibility(View.GONE);
                 break;
             case R.id.id_mian_timeup_bt_sayhi:
+                T.showShort(this, "打招呼成功");
+                idMianTimeup.setVisibility(View.GONE);
                 break;
             case R.id.id_mian_timeup_bt_chat:
+                Intent intent = new Intent();
+
+                // TODO: 2016/10/18 获取随机userid
+
+                //intent.putExtra("userid", mList.get(position - 1).getUserId());
+                intent.setClass(this, ChattingActivity.class);
+                startActivity(intent);
                 break;
         }
-
-        startActivity(intent);
     }
 
     @Override

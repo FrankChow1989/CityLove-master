@@ -19,6 +19,7 @@ import com.zzy.frank.www.citylove_master.dao.UserDB;
 import com.zzy.frank.www.citylove_master.util.TimeUtil;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -115,7 +116,7 @@ public class SendMsgORAddFriends extends Service
                     user = new User("000" + id, "1", "", "媚儿", R.drawable.a3, 1);
                     userDB.addUser(user);
                     // 将新来的消息进行存储
-                    msgs = new ChatMessage("哈哈", "https://oetlj49uy.qnssl.com/ce.jpg", "", true, "000" + id, R.drawable.h1, "1", "媚儿", false, TimeUtil.getTime(System.currentTimeMillis()));
+                    msgs = new ChatMessage("哈哈", "https://oetlj49uy.qnssl.com/ce.jpg", "", true, "000" + id, R.drawable.h1, "0", "媚儿", false, TimeUtil.getTime(System.currentTimeMillis()));
                     PushApplication.getInstance().getMessageDB()
                             .add("000" + id, msgs);
 
@@ -125,7 +126,8 @@ public class SendMsgORAddFriends extends Service
                     myHandler.sendMessage(message);
                 } else if (user != null)
                 {
-                    msgs = new ChatMessage("哈哈", "https://oetlj49uy.qnssl.com/ce.jpg", "", true, "000" + id, R.drawable.h3, "2", "媚儿", false, TimeUtil.getTime(System.currentTimeMillis()));
+                    msgs = new ChatMessage("哈哈", "https://oetlj49uy.qnssl.com/ce.jpg", "https://oetlj49uy.qnssl.com/aa.mp3", true, "000" + id, R.drawable.h3,
+                            "" + random.nextInt(3), "媚儿", false, TimeUtil.getTime(System.currentTimeMillis()));
                     PushApplication.getInstance().getMessageDB()
                             .add("000" + id, msgs);
 

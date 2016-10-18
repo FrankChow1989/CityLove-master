@@ -1,10 +1,13 @@
 package com.zzy.frank.www.citylove_master.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
+import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -12,7 +15,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.zzy.frank.www.citylove_master.R;
+import com.zzy.frank.www.citylove_master.Recorder.MediaManager;
 import com.zzy.frank.www.citylove_master.bean.ChatMessage;
+import com.zzy.frank.www.citylove_master.util.T;
 
 import java.util.List;
 
@@ -21,6 +26,8 @@ public class ChatMessageAdapter extends BaseAdapter
     private LayoutInflater mInflater;
     private List<ChatMessage> mDatas;
     private Context context;
+
+    View mAnimView;
 
     public ChatMessageAdapter(Context context, List<ChatMessage> datas)
     {
@@ -63,10 +70,8 @@ public class ChatMessageAdapter extends BaseAdapter
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
-        ChatMessage chatMessage = mDatas.get(position);
-
+        final ChatMessage chatMessage = mDatas.get(position);
         ViewHolder viewHolder = null;
-
         if (convertView == null)
         {
             viewHolder = new ViewHolder();
@@ -87,8 +92,7 @@ public class ChatMessageAdapter extends BaseAdapter
                 viewHolder.seconds = (TextView) convertView.findViewById(R.id.id_recorder_time);
                 viewHolder.length = convertView.findViewById(R.id.id_recorder_length);
 
-
-                if ("1".equals(mDatas.get(position).getMsgType()))
+                if ("0".equals(mDatas.get(position).getMsgType()))
                 {
                     viewHolder.relativeLayout.setVisibility(View.VISIBLE);
                     viewHolder.relativeLayout_pic.setVisibility(View.GONE);
@@ -96,30 +100,63 @@ public class ChatMessageAdapter extends BaseAdapter
 
                     viewHolder.content.setText(chatMessage.getMessage());
                     viewHolder.createDate.setText(chatMessage.getDateStr());
-                } else if ("2".equals(mDatas.get(position).getMsgType()))
+                } else if ("1".equals(mDatas.get(position).getMsgType()))
                 {
                     viewHolder.relativeLayout.setVisibility(View.GONE);
                     viewHolder.relativeLayout_pic.setVisibility(View.VISIBLE);
                     viewHolder.relativeLayout_record.setVisibility(View.GONE);
-
-                    System.out.println("-----------type---2------------" + mDatas.get(position).getPic_msg());
 
                     Glide.with(context)
                             .load(mDatas.get(position).getPic_msg())
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .into(viewHolder.imageView);
 
-
-                    viewHolder.createDate.setText("20" + chatMessage.getDateStr());
-                } else if ("3".equals(mDatas.get(position).getMsgType()))
+                    viewHolder.imageView.setOnClickListener(new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            T.showShort(context, "----------图片点击-----------");
+                        }
+                    });
+                    viewHolder.createDate.setText(chatMessage.getDateStr());
+                } else if ("2".equals(mDatas.get(position).getMsgType()))
                 {
                     viewHolder.relativeLayout.setVisibility(View.GONE);
                     viewHolder.relativeLayout_pic.setVisibility(View.GONE);
                     viewHolder.relativeLayout_record.setVisibility(View.VISIBLE);
 
+                    viewHolder.length.setOnClickListener(new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                        {
 
+                            if (mAnimView != null)
+                            {
+                                mAnimView = null;
+                            }
 
+                            mAnimView = v.findViewById(R.id.id_recorder_anim);
+                            mAnimView.setBackgroundResource(R.drawable.anim_recorder_play);
+                            AnimationDrawable anim = (AnimationDrawable) mAnimView
+                                    .getBackground();
+                            anim.start();
 
+                            T.showShort(context, "-------------语音点击-------------");
+                            MediaManager.playSound(context, chatMessage.getRecord_path(),
+                                    new MediaPlayer.OnCompletionListener()
+                                    {
+                                        @Override
+                                        public void onCompletion(MediaPlayer mp)
+                                        {
+                                            mAnimView.setBackgroundResource(R.drawable.adj);
+                                        }
+                                    });
+                        }
+                    });
+
+                    viewHolder.createDate.setText(chatMessage.getDateStr());
                 }
                 convertView.setTag(viewHolder);
             } else
@@ -131,7 +168,7 @@ public class ChatMessageAdapter extends BaseAdapter
                 viewHolder.content = (TextView) convertView
                         .findViewById(R.id.chat_send_content);
                 viewHolder.content.setText(chatMessage.getMessage());
-                viewHolder.createDate.setText("20" + chatMessage.getDateStr());
+                viewHolder.createDate.setText(chatMessage.getDateStr());
                 convertView.setTag(viewHolder);
             }
 
@@ -141,12 +178,10 @@ public class ChatMessageAdapter extends BaseAdapter
         }
 //		Date date = chatMessage.getDate();
 //		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-
         return convertView;
     }
 
-    private class ViewHolder
+    class ViewHolder
     {
         public RelativeLayout relativeLayout;
         public RelativeLayout relativeLayout_pic;
@@ -155,6 +190,7 @@ public class ChatMessageAdapter extends BaseAdapter
         public TextView content;
         public ImageView imageView;
         TextView seconds;
+
         View length;
     }
 

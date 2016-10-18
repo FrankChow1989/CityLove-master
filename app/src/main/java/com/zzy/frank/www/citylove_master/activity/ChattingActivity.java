@@ -1,26 +1,27 @@
 package com.zzy.frank.www.citylove_master.activity;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.AnimationDrawable;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.Display;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zzy.frank.www.citylove_master.PushApplication;
 import com.zzy.frank.www.citylove_master.R;
-import com.zzy.frank.www.citylove_master.Recorder.MediaManager;
 import com.zzy.frank.www.citylove_master.adapter.ChatMessageAdapter;
 import com.zzy.frank.www.citylove_master.bean.ChatMessage;
 import com.zzy.frank.www.citylove_master.bean.User;
@@ -51,6 +52,9 @@ public class ChattingActivity extends AppCompatActivity
     @Bind(R.id.ly_chat_bottom1)
     TextView lyChatBottom1;
 
+    LinearLayout button1, button2;
+    Button button;
+
     List<ChatMessage> mData = new ArrayList<ChatMessage>();
     String userId;
 
@@ -60,11 +64,15 @@ public class ChattingActivity extends AppCompatActivity
     private User mFromUser;
     private UserDB mUserDB;
 
-    //语音播放动画
-    private View mAnimView;
-
     SharedPreferences sp;
     SharedPreferences.Editor editor;
+
+
+    Dialog dialog;
+    Window dialogWindow;
+    WindowManager m;
+    Display d;
+    WindowManager.LayoutParams p;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -99,38 +107,6 @@ public class ChattingActivity extends AppCompatActivity
             }
         });
         initView();
-
-        idChattingListview.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-            {
-
-                if ("3".equals(mData.get(position).getMsgType()))
-                {
-                    if (mAnimView != null)
-                    {
-                        mAnimView = null;
-                    }
-
-                    mAnimView = view.findViewById(R.id.id_recorder_anim);
-                    mAnimView.setBackgroundResource(R.drawable.anim_recorder_play);
-                    AnimationDrawable anim = (AnimationDrawable) mAnimView
-                            .getBackground();
-                    anim.start();
-                    MediaManager.playSound(ChattingActivity.this, mData.get(position).getRecord_path(),
-                            new MediaPlayer.OnCompletionListener()
-                            {
-                                @Override
-                                public void onCompletion(MediaPlayer mp)
-                                {
-                                    // TODO Auto-generated method stub
-                                    mAnimView.setBackgroundResource(R.drawable.adj);
-                                }
-                            });
-                }
-            }
-        });
     }
 
     private void initView()
@@ -146,8 +122,12 @@ public class ChattingActivity extends AppCompatActivity
         idChattingListview.setAdapter(mAdapter);
         idChattingListview.setSelection(mData.size() - 1);
 
-        if (sp.getBoolean("isSend", false) == true)
+
+        System.out.println("-----------------sp_isSend--------------------:" + sp.getBoolean("isSend", false));
+
+        if (sp.getBoolean("isSendMsg", false) == true)
         {
+
             lyChatTitle.setGravity(View.GONE);
             lyChatBottom1.setVisibility(View.VISIBLE);
         } else
@@ -212,10 +192,95 @@ public class ChattingActivity extends AppCompatActivity
                 break;
             case R.id.id_chatting_checkweixin:
 
+                dialog = new Dialog(this);
+                dialog.setContentView(R.layout.dialog_custem);
+                dialogWindow = dialog.getWindow();
+
+                button1 = (LinearLayout) dialogWindow.findViewById(R.id.id_dialog_year);
+                button2 = (LinearLayout) dialogWindow.findViewById(R.id.id_dialog_month);
+                button = (Button) dialogWindow.findViewById(R.id.id_dialog_button);
+
+                button1.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+
+                    }
+                });
+
+                button2.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+
+                    }
+                });
+
+                button.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+
+                    }
+                });
+
+                m = getWindowManager();
+                d = m.getDefaultDisplay(); // 获取屏幕宽、高用
+                p = dialogWindow.getAttributes(); // 获取对话框当前的参数值
+                p.height = (int) (d.getHeight() * 0.6); // 高度设置为屏幕的0.6
+                p.width = (int) (d.getWidth() * 0.8); // 宽度设置为屏幕的0.65
+                dialogWindow.setAttributes(p);
+                dialog.show();
 
                 break;
             case R.id.ly_chat_bottom1:
 
+                dialog = new Dialog(this);
+                dialog.setContentView(R.layout.dialog_custem);
+                dialogWindow = dialog.getWindow();
+
+                button1 = (LinearLayout) dialogWindow.findViewById(R.id.id_dialog_year);
+                button2 = (LinearLayout) dialogWindow.findViewById(R.id.id_dialog_month);
+                button = (Button) dialogWindow.findViewById(R.id.id_dialog_button);
+
+                button1.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+
+                    }
+                });
+
+                button2.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+
+                    }
+                });
+
+
+                button.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+
+                    }
+                });
+
+                m = getWindowManager();
+                d = m.getDefaultDisplay(); // 获取屏幕宽、高用
+                p = dialogWindow.getAttributes(); // 获取对话框当前的参数值
+                p.height = (int) (d.getHeight() * 0.6); // 高度设置为屏幕的0.6
+                p.width = (int) (d.getWidth() * 0.8); // 宽度设置为屏幕的0.65
+                dialogWindow.setAttributes(p);
+                dialog.show();
 
                 break;
         }
