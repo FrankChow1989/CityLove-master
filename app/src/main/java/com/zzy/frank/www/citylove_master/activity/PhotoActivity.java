@@ -1,52 +1,60 @@
 package com.zzy.frank.www.citylove_master.activity;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.os.Environment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Display;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Toast;
+import android.view.WindowManager;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
-import com.baoyz.actionsheet.ActionSheet;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.jph.takephoto.app.TakePhoto;
+import com.jph.takephoto.app.TakePhotoActivity;
+import com.jph.takephoto.compress.CompressConfig;
+import com.jph.takephoto.model.CropOptions;
+import com.jph.takephoto.model.TImage;
+import com.jph.takephoto.model.TResult;
 import com.zzy.frank.www.citylove_master.R;
 import com.zzy.frank.www.citylove_master.adapter.PhotoAdapter;
 import com.zzy.frank.www.citylove_master.bean.MyPhoto;
-import com.zzy.frank.www.citylove_master.galleryfinal.listener.GlidePauseOnScrollListener;
-import com.zzy.frank.www.citylove_master.galleryfinal.loader.GlideImageLoader;
+import com.zzy.frank.www.citylove_master.util.T;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.finalteam.galleryfinal.CoreConfig;
-import cn.finalteam.galleryfinal.FunctionConfig;
-import cn.finalteam.galleryfinal.GalleryFinal;
-import cn.finalteam.galleryfinal.ImageLoader;
-import cn.finalteam.galleryfinal.PauseOnScrollListener;
-import cn.finalteam.galleryfinal.ThemeConfig;
-import cn.finalteam.galleryfinal.model.PhotoInfo;
 
-public class PhotoActivity extends AppCompatActivity
+public class PhotoActivity extends TakePhotoActivity
 {
 
     @Bind(R.id.id_recy_photo)
     RecyclerView idRecyPhoto;
-
     PhotoAdapter photoAdapter;
     List<MyPhoto> myPhotos;
-
     SharedPreferences sp;
     SharedPreferences.Editor editor;
-
     String[] user_pics;
+
+    AlertDialog dialog;
+    WindowManager m;
+    Display d;
+
+    TextView tv1, tv2;
+
+    final int PIC_NUM = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -55,9 +63,6 @@ public class PhotoActivity extends AppCompatActivity
         setContentView(R.layout.activity_photo);
         ButterKnife.bind(this);
         initView();
-
-        initData();
-
         photoAdapter = new PhotoAdapter(myPhotos, this);
         idRecyPhoto.setAdapter(photoAdapter);
 
@@ -73,127 +78,77 @@ public class PhotoActivity extends AppCompatActivity
             }
 
             @Override
-            public void onItemLongClick(View view, int position)
+            public void onItemLongClick(View view, final int position)
             {
+
+                ArrayList<String> list = new ArrayList<String>();
+                list.add("删除");
+
+                if (position != 0)
+                {
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(PhotoActivity.this);
+                    dialog.setAdapter(new ArrayAdapter<String>(PhotoActivity.this, android.R.layout.simple_list_item_1, android.R.id.text1, list), new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            myPhotos.remove(position);
+                            photoAdapter.notifyDataSetChanged();
+                        }
+                    });
+                    dialog.show();
+                }
             }
         });
-
     }
 
-    //初始化数据
-    private void initData()
-    {
-        mPhotoList = new ArrayList<>();
-    }
-
-    //图片选择
-    private List<PhotoInfo> mPhotoList;
-    private boolean muti;
-    ThemeConfig themeConfig = null;
-    private final int REQUEST_CODE_CAMERA = 1000;
-    private final int REQUEST_CODE_GALLERY = 1001;
-
+    Uri imageUri;
 
     private void ShowDialog()
     {
-        FunctionConfig.Builder functionConfigBuilder = new FunctionConfig.Builder();
-        ImageLoader imageLoader;
-        PauseOnScrollListener pauseOnScrollListener = null;
-        imageLoader = new GlideImageLoader();
-        pauseOnScrollListener = new GlidePauseOnScrollListener(false, true);
+        m = getWindowManager();
+        d = m.getDefaultDisplay();
 
-        muti = false;
-//        int maxSize = 1;
-//        functionConfigBuilder.setMutiSelectMaxSize(maxSize);
-        themeConfig = ThemeConfig.DEFAULT;
-        final boolean mutiSelect = muti;
-        functionConfigBuilder.setEnableEdit(true);
-        functionConfigBuilder.setRotateReplaceSource(false);
-        functionConfigBuilder.setEnableCrop(true);
-        functionConfigBuilder.setCropSquare(true);
-        functionConfigBuilder.setCropReplaceSource(false);
-        functionConfigBuilder.setForceCrop(true);
-        functionConfigBuilder.setForceCropEdit(true);
-        functionConfigBuilder.setEnableCamera(true);
-        functionConfigBuilder.setEnablePreview(true);
-        functionConfigBuilder.setSelected(mPhotoList);//添加过滤集合
-        final FunctionConfig functionConfig = functionConfigBuilder.build();
+        int width = d.getWidth();
+        int height = d.getHeight();
 
-        CoreConfig coreConfig = new CoreConfig.Builder(PhotoActivity.this, imageLoader, themeConfig)
-                .setFunctionConfig(functionConfig)
-                .setPauseOnScrollListener(pauseOnScrollListener)
-                .setNoAnimcation(true)
-                .build();
-        GalleryFinal.init(coreConfig);
+        File file = new File(Environment.getExternalStorageDirectory(), "/temp/" + System.currentTimeMillis() + ".jpg");
+        if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
+        imageUri = Uri.fromFile(file);
+        configCompress(getTakePhoto());
 
-        ActionSheet.createBuilder(PhotoActivity.this, getSupportFragmentManager())
-                .setCancelButtonTitle("取消(Cancel)").setOtherButtonTitles("打开相册(Open Gallery)", "拍照(Camera)")
-                .setCancelableOnTouchOutside(true)
-                .setListener(new ActionSheet.ActionSheetListener()
-                             {
-                                 @Override
-                                 public void onDismiss(ActionSheet actionSheet, boolean isCancel)
-                                 {
-                                 }
+        dialog = new AlertDialog.Builder(this).create();
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_pic_picker, null);
+        dialog.setView(view, 0, 0, 0, 0);
 
-                                 @Override
-                                 public void onOtherButtonClick(ActionSheet actionSheet, int index)
-                                 {
-                                     String path = "/sdcard/pk1-2.jpg";
+        tv1 = (TextView) view.findViewById(R.id.id_dialog_camria);
+        tv2 = (TextView) view.findViewById(R.id.id_dialog_photo);
 
-                                     switch (index)
-                                     {
-                                         case 0:
-                                             System.out.println("----------------------------" + mutiSelect);
-                                             if (mutiSelect)
-                                             {
-                                                 GalleryFinal.openGalleryMuti(REQUEST_CODE_GALLERY, functionConfig, mOnHanlderResultCallback);
-                                             } else
-                                             {
-                                                 GalleryFinal.openGallerySingle(REQUEST_CODE_GALLERY, functionConfig, mOnHanlderResultCallback);
-                                             }
-                                             break;
-                                         case 1:
-                                             GalleryFinal.openCamera(REQUEST_CODE_CAMERA, functionConfig, mOnHanlderResultCallback);
-                                             break;
-                                         default:
-                                             break;
-                                     }
-                                 }
-                             }
-                ).show();
-    }
-
-    private GalleryFinal.OnHanlderResultCallback mOnHanlderResultCallback = new GalleryFinal.OnHanlderResultCallback()
-    {
-        @Override
-        public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList)
+        tv1.setOnClickListener(new View.OnClickListener()
         {
-            if (resultList != null)
+            @Override
+            public void onClick(View v)
             {
-                mPhotoList.addAll(resultList);
+                getTakePhoto().onPickFromCaptureWithCrop(imageUri, getCropOptions());
+                dialog.dismiss();
             }
+        });
 
-            MyPhoto myPhoto = new MyPhoto();
-            myPhoto.setId("1");
-            myPhoto.setLocal_photo(mPhotoList.get(mPhotoList.size() - 1).getPhotoPath());
-            myPhotos.add(myPhoto);
-            photoAdapter.notifyDataSetChanged();
-
-//            for (int i = 0; i < mPhotoList.size(); i++)
-//            {
-//                user_pics[i] = mPhotoList.get(i).getPhotoPath();
-//            }
-//            setSharedPreference(myPhoto.getId(), user_pics);
-
-        }
-
-        @Override
-        public void onHanlderFailure(int requestCode, String errorMsg)
+        tv2.setOnClickListener(new View.OnClickListener()
         {
-            Toast.makeText(PhotoActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
-        }
-    };
+            @Override
+            public void onClick(View v)
+            {
+                getTakePhoto().onPickMultipleWithCrop(PIC_NUM, getCropOptions());
+                dialog.dismiss();
+            }
+        });
+
+
+        dialog.show();
+        dialog.getWindow().setLayout(width / 2 + 200, height / 3);
+    }
 
 
     private void initView()
@@ -208,6 +163,14 @@ public class PhotoActivity extends AppCompatActivity
         sp = getSharedPreferences("user", MODE_PRIVATE);
         editor = sp.edit();
 
+        user_pics = getSharedPreference("photo");
+
+        for (int i = 1; i < user_pics.length; i++)
+        {
+            MyPhoto photo = new MyPhoto();
+            photo.setLocal_photo(user_pics[i]);
+            myPhotos.add(photo);
+        }
 
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 3);
         //设置RecyclerView的布局管理
@@ -231,11 +194,23 @@ public class PhotoActivity extends AppCompatActivity
         }
     }
 
-    /**
-     * sp�������;
-     */
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        user_pics = new String[myPhotos.size()];
+        for (int i = 1; i < myPhotos.size(); i++)
+        {
+            user_pics[i] = myPhotos.get(i).getLocal_photo();
+        }
+        setSharedPreference1("photo", user_pics);
+    }
 
-    public void setSharedPreference(String key, String[] values)
+    /**
+     *
+     *
+     */
+    public void setSharedPreference1(String key, String[] values)
     {
         String regularEx = "#";
         String str = "";
@@ -252,4 +227,69 @@ public class PhotoActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * sp取数据;
+     */
+
+    public String[] getSharedPreference(String key)
+    {
+        String regularEx = "#";
+        String[] str = null;
+        String values;
+        sp = getSharedPreferences("user", MODE_PRIVATE);
+        values = sp.getString(key, "");
+        str = values.split(regularEx);
+        return str;
+    }
+
+    @Override
+    public void takeCancel()
+    {
+        super.takeCancel();
+    }
+
+    @Override
+    public void takeFail(TResult result, String msg)
+    {
+        super.takeFail(result, msg);
+    }
+
+    @Override
+    public void takeSuccess(TResult result)
+    {
+        super.takeSuccess(result);
+        showImg(result.getImages());
+    }
+
+    private void showImg(ArrayList<TImage> images)
+    {
+        //处理图片
+        for (int i = 0; i < images.size(); i++)
+        {
+            MyPhoto photo = new MyPhoto();
+            photo.setLocal_photo(images.get(i).getPath());
+            myPhotos.add(photo);
+            photoAdapter.notifyDataSetChanged();
+        }
+    }
+
+
+    private void configCompress(TakePhoto takePhoto)
+    {
+        int maxSize = Integer.parseInt("800");
+        int maxPixel = Integer.parseInt("800");
+        CompressConfig config = new CompressConfig.Builder().setMaxPixel(maxSize).setMaxPixel(maxPixel).create();
+        takePhoto.onEnableCompress(config, true);
+    }
+
+    private CropOptions getCropOptions()
+    {
+        int height = Integer.parseInt("800");
+        int width = Integer.parseInt("800");
+        CropOptions.Builder builder = new CropOptions.Builder();
+
+        builder.setOutputX(width).setOutputY(height);
+        builder.setWithOwnCrop(true);
+        return builder.create();
+    }
 }

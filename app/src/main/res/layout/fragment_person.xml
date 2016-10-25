@@ -60,6 +60,7 @@
                 >
 
                 <com.zzy.frank.www.citylove_master.ui.RoundImageView
+                    android:id="@+id/id_per_head"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"

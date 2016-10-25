@@ -3,6 +3,9 @@ package com.zzy.frank.www.citylove_master;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -54,17 +57,21 @@ public class MainActivity extends AppCompatActivity implements MSGFragment.OnUnR
     SharedPreferences sp;
     SharedPreferences.Editor editor;
 
+    PushApplication mApplication;
+    int UnReadMsgs = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        mApplication = (PushApplication) this.getApplication();
 
         badgeView = new BadgeView(this);
         badgeView.setTargetView(bt);
         badgeView.setBadgeGravity(Gravity.TOP | Gravity.RIGHT);
-        badgeView.setBadgeMargin(0, 0, 5, 0);
+        badgeView.setBadgeMargin(0, 0, 0, 0);
 
         sp = getSharedPreferences("isSend", MODE_PRIVATE);
         editor = sp.edit();
@@ -72,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements MSGFragment.OnUnR
         editor.putBoolean("isSendMsg", false);
         editor.commit();
 
+        badgeView.setVisibility(View.VISIBLE);
+        badgeView.setBadgeCount(UnReadMsg());
 
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
@@ -262,7 +271,6 @@ public class MainActivity extends AppCompatActivity implements MSGFragment.OnUnR
                 Intent intent = new Intent();
 
                 // TODO: 2016/10/18 获取随机userid
-
                 //intent.putExtra("userid", mList.get(position - 1).getUserId());
                 intent.setClass(this, ChattingActivity.class);
                 startActivity(intent);
@@ -276,6 +284,25 @@ public class MainActivity extends AppCompatActivity implements MSGFragment.OnUnR
         if (count == 0 && badgeView.getBadgeCount() == 0)
             badgeView.setVisibility(View.GONE);
         badgeView.setVisibility(View.VISIBLE);
-        badgeView.setBadgeCount(count);
+        badgeView.setBadgeCount(UnReadMsg());
+        voise();
+        System.out.println("---------count----------:" + count);
+    }
+
+    public int UnReadMsg()
+    {
+        UnReadMsgs = 0;
+        for (int i = 0; i < mApplication.getUserDB().getUserIds().size(); i++)
+        {
+            UnReadMsgs += mApplication.getMessageDB().getUnreadedMsgsCountByUserId(mApplication.getUserDB().getUserIds().get(i));
+        }
+        return UnReadMsgs;
+    }
+
+    private void voise()
+    {
+        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+        r.play();
     }
 }

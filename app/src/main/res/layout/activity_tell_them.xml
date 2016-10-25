@@ -116,6 +116,7 @@
                             />
 
                         <TextView
+                            android:id="@+id/id_tellthem_age1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="10dp"
@@ -129,6 +130,7 @@
                             />
 
                         <TextView
+                            android:id="@+id/id_tellthem_high1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="10dp"
@@ -142,6 +144,7 @@
                             />
 
                         <TextView
+                            android:id="@+id/id_tellthem_length1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="10dp"
@@ -162,6 +165,7 @@
                     >
 
                     <TextView
+                        android:id="@+id/id_tellthem_time1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -173,7 +177,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="37dp"
+                        android:layout_marginBottom="40dp"
                         android:layout_marginTop="3dp"
                         android:layout_weight="2"
                         android:background="@drawable/bg_tellthem4"
@@ -181,7 +185,7 @@
                         android:paddingTop="3dp"
                         android:text="在线"
                         android:textColor="@android:color/white"
-                        android:textSize="12dp"
+                        android:textSize="10dp"
                         />
                 </LinearLayout>
             </LinearLayout>
@@ -246,6 +250,7 @@
                             />
 
                         <TextView
+                            android:id="@+id/id_tellthem_age2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="10dp"
@@ -259,6 +264,7 @@
                             />
 
                         <TextView
+                            android:id="@+id/id_tellthem_high2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="10dp"
@@ -272,6 +278,7 @@
                             />
 
                         <TextView
+                            android:id="@+id/id_tellthem_length2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="10dp"
@@ -292,6 +299,7 @@
                     >
 
                     <TextView
+                        android:id="@+id/id_tellthem_time2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -303,7 +311,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="37dp"
+                        android:layout_marginBottom="40dp"
                         android:layout_marginTop="3dp"
                         android:layout_weight="2"
                         android:background="@drawable/bg_tellthem4"
@@ -311,7 +319,7 @@
                         android:paddingTop="3dp"
                         android:text="在线"
                         android:textColor="@android:color/white"
-                        android:textSize="12dp"
+                        android:textSize="10dp"
                         />
                 </LinearLayout>
             </LinearLayout>
@@ -376,6 +384,7 @@
                             />
 
                         <TextView
+                            android:id="@+id/id_tellthem_age3"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="10dp"
@@ -389,6 +398,7 @@
                             />
 
                         <TextView
+                            android:id="@+id/id_tellthem_high3"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="10dp"
@@ -402,6 +412,7 @@
                             />
 
                         <TextView
+                            android:id="@+id/id_tellthem_length3"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="10dp"
@@ -422,6 +433,7 @@
                     >
 
                     <TextView
+                        android:id="@+id/id_tellthem_time3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -433,7 +445,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="37dp"
+                        android:layout_marginBottom="40dp"
                         android:layout_marginTop="3dp"
                         android:layout_weight="2"
                         android:background="@drawable/bg_tellthem4"
@@ -441,7 +453,7 @@
                         android:paddingTop="3dp"
                         android:text="在线"
                         android:textColor="@android:color/white"
-                        android:textSize="12dp"
+                        android:textSize="10dp"
                         />
                 </LinearLayout>
             </LinearLayout>
@@ -506,6 +518,7 @@
                             />
 
                         <TextView
+                            android:id="@+id/id_tellthem_age4"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="10dp"
@@ -519,6 +532,7 @@
                             />
 
                         <TextView
+                            android:id="@+id/id_tellthem_high4"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="10dp"
@@ -532,6 +546,7 @@
                             />
 
                         <TextView
+                            android:id="@+id/id_tellthem_length4"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="10dp"
@@ -552,6 +567,7 @@
                     >
 
                     <TextView
+                        android:id="@+id/id_tellthem_time4"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -563,7 +579,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="37dp"
+                        android:layout_marginBottom="40dp"
                         android:layout_marginTop="3dp"
                         android:layout_weight="2"
                         android:background="@drawable/bg_tellthem4"
@@ -571,7 +587,7 @@
                         android:paddingTop="3dp"
                         android:text="在线"
                         android:textColor="@android:color/white"
-                        android:textSize="12dp"
+                        android:textSize="10dp"
                         />
                 </LinearLayout>
             </LinearLayout>

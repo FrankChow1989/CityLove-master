@@ -107,6 +107,9 @@ public class ChattingActivity extends AppCompatActivity
             }
         });
         initView();
+
+
+        // TODO: 2016/10/19 信息动态
     }
 
     private void initView()
@@ -152,11 +155,11 @@ public class ChattingActivity extends AppCompatActivity
                     return;
                 }
 
-                if (!NetUtil.isNetConnected(mApplication))
-                {
-                    T.showShort(mApplication, "当前无网络连接！");
-                    return;
-                }
+//                if (!NetUtil.isNetConnected(mApplication))
+//                {
+//                    T.showShort(mApplication, "当前无网络连接！");
+//                    return;
+//                }
 
                 ChatMessage chatMessage = new ChatMessage();
                 chatMessage.setComing(false);
@@ -200,24 +203,6 @@ public class ChattingActivity extends AppCompatActivity
                 button2 = (LinearLayout) dialogWindow.findViewById(R.id.id_dialog_month);
                 button = (Button) dialogWindow.findViewById(R.id.id_dialog_button);
 
-                button1.setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-
-                    }
-                });
-
-                button2.setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-
-                    }
-                });
-
                 button.setOnClickListener(new View.OnClickListener()
                 {
                     @Override
@@ -245,25 +230,6 @@ public class ChattingActivity extends AppCompatActivity
                 button1 = (LinearLayout) dialogWindow.findViewById(R.id.id_dialog_year);
                 button2 = (LinearLayout) dialogWindow.findViewById(R.id.id_dialog_month);
                 button = (Button) dialogWindow.findViewById(R.id.id_dialog_button);
-
-                button1.setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-
-                    }
-                });
-
-                button2.setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-
-                    }
-                });
-
 
                 button.setOnClickListener(new View.OnClickListener()
                 {

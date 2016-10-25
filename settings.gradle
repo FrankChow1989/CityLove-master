@@ -1,2 +1,2 @@
-include ':app', 'galleryfinal', ':frescoimageviewer'
+include ':app', ':frescoimageviewer', ':takephoto_library'
 include ':badgeView'

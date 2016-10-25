@@ -78,12 +78,12 @@
                 android:layout_weight="1"/>
 
             <CheckBox
+                android:id="@+id/id_shezhi_notice"
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
                 android:layout_marginLeft="30dp"
                 android:layout_weight="2"
                 />
-
 
         </LinearLayout>
 
@@ -144,6 +144,7 @@
                 android:layout_weight="1"/>
 
             <CheckBox
+                android:id="@+id/id_shezhi_voise"
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
                 android:layout_marginLeft="30dp"

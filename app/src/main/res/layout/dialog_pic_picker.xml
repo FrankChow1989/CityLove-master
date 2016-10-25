@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="300dp"
-              android:layout_height="200dp"
-              android:layout_margin="10dp"
+              android:layout_width="250dp"
+              android:layout_height="148dp"
+              android:layout_gravity="center"
               android:orientation="vertical">
 
     <TextView
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:gravity="left|center"
+        android:paddingLeft="5dp"
         android:text="选择照片"
-        android:paddingLeft="10dp"
         android:textColor="@color/colorPrimary"
         android:textSize="20dp"
         android:textStyle="bold"
@@ -20,31 +22,38 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:background="@color/colorPrimary"/>
 
     <TextView
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:layout_weight="1"
+        android:id="@+id/id_dialog_camria"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
         android:text="立即拍照"
         android:textColor="@color/blacklight"
-        android:textSize="20dp"
-        android:gravity="center"
-        android:textStyle="bold"/>
+        android:textSize="20dp"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:background="@color/blacklight"/>
 
     <TextView
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:layout_weight="1"
+        android:id="@+id/id_dialog_photo"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
         android:text="从本地相册选取"
         android:textColor="@color/blacklight"
-        android:textSize="20dp"
-        android:gravity="center"
-        android:textStyle="bold"/>
+        android:textSize="20dp"/>
 
 </LinearLayout>

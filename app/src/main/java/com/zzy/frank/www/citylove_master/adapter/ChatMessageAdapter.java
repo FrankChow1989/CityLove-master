@@ -1,24 +1,27 @@
 package com.zzy.frank.www.citylove_master.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.stfalcon.frescoimageviewer.ImageViewer;
 import com.zzy.frank.www.citylove_master.R;
 import com.zzy.frank.www.citylove_master.Recorder.MediaManager;
+import com.zzy.frank.www.citylove_master.activity.ChattingSeePicActivity;
 import com.zzy.frank.www.citylove_master.bean.ChatMessage;
 import com.zzy.frank.www.citylove_master.util.T;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChatMessageAdapter extends BaseAdapter
@@ -29,11 +32,16 @@ public class ChatMessageAdapter extends BaseAdapter
 
     View mAnimView;
 
+    ArrayList<String> mPicUrls;
+
     public ChatMessageAdapter(Context context, List<ChatMessage> datas)
     {
         this.context = context;
         mInflater = LayoutInflater.from(context);
         mDatas = datas;
+        mPicUrls = new ArrayList<>();
+
+        System.out.println("-------mData-------:" + mDatas.size());
     }
 
     @Override
@@ -68,7 +76,7 @@ public class ChatMessageAdapter extends BaseAdapter
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent)
+    public View getView(final int position, View convertView, ViewGroup parent)
     {
         final ChatMessage chatMessage = mDatas.get(position);
         ViewHolder viewHolder = null;
@@ -106,6 +114,7 @@ public class ChatMessageAdapter extends BaseAdapter
                     viewHolder.relativeLayout_pic.setVisibility(View.VISIBLE);
                     viewHolder.relativeLayout_record.setVisibility(View.GONE);
 
+                    System.out.println("-------position--------:" + position);
                     Glide.with(context)
                             .load(mDatas.get(position).getPic_msg())
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -116,7 +125,12 @@ public class ChatMessageAdapter extends BaseAdapter
                         @Override
                         public void onClick(View v)
                         {
-                            T.showShort(context, "----------图片点击-----------");
+                            T.showShort(context, "----------图片点击-----------" + position);
+
+                            Intent intent = new Intent(context, ChattingSeePicActivity.class);
+                            intent.putExtra("pic", chatMessage.getPic_msg());
+                            context.startActivity(intent);
+
                         }
                     });
                     viewHolder.createDate.setText(chatMessage.getDateStr());

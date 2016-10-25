@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="70dp"
-              android:background="@android:color/white"
+              android:background="@drawable/item_chatbg_selector"
               android:orientation="horizontal"
               android:paddingLeft="3dp"
               android:paddingRight="3dp"

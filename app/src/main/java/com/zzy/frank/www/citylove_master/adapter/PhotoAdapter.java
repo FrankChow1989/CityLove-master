@@ -1,6 +1,7 @@
 package com.zzy.frank.www.citylove_master.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.stfalcon.frescoimageviewer.ImageViewer;
 import com.zzy.frank.www.citylove_master.R;
 import com.zzy.frank.www.citylove_master.bean.MyPhoto;
 
@@ -18,12 +20,14 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by pc on 2016/9/22.
+ *
  */
 public class PhotoAdapter extends RecyclerView.Adapter
 {
     private List<MyPhoto> photos;
     private Context context;
+
+    String[] mPics;
 
     //Onclik接口
     public interface OnItemClickListener
@@ -47,6 +51,14 @@ public class PhotoAdapter extends RecyclerView.Adapter
     {
         this.photos = photos;
         this.context = context;
+
+        mPics = new String[photos.size()];
+
+        for (int i = 0; i < photos.size(); i++)
+        {
+            mPics[i] = photos.get(i).getLocal_photo();
+        }
+
     }
 
     @Override
@@ -58,16 +70,17 @@ public class PhotoAdapter extends RecyclerView.Adapter
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position)
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position)
     {
         PhotoViewHolder photoViewHolder = (PhotoViewHolder) holder;
 
         if (position == 0)
         {
-            photoViewHolder.idItemPhoto.setImageBitmap(photos.get(position).getPhoto());
+            photoViewHolder.idItemPhoto.setImageResource(R.mipmap.ic_launcher);
         }
 
         System.out.println("------loacal------" + photos.get(position).getLocal_photo());
+
 
         Glide.with(context)
                 .load(photos.get(position).getLocal_photo())
