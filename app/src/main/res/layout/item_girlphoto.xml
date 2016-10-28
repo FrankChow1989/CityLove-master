@@ -9,7 +9,7 @@
                                            fresco:progressBarAutoRotateInterval="5000"
                                            fresco:progressBarImage="@drawable/jiazai_ing"
                                            fresco:progressBarImageScaleType="centerInside"
-                                           fresco:failureImage = "@drawable/h0"
+                                           fresco:failureImage = "@drawable/h7"
                                            fresco:failureImageScaleType = "centerInside"
     >
 </com.facebook.drawee.view.SimpleDraweeView>

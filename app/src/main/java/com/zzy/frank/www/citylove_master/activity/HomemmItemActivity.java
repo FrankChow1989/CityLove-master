@@ -57,7 +57,8 @@ public class HomemmItemActivity extends AppCompatActivity
     @Bind(R.id.id_homemm_scroll)
     ScrollView idHomemmScroll;
 
-    String id, pic;
+    String id, pic, name, addr, distance, local, focus;
+    String[] photos, space, data, info, condition;
 
     @Bind(R.id.id_homemm_pic)
     ImageView idHomemmPic;
@@ -112,7 +113,49 @@ public class HomemmItemActivity extends AppCompatActivity
         setContentView(R.layout.activity_homemm_item);
         ButterKnife.bind(this);
         initView();
-        getData();
+        initData();
+    }
+
+    private void initData()
+    {
+        toolBar.setTitle(name);
+        idHomemmId.setText(id);
+        idHomemmNickname.setText(name);
+        idHomemmLocal.setText(addr);
+        idHomemmPhoto.setText("相册 " + photos.length);
+        idHomemmDate.setText("20" + TimeUtil.getTime(System.currentTimeMillis() - 30000));
+        idHomemmFocus.setText("关注 " + focus);
+        idHomemmLong.setText(distance);
+
+
+        idHomemmWhatfor.setText(space[0]);
+        idHomemmGuannian.setText(space[1]);
+        idHomemmFirstmeet.setText(space[2]);
+        idHomemmAiaiplace.setText(space[3]);
+
+
+        idHomemmNicname1.setText(data[0]);
+        idHomemmAge.setText(data[2]);
+        idHomemmTall.setText(data[4]);
+        idHomemmShouru.setText(data[5]);
+        idHomemmMarrie.setText(data[5]);
+
+        idHomemmXueli.setText(info[0]);
+        idHomemmZhiye.setText(info[1]);
+        idHomemmBrith.setText(info[2]);
+        idHomemmWigth.setText(info[3]);
+        idHomemmXingzuo.setText(info[4]);
+
+        idHomemmFriendage.setText(condition[0]);
+        idHomemmFriendwhere.setText(condition[1]);
+        idHomemmFriendtall.setText(condition[2]);
+        idHomemmFriendxueli.setText(condition[3]);
+        idHomemmFriendshouru.setText(condition[4]);
+
+        Glide.with(this)
+                .load(pic)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(idHomemmPic);
     }
 
     private void initView()
@@ -131,8 +174,18 @@ public class HomemmItemActivity extends AppCompatActivity
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
         pic = intent.getStringExtra("pic");
+        name = intent.getStringExtra("name");
+        addr = intent.getStringExtra("addr");
+        local = intent.getStringExtra("local");
+        distance = intent.getStringExtra("distance");
+        focus = intent.getStringExtra("focus");
 
-        System.out.println("-----------homemmitem------:" + id);
+        photos = intent.getStringArrayExtra("photos");
+        space = intent.getStringArrayExtra("space");
+        data = intent.getStringArrayExtra("data");
+        info = intent.getStringArrayExtra("info");
+        condition = intent.getStringArrayExtra("condition");
+
 
     }
 
@@ -144,6 +197,7 @@ public class HomemmItemActivity extends AppCompatActivity
         {
             case R.id.id_homemm_photo:
                 intent.setClass(this, GirlsPhotoActivity.class);
+                intent.putExtra("photo", photos);
                 startActivity(intent);
                 break;
             case R.id.id_homemm_weixin:
@@ -153,18 +207,18 @@ public class HomemmItemActivity extends AppCompatActivity
                 // TODO: 2016/9/26 跳转聊天窗口
                 break;
             case R.id.id_homemm_sayhi:
-                idHomemmSayhi.setImageResource(R.mipmap.ic_launcher);
+                idHomemmSayhi.setImageResource(R.drawable.hi_gray);
                 break;
             case R.id.id_homemm_guanzhu:
 
                 if (isGuanZhu == false)
                 {
-                    idHomemmGuanzhu.setImageResource(R.mipmap.ic_launcher);
+                    idHomemmGuanzhu.setImageResource(R.drawable.watch);
                     isGuanZhu = true;
 
                 } else if (isGuanZhu == true)
                 {
-                    idHomemmGuanzhu.setImageResource(R.drawable.a3);
+                    idHomemmGuanzhu.setImageResource(R.drawable.unwatch);
                     isGuanZhu = false;
                 }
                 break;
@@ -174,91 +228,4 @@ public class HomemmItemActivity extends AppCompatActivity
         }
     }
 
-    private void getData()
-    {
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "https://oetlj49uy.qnssl.com/home_items" + "001" + ".txt";
-        JsonObjectRequest objRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>()
-                {
-                    @Override
-                    public void onResponse(JSONObject obj)
-                    {
-                        System.out.println("---sssssssssssssss---:" + obj);
-                        pasreData(obj);
-                    }
-                }, new Response.ErrorListener()
-        {
-            @Override
-            public void onErrorResponse(VolleyError error)
-            {
-                error.getMessage();
-            }
-        })
-        {
-            protected Response<JSONObject> parseNetworkResponse(NetworkResponse response)
-            {
-                JSONObject jsonObject;
-                try
-                {
-                    jsonObject = new JSONObject(new String(response.data, "GBK"));
-                    return Response.success(jsonObject, HttpHeaderParser.parseCacheHeaders(response));
-                } catch (UnsupportedEncodingException e)
-                {
-                    e.printStackTrace();
-                    return Response.error(new ParseError(e));
-                } catch (JSONException e)
-                {
-                    e.printStackTrace();
-                    return Response.error(new ParseError(e));
-                }
-            }
-        };
-//        objRequest.setTag("obj");
-        queue.add(objRequest);
-    }
-
-    private void pasreData(JSONObject obj)
-    {
-        try
-        {
-            toolBar.setTitle(obj.getString("nickname"));
-            idHomemmId.setText(obj.getString("id"));
-            idHomemmNickname.setText(obj.getString("nickname"));
-            idHomemmLocal.setText(obj.getString("local"));
-            idHomemmPhoto.setText("相册 " + obj.getString("picnum"));
-            idHomemmDate.setText("20" + TimeUtil.getTime(System.currentTimeMillis() - 30000));
-            idHomemmFocus.setText("关注 " + obj.getString("focus"));
-            idHomemmWhatfor.setText(obj.getString("whatfor"));
-            idHomemmGuannian.setText(obj.getString("guannian"));
-            idHomemmFirstmeet.setText(obj.getString("firstmeet"));
-            idHomemmAiaiplace.setText(obj.getString("aiaiplace"));
-            idHomemmNicname1.setText(obj.getString("nickname"));
-            idHomemmAge.setText(obj.getString("age"));
-            idHomemmTall.setText(obj.getString("tall"));
-            idHomemmShouru.setText(obj.getString("shouru"));
-            idHomemmMarrie.setText(obj.getString("marrie"));
-
-            idHomemmXueli.setText(obj.getString("xueli"));
-            idHomemmZhiye.setText(obj.getString("zhiye"));
-            idHomemmBrith.setText(obj.getString("brith"));
-            idHomemmWigth.setText(obj.getString("wigth"));
-            idHomemmXingzuo.setText(obj.getString("xingzuo"));
-
-            idHomemmFriendage.setText(obj.getString("friendage"));
-            idHomemmFriendwhere.setText(obj.getString("friendwhere"));
-            idHomemmFriendtall.setText(obj.getString("friendtall"));
-            idHomemmFriendxueli.setText(obj.getString("friendxueli"));
-            idHomemmFriendshouru.setText(obj.getString("friendshouru"));
-
-            Glide.with(this)
-                    .load(pic)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(idHomemmPic);
-
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
 }

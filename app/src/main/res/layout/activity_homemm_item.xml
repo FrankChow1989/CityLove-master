@@ -1137,14 +1137,14 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginRight="5dp"
-                android:src="@drawable/a3"
+                android:src="@drawable/letter"
                 />
 
             <com.zzy.frank.www.citylove_master.ui.RoundImageView
                 android:id="@+id/id_homemm_sayhi"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/a3"
+                android:src="@drawable/hi"
                 />
 
             <com.zzy.frank.www.citylove_master.ui.RoundImageView
@@ -1152,7 +1152,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginLeft="5dp"
-                android:src="@drawable/a3"/>
+                android:src="@drawable/watch"/>
         </LinearLayout>
 
     </FrameLayout>

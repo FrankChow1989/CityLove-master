@@ -25,9 +25,9 @@
         android:layout_width="200dp"
         android:layout_height="40dp"
         android:layout_gravity="top|center"
-        android:gravity="center"
-        android:layout_marginTop="140dp"
         android:layout_marginRight="300dp"
+        android:layout_marginTop="140dp"
+        android:gravity="center"
         android:text="同城寂寞男女快约平台"
         android:textColor="@android:color/white"
         android:textSize="18dp"
@@ -37,7 +37,7 @@
     <RadioGroup
         android:id="@+id/id_wel_rg"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_gravity="bottom"
         android:layout_marginBottom="5dp"
         android:orientation="horizontal"
@@ -46,29 +46,31 @@
         <RadioButton
             android:id="@+id/id_login_qq"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:background="@drawable/wel_rb_selector"
             android:button="@null"
-            android:drawableLeft="@mipmap/ic_launcher"
-            android:paddingLeft="25dp"
+            android:drawableLeft="@drawable/umeng_socialize_qq_on"
+            android:paddingLeft="40dp"
             android:text="使用QQ登陆"
+            android:textSize="12dp"
             />
 
         <RadioButton
             android:id="@+id/id_login_weixin"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:background="@drawable/wel_rb_selector"
             android:button="@null"
-            android:drawableLeft="@mipmap/ic_launcher"
-            android:paddingLeft="25dp"
+            android:drawableLeft="@drawable/umeng_socialize_wechat"
+            android:paddingLeft="40dp"
             android:text="使用微信登陆"
+            android:textSize="12dp"
             />
     </RadioGroup>
 

@@ -1,18 +1,16 @@
 package com.zzy.frank.www.citylove_master.adapter;
 
 import android.content.Context;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.zzy.frank.www.citylove_master.R;
-import com.zzy.frank.www.citylove_master.bean.Homemm;
+import com.zzy.frank.www.citylove_master.bean.Grils;
 import com.zzy.frank.www.citylove_master.ui.RoundImageView;
 
 import java.util.List;
@@ -26,7 +24,7 @@ import butterknife.ButterKnife;
 public class HomeAdapter extends RecyclerView.Adapter
 {
 
-    private List<Homemm> mList;
+    private List<Grils> mList;
     private Context context;
 
     //Onclik接口
@@ -46,7 +44,7 @@ public class HomeAdapter extends RecyclerView.Adapter
         this.mOnItemClickListener = listener;
     }
 
-    public HomeAdapter(List<Homemm> mList, Context context)
+    public HomeAdapter(List<Grils> mList, Context context)
     {
         this.mList = mList;
         this.context = context;
@@ -66,11 +64,11 @@ public class HomeAdapter extends RecyclerView.Adapter
         HomemmViewHolder homemmViewHolder = (HomemmViewHolder) holder;
 
         Glide.with(context)
-                .load(mList.get(position).getPic())
+                .load(mList.get(position).getIcon())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(homemmViewHolder.idItemHomemmPic);
 
-        homemmViewHolder.idItemHomemmName.setText(mList.get(position).getName());
+        homemmViewHolder.idItemHomemmName.setText(mList.get(position).getNickname() + "|" + mList.get(position).getAge() + "岁");
 //        Uri uri = Uri.parse("res://" + context.getPackageName() + "/" + mList.get(position).getPic());
 //        homemmViewHolder.idItemHomemmPic.setImageURI(uri);
 
@@ -93,7 +91,6 @@ public class HomeAdapter extends RecyclerView.Adapter
             });
 
             //longclick
-
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener()
             {
                 @Override

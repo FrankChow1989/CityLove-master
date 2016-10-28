@@ -25,17 +25,7 @@ public class GirlsPhotoActivity extends AppCompatActivity
     RecyclerView idGirlsPhotoRecy;
     GirlsPhotoAdapter girlsPhotoAdapter;
 
-    private static final String[] posters = {
-            "https://pp.vk.me/c630619/v630619423/4637a/vAOodrqPzQM.jpg",
-            "https://pp.vk.me/c630619/v630619423/46395/71QKIPW6BWM.jpg",
-            "https://pp.vk.me/c630619/v630619423/46383/GOTf1IvHKoc.jpg",
-            "https://pp.vk.me/c630619/v630619423/4638c/i1URx2fWj20.jpg",
-            "https://pp.vk.me/c630619/v630619423/4639e/BPoHv4xEikA.jpg",
-            "https://pp.vk.me/c630619/v630619423/463a7/9EjA0oqA_yQ.jpg",
-            "https://pp.vk.me/c630619/v630619423/463b0/VLPAZQJ0kuI.jpg",
-            "https://pp.vk.me/c630619/v630619423/463b9/O3-hk8kIvdY.jpg",
-            "https://pp.vk.me/c630619/v630619423/463c2/WgtvE0FQwVY.jpg"
-    };
+    private String[] posters;
 
 
     @Override
@@ -90,5 +80,6 @@ public class GirlsPhotoActivity extends AppCompatActivity
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 3);
         //设置RecyclerView的布局管理
         idGirlsPhotoRecy.setLayoutManager(layoutManager);
+        posters = getIntent().getStringArrayExtra("photo");
     }
 }

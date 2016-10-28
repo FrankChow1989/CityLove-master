@@ -32,7 +32,7 @@ public class WelcomeActivity extends AppCompatActivity
     @Bind(R.id.id_wel_rg)
     RadioGroup idWelRg;
 
-    private int width;
+    private float width;
 
     PushApplication mApplication;
 
@@ -62,8 +62,11 @@ public class WelcomeActivity extends AppCompatActivity
 
             public void run()
             {
+
+                System.out.println("------width------:" + width);
+
                 idWelRg.setVisibility(View.VISIBLE);
-                ValueAnim.startValue(startContent, "x", 0, width - 120);
+                ValueAnim.startValue(startContent, "x", 0, width / 1.2f);
                 ObjectAnim.startObj(idWelRg, 0.0f, 1.0f);
             }
 

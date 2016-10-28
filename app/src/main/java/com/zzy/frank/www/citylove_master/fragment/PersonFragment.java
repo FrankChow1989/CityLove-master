@@ -71,6 +71,7 @@ public class PersonFragment extends TakePhotoFragment implements View.OnClickLis
         imageView = (RoundImageView) view.findViewById(R.id.id_per_head);
         Glide.with(this)
                 .load(pic)
+                .error(R.drawable.icon_center_header)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imageView);
 
@@ -88,25 +89,6 @@ public class PersonFragment extends TakePhotoFragment implements View.OnClickLis
         });
 
         return view;
-    }
-
-    @Override
-    public void takeCancel()
-    {
-        super.takeCancel();
-    }
-
-    @Override
-    public void takeFail(TResult result, String msg)
-    {
-        super.takeFail(result, msg);
-    }
-
-    @Override
-    public void takeSuccess(TResult result)
-    {
-        super.takeSuccess(result);
-        showImg(result.getImages());
     }
 
     private void showImg(ArrayList<TImage> images)
@@ -220,6 +202,25 @@ public class PersonFragment extends TakePhotoFragment implements View.OnClickLis
 
 
         dialog.show();
-        dialog.getWindow().setLayout(width / 2 + 200, height / 3);
+        dialog.getWindow().setLayout(width / 2 + 200, height / 4 + 20);
+
+    }
+
+    @Override
+    public void takeSuccess(TResult result)
+    {
+        showImg(result.getImages());
+    }
+
+    @Override
+    public void takeFail(TResult result, String msg)
+    {
+        super.takeFail(result, msg);
+    }
+
+    @Override
+    public void takeCancel()
+    {
+        super.takeCancel();
     }
 }

@@ -16,7 +16,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:src="@drawable/a3"
+            android:src="@drawable/icon_msg_hn"
             />
 
         <LinearLayout
@@ -66,7 +66,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:src="@drawable/a3"
+            android:src="@drawable/icon_near_lf"
             />
 
         <LinearLayout
@@ -110,7 +110,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:src="@drawable/a3"
+            android:src="@drawable/icon_msg_attention_me"
             />
 
         <LinearLayout

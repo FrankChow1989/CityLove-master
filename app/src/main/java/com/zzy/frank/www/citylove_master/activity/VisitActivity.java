@@ -77,7 +77,7 @@ public class VisitActivity extends AppCompatActivity
         for (int i = 0; i < 8; i++)
         {
             VisitCommon visitCommon = new VisitCommon();
-            visitCommon.setPic(R.drawable.a3);
+            visitCommon.setPic(R.drawable.h7);
             visitCommon.setName("思思");
             visitCommon.setContent("20岁.上海市.163cm");
             visitCommon.setFrom("3.12km");

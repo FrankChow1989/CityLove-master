@@ -128,8 +128,6 @@ public class MSGFragment extends Fragment implements SendMsgORAddFriends.onNewFr
         {
             mUnReadedMsgs += val;
         }
-
-        notifyUnReadedMsg();
     }
 
     @Override
@@ -172,7 +170,7 @@ public class MSGFragment extends Fragment implements SendMsgORAddFriends.onNewFr
                     mUnReadedMsgs -= val;
                     mUserMessages.remove(userId);
                     chatAdapter.notifyDataSetChanged();
-                    //chattingRecy.setSelection(position);
+                    chattingRecy.setSelection(position);
                     notifyUnReadedMsg();
                 }
                 Intent intent = new Intent();
@@ -197,6 +195,13 @@ public class MSGFragment extends Fragment implements SendMsgORAddFriends.onNewFr
         SendMsgORAddFriends.msgListeners.add(this);
         // 更新用户列表
         mList = mApplication.getUserDB().getUser();
+        mUserMessages = mApplication.getMessageDB().getUserUnReadMsgs(
+                mApplication.getUserDB().getUserIds());
+
+        for (Integer val : mUserMessages.values())
+        {
+            mUnReadedMsgs += val;
+        }
         chatAdapter.notifyDataSetChanged();
     }
 

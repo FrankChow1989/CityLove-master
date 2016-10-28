@@ -17,8 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:padding="5dp"
-            android:src="@mipmap/ic_launcher"/>
+            android:padding="13dp"
+            android:src="@drawable/vip_icon"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -65,7 +65,7 @@
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="20dp"
-                    android:src="@drawable/a3"/>
+                    android:src="@drawable/icon_center_header"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -120,7 +120,7 @@
                         android:paddingBottom="8dp"
                         android:paddingLeft="25dp"
                         android:paddingTop="8dp"
-                        android:src="@mipmap/ic_launcher"/>
+                        android:src="@drawable/vipicon"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -151,7 +151,7 @@
                         android:paddingBottom="8dp"
                         android:paddingLeft="25dp"
                         android:paddingTop="8dp"
-                        android:src="@mipmap/ic_launcher"/>
+                        android:src="@drawable/phone_icon"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -184,7 +184,7 @@
                         android:layout_height="50dp"
                         android:layout_weight="1.5"
                         android:padding="5dp"
-                        android:src="@mipmap/ic_launcher"
+                        android:src="@drawable/icon_center_lf"
                         ></ImageView>
 
                     <TextView
@@ -220,7 +220,7 @@
                         android:layout_height="50dp"
                         android:layout_weight="1.5"
                         android:padding="5dp"
-                        android:src="@mipmap/ic_launcher"
+                        android:src="@drawable/icon_center_attention"
                         ></ImageView>
 
                     <TextView
@@ -255,7 +255,7 @@
                         android:layout_height="50dp"
                         android:layout_weight="1.5"
                         android:padding="5dp"
-                        android:src="@mipmap/ic_launcher"
+                        android:src="@drawable/icon_center_self"
                         ></ImageView>
 
                     <TextView
@@ -292,7 +292,7 @@
                         android:layout_height="50dp"
                         android:layout_weight="1.5"
                         android:padding="5dp"
-                        android:src="@mipmap/ic_launcher"
+                        android:src="@drawable/icon_center_photos"
                         ></ImageView>
 
                     <TextView
@@ -329,7 +329,7 @@
                         android:layout_height="50dp"
                         android:layout_weight="1.5"
                         android:padding="5dp"
-                        android:src="@mipmap/ic_launcher"
+                        android:src="@drawable/icon_center_tj"
                         ></ImageView>
 
                     <TextView
@@ -363,7 +363,7 @@
                         android:layout_height="50dp"
                         android:layout_weight="1.5"
                         android:padding="5dp"
-                        android:src="@mipmap/ic_launcher"
+                        android:src="@drawable/icon_center_setting"
                         ></ImageView>
 
                     <TextView

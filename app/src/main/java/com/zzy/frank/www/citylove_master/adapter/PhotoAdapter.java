@@ -76,7 +76,7 @@ public class PhotoAdapter extends RecyclerView.Adapter
 
         if (position == 0)
         {
-            photoViewHolder.idItemPhoto.setImageResource(R.mipmap.ic_launcher);
+            photoViewHolder.idItemPhoto.setBackgroundResource(R.drawable.take_photo_bt);
         }
 
         System.out.println("------loacal------" + photos.get(position).getLocal_photo());

@@ -53,16 +53,6 @@
     public static final int *;
 }
 
-# volley
--keep class com.android.volley.** {*;}
--keep class com.android.volley.toolbox.** {*;}
--keep class com.android.volley.Response$* { *; }
--keep class com.android.volley.Request$* { *; }
--keep class com.android.volley.RequestQueue$* { *; }
--keep class com.android.volley.toolbox.HurlStack$* { *; }
--keep class com.android.volley.toolbox.ImageLoader$* { *; }
-
-
 -keep class butterknife.** { *; }
 -dontwarn butterknife.internal.**
 -keep class **$$ViewBinder { *; }

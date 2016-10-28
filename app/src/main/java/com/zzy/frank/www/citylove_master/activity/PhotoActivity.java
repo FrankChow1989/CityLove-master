@@ -147,14 +147,14 @@ public class PhotoActivity extends TakePhotoActivity
 
 
         dialog.show();
-        dialog.getWindow().setLayout(width / 2 + 200, height / 3);
+        dialog.getWindow().setLayout(width / 2 + 200, height / 4 + 20);
     }
 
 
     private void initView()
     {
         Resources r = this.getResources();
-        Bitmap bmp = BitmapFactory.decodeResource(r, R.drawable.h1);
+        Bitmap bmp = BitmapFactory.decodeResource(r, R.drawable.take_photo_bt);
         myPhotos = new ArrayList<>();
         MyPhoto myPhoto = new MyPhoto();
         myPhoto.setPhoto(bmp);

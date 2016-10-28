@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right|center"
         android:layout_marginTop="10dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -35,7 +35,7 @@
                 android:id="@+id/chat_from_icon"
                 android:layout_width="49dp"
                 android:layout_height="49dp"
-                android:src="@drawable/a3"/>
+                android:src="@drawable/h7"/>
 
             <TextView
                 android:id="@+id/chat_from_content"
@@ -77,7 +77,7 @@
                 android:id="@+id/chat_from_icon_pic"
                 android:layout_width="49dp"
                 android:layout_height="49dp"
-                android:src="@drawable/a3"/>
+                android:src="@drawable/h7"/>
 
             <ImageView
                 android:id="@+id/chat_from_content_pic"
@@ -85,7 +85,6 @@
                 android:layout_height="190dp"
                 android:layout_marginLeft="5dp"
                 android:clickable="true"
-                android:src="@drawable/ce"
                 android:focusable="true"
                 android:gravity="center_vertical"/>
         </LinearLayout>
@@ -97,7 +96,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right|center"
         android:layout_marginTop="10dp"
-        android:visibility="visible"
+        android:visibility="gone"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -112,7 +111,7 @@
                 android:id="@+id/chat_from_icon_record"
                 android:layout_width="49dp"
                 android:layout_height="49dp"
-                android:src="@drawable/a3"/>
+                android:src="@drawable/h7"/>
 
             <RelativeLayout
                 android:id="@+id/chat_from_content_record"

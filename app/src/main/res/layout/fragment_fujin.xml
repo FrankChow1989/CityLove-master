@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#ededed"
+    android:orientation="vertical"
     tools:context="com.zzy.frank.www.citylove_master.fragment.FujinFragment">
 
     <LinearLayout
@@ -18,8 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:padding="5dp"
-            android:src="@mipmap/ic_launcher"/>
+            android:padding="13dp"
+            android:src="@drawable/vip_icon"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -48,20 +48,24 @@
         >
     </ListView>
 
-    <Button
+
+    <RadioButton
         android:id="@+id/id_all_sayhi"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="4.5"
-        android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="4.5"
         android:background="@drawable/wel_rb_selector"
+        android:button="@null"
+        android:drawableLeft="@drawable/icon_head"
+        android:paddingLeft="120dp"
         android:text="对他们打招呼"
         android:textColor="@android:color/white"
-        android:textStyle="bold"
         android:textSize="16dp"
+        android:textStyle="bold"
         />
 
 </LinearLayout>

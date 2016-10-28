@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#ededed"
+    android:orientation="vertical"
     tools:context="com.zzy.frank.www.citylove_master.fragment.HomeFragment">
 
     <LinearLayout
@@ -18,8 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:padding="5dp"
-            android:src="@mipmap/ic_launcher"/>
+            android:padding="13dp"
+            android:src="@drawable/vip_icon"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -35,17 +35,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:padding="5dp"
-            android:src="@mipmap/ic_launcher"/>
+            android:padding="13dp"
+            android:src="@drawable/search_icon"/>
 
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/gradview_home"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refreshlayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        >
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/gradview_home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
+        </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

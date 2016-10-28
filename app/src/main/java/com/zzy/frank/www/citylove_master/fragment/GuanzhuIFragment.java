@@ -64,7 +64,7 @@ public class GuanzhuIFragment extends Fragment
         for (int i = 0; i < 10; i++)
         {
             VisitCommon common = new VisitCommon();
-            common.setPic(R.drawable.a3);
+            common.setPic(R.drawable.h7);
             common.setName("小泥鳅");
             common.setContent("22岁.上海市.165cm");
             common.setFrom("5.95km");

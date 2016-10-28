@@ -61,7 +61,7 @@ public class FujinFragment extends Fragment
         {
             FuJinMM fuJinMM = new FuJinMM();
             fuJinMM.setId(i);
-            fuJinMM.setPic(R.drawable.a3);
+            fuJinMM.setPic(R.drawable.h7);
             fuJinMM.setTitle("花季少女");
             fuJinMM.setContent("27岁.上海市.162cm");
             fuJinMM.setFrom("3.22km");

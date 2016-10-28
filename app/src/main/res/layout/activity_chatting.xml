@@ -73,7 +73,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_margin="10dp"
-            android:src="@drawable/a3"/>
+            android:src="@drawable/h7"/>
 
         <RelativeLayout
             android:id="@+id/id_chat_re"
