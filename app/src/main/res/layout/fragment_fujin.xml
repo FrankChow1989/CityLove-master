@@ -49,7 +49,7 @@
     </ListView>
 
 
-    <RadioButton
+    <LinearLayout
         android:id="@+id/id_all_sayhi"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -59,13 +59,30 @@
         android:layout_marginTop="5dp"
         android:layout_weight="4.5"
         android:background="@drawable/wel_rb_selector"
-        android:button="@null"
-        android:drawableLeft="@drawable/icon_head"
-        android:paddingLeft="120dp"
-        android:text="对他们打招呼"
-        android:textColor="@android:color/white"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        />
+        android:orientation="horizontal"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:paddingBottom="10dp"
+            android:paddingLeft="100dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/icon_head"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="left|center"
+            android:paddingLeft="5dp"
+            android:text="对她们打招呼"
+            android:textColor="@android:color/white"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            />
+
+    </LinearLayout>
 
 </LinearLayout>

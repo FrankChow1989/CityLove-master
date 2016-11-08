@@ -96,6 +96,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                                 intent.putExtra("pic", grils.get(position).getIcon());
                                 intent.putExtra("name", grils.get(position).getNickname());
                                 intent.putExtra("addr", grils.get(position).getAddr());
+                                intent.putExtra("age",grils.get(position).getAge());
                                 intent.putExtra("focus", grils.get(position).getAttention());
                                 intent.putExtra("distance", grils.get(position).getDistance());
 

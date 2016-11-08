@@ -3,31 +3,23 @@ package com.zzy.frank.www.citylove_master.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.android.volley.NetworkResponse;
-import com.android.volley.ParseError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.HttpHeaderParser;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.zzy.frank.www.citylove_master.R;
+import com.zzy.frank.www.citylove_master.adapter.GirlsPhotoAdapter;
+import com.zzy.frank.www.citylove_master.adapter.VedioAdapter;
+import com.zzy.frank.www.citylove_master.ui.Dialog_VIP;
 import com.zzy.frank.www.citylove_master.ui.RoundImageView;
+import com.zzy.frank.www.citylove_master.util.DividerItemDecoration;
 import com.zzy.frank.www.citylove_master.util.TimeUtil;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -57,7 +49,7 @@ public class HomemmItemActivity extends AppCompatActivity
     @Bind(R.id.id_homemm_scroll)
     ScrollView idHomemmScroll;
 
-    String id, pic, name, addr, distance, local, focus;
+    String id, pic, name, addr, age, distance, local, focus;
     String[] photos, space, data, info, condition;
 
     @Bind(R.id.id_homemm_pic)
@@ -104,6 +96,13 @@ public class HomemmItemActivity extends AppCompatActivity
     TextView idHomemmFriendshouru;
     @Bind(R.id.id_homemm_nicname1)
     TextView idHomemmNicname1;
+    @Bind(R.id.id_homemm_photos)
+    RecyclerView idHomemmPhotos;
+    @Bind(R.id.id_homemm_vedio)
+    RecyclerView idHomemmVedio;
+
+    GirlsPhotoAdapter girlsPhotoAdapter;
+    VedioAdapter mAdapter;
 
 
     @Override
@@ -123,7 +122,7 @@ public class HomemmItemActivity extends AppCompatActivity
         idHomemmNickname.setText(name);
         idHomemmLocal.setText(addr);
         idHomemmPhoto.setText("相册 " + photos.length);
-        idHomemmDate.setText("20" + TimeUtil.getTime(System.currentTimeMillis() - 30000));
+        idHomemmDate.setText(TimeUtil.getTime(System.currentTimeMillis() - 30000));
         idHomemmFocus.setText("关注 " + focus);
         idHomemmLong.setText(distance);
 
@@ -171,11 +170,23 @@ public class HomemmItemActivity extends AppCompatActivity
             }
         });
 
-        Intent intent = getIntent();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        idHomemmPhotos.setLayoutManager(linearLayoutManager);
+//        idHomemmVedio.setLayoutManager(linearLayoutManager);
+//        idHomemmVedio.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
+
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(this);
+        linearLayoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
+        idHomemmVedio.setLayoutManager(linearLayoutManager1);
+
+
+        final Intent intent = getIntent();
         id = intent.getStringExtra("id");
         pic = intent.getStringExtra("pic");
         name = intent.getStringExtra("name");
         addr = intent.getStringExtra("addr");
+        age = intent.getStringExtra("age");
         local = intent.getStringExtra("local");
         distance = intent.getStringExtra("distance");
         focus = intent.getStringExtra("focus");
@@ -187,21 +198,69 @@ public class HomemmItemActivity extends AppCompatActivity
         condition = intent.getStringArrayExtra("condition");
 
 
+        girlsPhotoAdapter = new GirlsPhotoAdapter(photos, this);
+        idHomemmPhotos.setAdapter(girlsPhotoAdapter);
+
+        mAdapter = new VedioAdapter(photos, this);
+        idHomemmVedio.setAdapter(mAdapter);
+
+        /**
+         * 查看照片
+         */
+        girlsPhotoAdapter.setOnItemClickListener(new GirlsPhotoAdapter.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(View view, int position)
+            {
+                Dialog_VIP dialogVip = new Dialog_VIP();
+                dialogVip.show(HomemmItemActivity.this);
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position)
+            {
+
+            }
+        });
+
+        /**
+         * 查看视频
+         */
+        mAdapter.setOnItemClickListener(new VedioAdapter.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(View view, int position)
+            {
+                Intent intent1 = new Intent(HomemmItemActivity.this, ScretVedioActivity.class);
+                intent1.putExtra("icon", pic);
+                intent1.putExtra("name", name);
+                intent1.putExtra("addr", addr);
+                intent1.putExtra("age", age);
+                startActivity(intent1);
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position)
+            {
+
+            }
+        });
+
     }
 
-    @OnClick({R.id.id_homemm_photo, R.id.id_homemm_weixin, R.id.id_homemm_sendletter, R.id.id_homemm_sayhi, R.id.id_homemm_guanzhu, R.id.homemm_head4})
+    @OnClick({R.id.id_homemm_linea_photo, R.id.id_homemm_weixin, R.id.id_homemm_sendletter, R.id.id_homemm_sayhi, R.id.id_homemm_guanzhu, R.id.id_homemm_phone, R.id.id_homemm_weixincheck})
     public void onClick(View view)
     {
         Intent intent = new Intent();
         switch (view.getId())
         {
-            case R.id.id_homemm_photo:
-                intent.setClass(this, GirlsPhotoActivity.class);
-                intent.putExtra("photo", photos);
-                startActivity(intent);
+            case R.id.id_homemm_linea_photo:
+//                intent.setClass(this, GirlsPhotoActivity.class);
+//                intent.putExtra("photo", photos);
+//                startActivity(intent);
                 break;
             case R.id.id_homemm_weixin:
-                idHomemmScroll.scrollTo(0, 1600);
+                idHomemmScroll.scrollTo(0, 2020);
                 break;
             case R.id.id_homemm_sendletter:
                 // TODO: 2016/9/26 跳转聊天窗口
@@ -222,8 +281,13 @@ public class HomemmItemActivity extends AppCompatActivity
                     isGuanZhu = false;
                 }
                 break;
-            case R.id.homemm_head4:
-
+            case R.id.id_homemm_phone:
+                Dialog_VIP dialog = new Dialog_VIP();
+                dialog.show(this);
+                break;
+            case R.id.id_homemm_weixincheck:
+                Dialog_VIP dialogVip = new Dialog_VIP();
+                dialogVip.show(this);
                 break;
         }
     }

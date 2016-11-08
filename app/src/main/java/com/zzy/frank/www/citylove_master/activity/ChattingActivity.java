@@ -4,11 +4,15 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Display;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -26,9 +30,11 @@ import com.zzy.frank.www.citylove_master.adapter.ChatMessageAdapter;
 import com.zzy.frank.www.citylove_master.bean.ChatMessage;
 import com.zzy.frank.www.citylove_master.bean.User;
 import com.zzy.frank.www.citylove_master.dao.UserDB;
+import com.zzy.frank.www.citylove_master.ui.Dialog_VIP;
 import com.zzy.frank.www.citylove_master.util.NetUtil;
 import com.zzy.frank.www.citylove_master.util.T;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -52,9 +58,6 @@ public class ChattingActivity extends AppCompatActivity
     @Bind(R.id.ly_chat_bottom1)
     TextView lyChatBottom1;
 
-    LinearLayout button1, button2;
-    Button button;
-
     List<ChatMessage> mData = new ArrayList<ChatMessage>();
     String userId;
 
@@ -66,13 +69,6 @@ public class ChattingActivity extends AppCompatActivity
 
     SharedPreferences sp;
     SharedPreferences.Editor editor;
-
-
-    Dialog dialog;
-    Window dialogWindow;
-    WindowManager m;
-    Display d;
-    WindowManager.LayoutParams p;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -141,7 +137,7 @@ public class ChattingActivity extends AppCompatActivity
 
     }
 
-    @OnClick({R.id.id_chatting_send, R.id.id_chatting_checkweixin, R.id.ly_chat_bottom1})
+    @OnClick({R.id.id_chatting_send, R.id.id_chatting_checkweixin, R.id.ly_chat_bottom1,R.id.chatting_zengsong})
     public void onClick(View view)
     {
         switch (view.getId())
@@ -194,60 +190,16 @@ public class ChattingActivity extends AppCompatActivity
 
                 break;
             case R.id.id_chatting_checkweixin:
-
-                dialog = new Dialog(this);
-                dialog.setContentView(R.layout.dialog_custem);
-                dialogWindow = dialog.getWindow();
-
-                button1 = (LinearLayout) dialogWindow.findViewById(R.id.id_dialog_year);
-                button2 = (LinearLayout) dialogWindow.findViewById(R.id.id_dialog_month);
-                button = (Button) dialogWindow.findViewById(R.id.id_dialog_button);
-
-                button.setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-
-                    }
-                });
-
-                m = getWindowManager();
-                d = m.getDefaultDisplay(); // 获取屏幕宽、高用
-                p = dialogWindow.getAttributes(); // 获取对话框当前的参数值
-                p.height = (int) (d.getHeight() * 0.6); // 高度设置为屏幕的0.6
-                p.width = (int) (d.getWidth() * 0.8); // 宽度设置为屏幕的0.65
-                dialogWindow.setAttributes(p);
-                dialog.show();
-
+                Dialog_VIP dialog_vip = new Dialog_VIP();
+                dialog_vip.show(this);
                 break;
             case R.id.ly_chat_bottom1:
-
-                dialog = new Dialog(this);
-                dialog.setContentView(R.layout.dialog_custem);
-                dialogWindow = dialog.getWindow();
-
-                button1 = (LinearLayout) dialogWindow.findViewById(R.id.id_dialog_year);
-                button2 = (LinearLayout) dialogWindow.findViewById(R.id.id_dialog_month);
-                button = (Button) dialogWindow.findViewById(R.id.id_dialog_button);
-
-                button.setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-
-                    }
-                });
-
-                m = getWindowManager();
-                d = m.getDefaultDisplay(); // 获取屏幕宽、高用
-                p = dialogWindow.getAttributes(); // 获取对话框当前的参数值
-                p.height = (int) (d.getHeight() * 0.6); // 高度设置为屏幕的0.6
-                p.width = (int) (d.getWidth() * 0.8); // 宽度设置为屏幕的0.65
-                dialogWindow.setAttributes(p);
-                dialog.show();
-
+                Dialog_VIP dialogVip = new Dialog_VIP();
+                dialogVip.show(this);
+                break;
+            case R.id.chatting_zengsong:
+                Dialog_VIP dialogVip1 = new Dialog_VIP();
+                dialogVip1.show(this);
                 break;
         }
     }

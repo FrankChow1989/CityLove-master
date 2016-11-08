@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="60dp"
+    android:layout_centerInParent="true"
+    android:layout_height="match_parent">
+    >
+
+    <com.facebook.drawee.view.SimpleDraweeView android:id="@+id/id_item_girlsvedio"
+                                               xmlns:android="http://schemas.android.com/apk/res/android"
+                                               xmlns:fresco="http://schemas.android.com/apk/res-auto"
+                                               android:layout_width="60dp"
+                                               android:layout_height="60dp"
+                                               android:layout_marginLeft="5dp"
+                                               android:layout_centerInParent="true"
+                                               fresco:failureImage="@drawable/h7"
+                                               fresco:failureImageScaleType="centerInside"
+                                               fresco:placeholderImage="@mipmap/ic_launcher"
+                                               fresco:placeholderImageScaleType="fitCenter"
+                                               fresco:progressBarAutoRotateInterval="5000"
+                                               fresco:progressBarImage="@drawable/jiazai_ing"
+                                               fresco:progressBarImageScaleType="centerInside"
+        >
+    </com.facebook.drawee.view.SimpleDraweeView>
+
+</RelativeLayout>

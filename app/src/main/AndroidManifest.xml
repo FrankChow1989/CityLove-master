@@ -72,8 +72,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </receiver>
-        <activity android:name=".activity.ChattingSeePicActivity"/>
 
+        <activity android:name=".activity.ChattingSeePicActivity"/>
+        <activity android:name=".activity.ScretVedioActivity">
+        </activity>
     </application>
 
 </manifest>

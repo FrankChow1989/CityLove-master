@@ -15,6 +15,7 @@
     <color name="red">#e12003</color>
     <color name="brown">#8D6E63</color>
     <color name="blue">#60a8e1</color>
+    <color name="blue_light">#1cb0fa</color>
     <color name="blue_normal">#91c6f1</color>
     <color name="blue_pressed">#548ab4</color>
     <color name="grey">#607D8B</color>

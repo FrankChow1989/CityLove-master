@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.facebook.drawee.view.SimpleDraweeView android:id="@+id/id_item_girlspic"
-                                           xmlns:android="http://schemas.android.com/apk/res/android"
-                                           xmlns:fresco="http://schemas.android.com/apk/res-auto"
-                                           android:layout_width="120dp"
-                                           android:layout_height="120dp"
-                                           fresco:placeholderImage="@mipmap/ic_launcher"
-                                           fresco:placeholderImageScaleType="fitCenter"
-                                           fresco:progressBarAutoRotateInterval="5000"
-                                           fresco:progressBarImage="@drawable/jiazai_ing"
-                                           fresco:progressBarImageScaleType="centerInside"
-                                           fresco:failureImage = "@drawable/h7"
-                                           fresco:failureImageScaleType = "centerInside"
-    >
-</com.facebook.drawee.view.SimpleDraweeView>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="120dp"
+    android:layout_height="120dp"
+    android:layout_centerInParent="true">
+
+    <com.facebook.drawee.view.SimpleDraweeView android:id="@+id/id_item_girlspic"
+                                               xmlns:android="http://schemas.android.com/apk/res/android"
+                                               xmlns:fresco="http://schemas.android.com/apk/res-auto"
+                                               android:layout_width="120dp"
+                                               android:layout_height="120dp"
+                                               fresco:failureImage="@drawable/h7"
+                                               android:layout_margin="3dp"
+                                               fresco:failureImageScaleType="centerInside"
+                                               fresco:placeholderImage="@mipmap/ic_launcher"
+                                               fresco:placeholderImageScaleType="fitCenter"
+                                               fresco:progressBarAutoRotateInterval="5000"
+                                               fresco:progressBarImage="@drawable/jiazai_ing"
+                                               fresco:progressBarImageScaleType="centerInside"
+        >
+    </com.facebook.drawee.view.SimpleDraweeView>
+
+</RelativeLayout>
