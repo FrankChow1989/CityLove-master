@@ -26,9 +26,11 @@ import com.jph.takephoto.model.TResult;
 import com.zzy.frank.www.citylove_master.R;
 import com.zzy.frank.www.citylove_master.activity.GuanZhuActivity;
 import com.zzy.frank.www.citylove_master.activity.PersonalInfoActivity;
+import com.zzy.frank.www.citylove_master.activity.PhoneVerifyActivity;
 import com.zzy.frank.www.citylove_master.activity.PhotoActivity;
 import com.zzy.frank.www.citylove_master.activity.ShezhiActivity;
 import com.zzy.frank.www.citylove_master.activity.VIPActivity;
+import com.zzy.frank.www.citylove_master.activity.VIPUpdateActivity;
 import com.zzy.frank.www.citylove_master.activity.VisitActivity;
 import com.zzy.frank.www.citylove_master.activity.ZhengyouIfActivity;
 import com.zzy.frank.www.citylove_master.ui.RoundImageView;
@@ -109,7 +111,7 @@ public class PersonFragment extends TakePhotoFragment implements View.OnClickLis
         ButterKnife.unbind(this);
     }
 
-    @OnClick({R.id.liner_zuijin_vist, R.id.liner_guanzhu, R.id.linear_personalinfo, R.id.linear_zhengyouif, R.id.linear_shenzhi, R.id.id_person_vip, R.id.linear_photo})
+    @OnClick({R.id.liner_zuijin_vist, R.id.liner_guanzhu, R.id.linear_personalinfo, R.id.linear_zhengyouif, R.id.linear_shenzhi, R.id.id_person_vip, R.id.linear_photo, R.id.id_person_vip_lin, R.id.id_person_photo_lin})
     public void onClick(View view)
     {
         Intent intent = new Intent();
@@ -135,6 +137,12 @@ public class PersonFragment extends TakePhotoFragment implements View.OnClickLis
                 break;
             case R.id.linear_photo:
                 intent.setClass(getActivity(), PhotoActivity.class);
+                break;
+            case R.id.id_person_vip_lin:
+                intent.setClass(getActivity(), VIPUpdateActivity.class);
+                break;
+            case R.id.id_person_photo_lin:
+                intent.setClass(getActivity(), PhoneVerifyActivity.class);
                 break;
         }
         startActivity(intent);

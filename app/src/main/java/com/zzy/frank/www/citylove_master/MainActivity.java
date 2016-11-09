@@ -23,6 +23,7 @@ import android.widget.RadioGroup;
 
 import com.jauker.widget.BadgeView;
 import com.zzy.frank.www.citylove_master.activity.ChattingActivity;
+import com.zzy.frank.www.citylove_master.face.FaceConversionUtil;
 import com.zzy.frank.www.citylove_master.fragment.FujinFragment;
 import com.zzy.frank.www.citylove_master.fragment.HomeFragment;
 import com.zzy.frank.www.citylove_master.fragment.MSGFragment;
@@ -81,6 +82,15 @@ public class MainActivity extends AppCompatActivity implements MSGFragment.OnUnR
 
         badgeView.setVisibility(View.VISIBLE);
         badgeView.setBadgeCount(UnReadMsg());
+
+
+        //初始化表情包
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                FaceConversionUtil.getInstace().getFileText(getApplication());
+            }
+        }).start();
 
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {

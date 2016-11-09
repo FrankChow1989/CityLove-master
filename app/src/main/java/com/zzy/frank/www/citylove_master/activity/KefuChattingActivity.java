@@ -3,7 +3,10 @@ package com.zzy.frank.www.citylove_master.activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.zzy.frank.www.citylove_master.R;
 import com.zzy.frank.www.citylove_master.adapter.KefuChattingAdpter;
 import com.zzy.frank.www.citylove_master.bean.KeFuBean;
+import com.zzy.frank.www.citylove_master.face.FaceRelativeLayout;
 import com.zzy.frank.www.citylove_master.util.T;
 import com.zzy.frank.www.citylove_master.util.VolleyInterface;
 import com.zzy.frank.www.citylove_master.util.VolleyRequest;
@@ -39,9 +43,8 @@ public class KefuChattingActivity extends AppCompatActivity
     ListView mListView;
     List<KeFuBean> mList;
     private KefuChattingAdpter adpter;
-
-    private EditText editText;
     private Button sendButton;
+    private EditText editText;
     private static final String API = "http://www.tuling123.com/openapi/api";//api地址
 
     //应用唯一key，请到官网注册账号后，可以获取，注册地址：
@@ -87,8 +90,17 @@ public class KefuChattingActivity extends AppCompatActivity
 
         adpter = new KefuChattingAdpter(mList, this);
         editText = (EditText) findViewById(R.id.et_sendmessage);
+        editText.addTextChangedListener(textWatcher);
         sendButton = (Button) findViewById(R.id.btn_send);
+
         mListView.setAdapter(adpter);
+
+        System.out.println(editText.getText() + "--------------");
+
+        if (editText.isFocused())
+        {
+            sendButton.setVisibility(View.VISIBLE);
+        }
     }
 
     public void setListener()
@@ -103,11 +115,43 @@ public class KefuChattingActivity extends AppCompatActivity
         });
     }
 
+    private TextWatcher textWatcher = new TextWatcher()
+    {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after)
+        {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count)
+        {
+            sendButton.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        public void afterTextChanged(Editable s)
+        {
+        }
+    };
+
+
     @Override
     protected void onResume()
     {
         super.onResume();
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK
+                && ((FaceRelativeLayout) findViewById(R.id.face_kefu_chat_bottom))
+                .hideFaceView())
+        {
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private void sendData()
@@ -120,6 +164,9 @@ public class KefuChattingActivity extends AppCompatActivity
             return;
         }
         editText.setText("");
+
+        sendButton.setVisibility(View.GONE);
+
         sendMessage = sendMessage.replaceAll(" ", "").replaceAll("\n", "")
                 .trim(); //替换空格和换行
         //LiaoTianBean是一个实体类，
@@ -131,6 +178,7 @@ public class KefuChattingActivity extends AppCompatActivity
         mList.add(liaoTianBean); //把自己发送的信息，加入集合
         adpter.notifyDataSetChanged(); //通知listview更新
         mListView.setSelection(mList.size() - 1);
+
         getDataFromServer(); //从服务器获取返回到额数据，机器人的信息
     }
 
@@ -139,7 +187,6 @@ public class KefuChattingActivity extends AppCompatActivity
      */
     public void getDataFromServer()
     {
-
         Map<String, String> params = new HashMap<String, String>();
         params.put("key", KEY_STRING);
         params.put("info", sendMessage);
@@ -150,9 +197,6 @@ public class KefuChattingActivity extends AppCompatActivity
             @Override
             public void onMySuccess(String result)
             {
-
-                System.out.println("------------:" + result);
-
                 paresData(result);
             }
 

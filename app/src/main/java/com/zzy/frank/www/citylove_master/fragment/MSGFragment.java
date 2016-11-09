@@ -170,7 +170,7 @@ public class MSGFragment extends Fragment implements SendMsgORAddFriends.onNewFr
                     mUnReadedMsgs -= val;
                     mUserMessages.remove(userId);
                     chatAdapter.notifyDataSetChanged();
-                    chattingRecy.setSelection(position);
+                    //chattingRecy.setSelection(position);
                     notifyUnReadedMsg();
                 }
                 Intent intent = new Intent();

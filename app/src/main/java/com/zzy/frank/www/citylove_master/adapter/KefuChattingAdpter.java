@@ -1,6 +1,7 @@
 package com.zzy.frank.www.citylove_master.adapter;
 
 import android.content.Context;
+import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.zzy.frank.www.citylove_master.R;
 import com.zzy.frank.www.citylove_master.bean.KeFuBean;
+import com.zzy.frank.www.citylove_master.face.FaceConversionUtil;
 
 import java.util.List;
 
@@ -80,8 +82,10 @@ public class KefuChattingAdpter extends BaseAdapter
 
         }
 
-        holder.contenTextView.setText(mList.get(position).getMessage());
         holder.time.setText(mList.get(position).getDateStr());
+        SpannableString spannableString = FaceConversionUtil.getInstace().getExpressionString(context, mList.get(position).getMessage());
+        holder.contenTextView.setText(spannableString);
+
         return convertView;
     }
 

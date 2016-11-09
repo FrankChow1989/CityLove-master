@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zzy.frank.www.citylove_master.face.FaceRelativeLayout
+    android:id="@+id/face_kefu_chat_bottom"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/ly_kefu_chat_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/white">
+
+        <ImageView
+            android:id="@+id/id_kefu_chat_img"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:layout_weight="3"
+            android:background="@drawable/rc_icon_admin"/>
+
+        <FrameLayout
+            android:id="@+id/et_sendmessage_fram"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/id_kefu_chat_img">
+
+            <EditText
+                android:id="@+id/et_sendmessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center"
+                android:layout_marginRight="5dp"
+                android:textSize="18sp"
+                />
+
+            <ImageButton
+                android:id="@+id/kefu_chat_face"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="right|center"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/chat_face_selector"
+                android:button="@null"
+                />
+
+            <Button
+                android:id="@+id/btn_send"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_gravity="right|center"
+                android:background="@color/blue"
+                android:layout_marginRight="60dp"
+                android:layout_marginBottom="5dp"
+                android:text="发送"
+                android:visibility="gone"
+                android:textColor="@android:color/white"
+                android:textSize="16dp"/>
+        </FrameLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ll_facechoose"
+        android:layout_width="fill_parent"
+        android:layout_height="160dp"
+        android:layout_below="@id/ly_kefu_chat_bottom"
+        android:background="#f6f5f5"
+        android:visibility="gone">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_contains"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v4.view.ViewPager>
+
+        <LinearLayout
+            android:id="@+id/iv_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="6dip"
+            android:gravity="center"
+            android:orientation="horizontal">
+        </LinearLayout>
+    </RelativeLayout>
+
+</com.zzy.frank.www.citylove_master.face.FaceRelativeLayout>

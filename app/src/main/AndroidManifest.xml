@@ -78,6 +78,8 @@
         </activity>
         <activity android:name=".activity.VIPUpdateActivity">
         </activity>
+        <activity android:name=".activity.PhoneVerifyActivity">
+        </activity>
     </application>
 
 </manifest>

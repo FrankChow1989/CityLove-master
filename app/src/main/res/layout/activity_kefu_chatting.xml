@@ -14,58 +14,22 @@
         <include layout="@layout/toolbar"/>
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/ly_kefu_chat_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:background="@android:color/white"
-        >
+    <LinearLayout
+        android:id="@+id/rl_bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
 
-        <ImageView
-            android:id="@+id/id_kefu_chat_img"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_margin="5dp"
-            android:layout_weight="3"
-            android:padding="5dp"
-            android:src="@drawable/rc_icon_admin"/>
-
-        <EditText
-            android:id="@+id/et_sendmessage"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/id_kefu_chat_img"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:maxEms="10"
-            android:textSize="18sp"
-            />
-
-        <Button
-            android:id="@+id/btn_send"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:layout_toRightOf="@id/et_sendmessage"
-            android:background="@color/blue"
-            android:text="发送"
-            android:textColor="@android:color/white"
-            android:textSize="16dp"/>
-    </RelativeLayout>
+        <include
+            layout="@layout/chat_bottom"/>
+    </LinearLayout>
 
     <ListView
         android:id="@+id/id_kefuchatting_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/ly_kefu_chat_bottom"
+        android:layout_above="@+id/rl_bottom"
         android:layout_below="@id/ly_kefu_chat_title"
-        android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
         android:layout_weight="1"
         android:cacheColorHint="#0000"

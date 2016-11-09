@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="可以直接用手机号码登录，保护账号安全"
+        android:background="@color/yellow"
+        android:gravity="center"
+        android:textColor="@color/org"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:hint="请输入手机号"
+            android:textSize="14dp"
+            android:phoneNumber="true"
+            android:singleLine="true"
+            android:maxEms="11"
+            android:layout_weight="1"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="免费获取验证码"
+            android:textColor="@android:color/white"
+            android:background="@drawable/wel_rb_selector"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="10dp"/>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.AppCompatEditText
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:hint="请输入短信验证码"
+        android:phoneNumber="true"
+        android:singleLine="true"
+        android:maxEms="4"
+        android:textSize="14dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.8"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:text="立即验证"
+        android:textColor="@android:color/white"
+        android:textSize="18dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/wel_rb_selector"/>
+
+</LinearLayout>
