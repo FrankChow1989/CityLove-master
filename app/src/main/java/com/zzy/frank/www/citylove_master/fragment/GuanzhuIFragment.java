@@ -1,5 +1,6 @@
 package com.zzy.frank.www.citylove_master.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.zzy.frank.www.citylove_master.R;
+import com.zzy.frank.www.citylove_master.activity.VIPUpdateActivity;
 import com.zzy.frank.www.citylove_master.adapter.CommonAdapter;
 import com.zzy.frank.www.citylove_master.bean.VisitCommon;
 import com.zzy.frank.www.citylove_master.util.DividerItemDecoration;
@@ -82,5 +84,8 @@ public class GuanzhuIFragment extends Fragment
     @OnClick(R.id.bt_guanzhu_VIPupdate)
     public void onClick()
     {
+        Intent intent = new Intent();
+        intent.setClass(getActivity(), VIPUpdateActivity.class);
+        startActivity(intent);
     }
 }

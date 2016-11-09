@@ -76,6 +76,8 @@
         <activity android:name=".activity.ChattingSeePicActivity"/>
         <activity android:name=".activity.ScretVedioActivity">
         </activity>
+        <activity android:name=".activity.VIPUpdateActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.zzy.frank.www.citylove_master.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -32,8 +33,6 @@ public class VisitActivity extends AppCompatActivity
     Toolbar toolBar;
     @Bind(R.id.visit_recy)
     RecyclerView visitRecy;
-    @Bind(R.id.bt_huiyuan_update)
-    Button btHuiyuanUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -89,5 +88,8 @@ public class VisitActivity extends AppCompatActivity
     @OnClick(R.id.bt_huiyuan_update)
     public void onClick()
     {
+        Intent intent = new Intent();
+        intent.setClass(this,VIPUpdateActivity.class);
+        startActivity(intent);
     }
 }
