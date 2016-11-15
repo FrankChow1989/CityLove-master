@@ -16,40 +16,21 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/ly_chat_bottom"
+
+    <LinearLayout
+        android:id="@+id/rl_bottom_have"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@android:color/white"
-        android:visibility="visible">
+        android:layout_alignParentBottom="true">
 
-        <Button
-            android:id="@+id/id_chatting_send"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:onClick="sendMessage"
-            android:text="发送"/>
-
-        <EditText
-            android:id="@+id/id_chatting_edit"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@id/id_chatting_send"
-            android:maxEms="10"
-            android:textSize="18sp"/>
-    </RelativeLayout>
+        <include layout="@layout/chat_bottom_havevedio"
+            />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/ly_chat_bottom1"
         android:layout_width="fill_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
@@ -131,24 +112,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_weight="2"
-                    android:paddingTop="5dp"
                     android:gravity="center|top"
+                    android:paddingTop="5dp"
                     android:text="赠送"
                     android:textColor="@color/red"/>
-
-
             </LinearLayout>
-
         </LinearLayout>
-
     </LinearLayout>
 
     <ListView
         android:id="@+id/id_chatting_listview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@id/ly_chat_bottom"
+        android:layout_above="@id/rl_bottom_have"
         android:layout_below="@id/id_chat_ziliao"
+        android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
         android:cacheColorHint="#0000"
         android:divider="@null"

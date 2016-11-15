@@ -210,7 +210,7 @@ public class PersonFragment extends TakePhotoFragment implements View.OnClickLis
 
 
         dialog.show();
-        dialog.getWindow().setLayout(width / 2 + 200, height / 4 + 20);
+        dialog.getWindow().setLayout(width / 2 + 200, height / 3 + 20);
 
     }
 

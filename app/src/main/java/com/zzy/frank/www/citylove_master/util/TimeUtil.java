@@ -15,7 +15,7 @@ import android.annotation.SuppressLint;
 public class TimeUtil {
 
 	public static String getTime(long time) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return format.format(new Date(time));
 	}
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zzy.frank.www.citylove_master.face.FaceRelativeLayout
+<com.zzy.frank.www.citylove_master.face.FaceRelativeLayoutKeFu
     android:id="@+id/face_kefu_chat_bottom"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -24,7 +24,8 @@
         <FrameLayout
             android:id="@+id/et_sendmessage_fram"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_toRightOf="@id/id_kefu_chat_img">
 
             <EditText
@@ -34,6 +35,7 @@
                 android:layout_gravity="left|center"
                 android:layout_marginRight="5dp"
                 android:textSize="18sp"
+                android:paddingRight="45dp"
                 />
 
             <ImageButton
@@ -87,4 +89,4 @@
         </LinearLayout>
     </RelativeLayout>
 
-</com.zzy.frank.www.citylove_master.face.FaceRelativeLayout>
+</com.zzy.frank.www.citylove_master.face.FaceRelativeLayoutKeFu>

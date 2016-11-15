@@ -1,6 +1,7 @@
 package com.zzy.frank.www.citylove_master.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,13 +66,10 @@ public class HomeAdapter extends RecyclerView.Adapter
 
         Glide.with(context)
                 .load(mList.get(position).getIcon())
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.jiazai_ing).crossFade()
                 .into(homemmViewHolder.idItemHomemmPic);
 
         homemmViewHolder.idItemHomemmName.setText(mList.get(position).getNickname() + "|" + mList.get(position).getAge() + "岁");
-//        Uri uri = Uri.parse("res://" + context.getPackageName() + "/" + mList.get(position).getPic());
-//        homemmViewHolder.idItemHomemmPic.setImageURI(uri);
-
         setUpItemEvent(homemmViewHolder);
     }
 

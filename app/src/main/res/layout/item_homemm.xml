@@ -17,7 +17,6 @@
             android:layout_height="85dp"
             android:layout_gravity="center"
             android:padding="5dp"
-            android:src="@drawable/h7"
             />
 
         <LinearLayout

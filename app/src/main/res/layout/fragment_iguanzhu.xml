@@ -1,8 +1,17 @@
-<android.support.v7.widget.RecyclerView android:id="@+id/id_i_guanzhu_recy"
-                                        xmlns:android="http://schemas.android.com/apk/res/android"
-                                        xmlns:tools="http://schemas.android.com/tools"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        tools:context="com.zzy.frank.www.citylove_master.fragment.IGuanzhuFragmen">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-</android.support.v7.widget.RecyclerView>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/id_i_guanzhu_recy"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.zzy.frank.www.citylove_master.fragment.IGuanzhuFragmen">
+    </android.support.v7.widget.RecyclerView>
+
+    <include layout="@layout/include_error"/>
+
+</LinearLayout>

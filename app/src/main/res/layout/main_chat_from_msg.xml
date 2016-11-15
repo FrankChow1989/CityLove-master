@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:background="@drawable/from_msg_selector"
+                android:background="@drawable/from_send_txt_bg"
                 android:clickable="true"
                 android:focusable="true"
                 android:gravity="center_vertical"
@@ -126,14 +126,14 @@
                     android:layout_marginLeft="10dip"
                     android:layout_marginBottom="10dp"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/dibg"
+                    android:background="@drawable/from_send_txt_bg"
                     >
                     <View
                         android:id="@+id/id_recorder_anim"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:layout_gravity="center_vertical|left"
-                        android:background="@drawable/adj"
+                        android:background="@drawable/rc_ic_voice_receive"
                         />
                 </FrameLayout>
 

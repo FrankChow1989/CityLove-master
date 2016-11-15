@@ -18,6 +18,7 @@ import com.zzy.frank.www.citylove_master.R;
 import com.zzy.frank.www.citylove_master.adapter.KefuChattingAdpter;
 import com.zzy.frank.www.citylove_master.bean.KeFuBean;
 import com.zzy.frank.www.citylove_master.face.FaceRelativeLayout;
+import com.zzy.frank.www.citylove_master.face.FaceRelativeLayoutKeFu;
 import com.zzy.frank.www.citylove_master.util.T;
 import com.zzy.frank.www.citylove_master.util.VolleyInterface;
 import com.zzy.frank.www.citylove_master.util.VolleyRequest;
@@ -126,6 +127,10 @@ public class KefuChattingActivity extends AppCompatActivity
         public void onTextChanged(CharSequence s, int start, int before, int count)
         {
             sendButton.setVisibility(View.VISIBLE);
+            if ("".equals(editText.getText().toString()))
+            {
+                sendButton.setVisibility(View.GONE);
+            }
         }
 
         @Override
@@ -146,7 +151,7 @@ public class KefuChattingActivity extends AppCompatActivity
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {
         if (keyCode == KeyEvent.KEYCODE_BACK
-                && ((FaceRelativeLayout) findViewById(R.id.face_kefu_chat_bottom))
+                && ((FaceRelativeLayoutKeFu) findViewById(R.id.face_kefu_chat_bottom))
                 .hideFaceView())
         {
             return true;

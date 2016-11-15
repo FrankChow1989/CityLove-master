@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import com.zzy.frank.www.citylove_master.R;
 import com.zzy.frank.www.citylove_master.activity.VIPUpdateActivity;
@@ -35,6 +36,8 @@ public class GuanzhuIFragment extends Fragment
     CommonAdapter commonAdapter;
     @Bind(R.id.bt_guanzhu_VIPupdate)
     Button btGuanzhuVIPupdate;
+    @Bind(R.id.id_error_page)
+    RelativeLayout idErrorPage;
 
     @Override
     public View onCreateView(
@@ -44,8 +47,16 @@ public class GuanzhuIFragment extends Fragment
         view = inflater.inflate(R.layout.fragment_guanzhu_i, container, false);
         ButterKnife.bind(this, view);
         initView();
-        commonAdapter = new CommonAdapter(mList, getContext());
-        idGuanzhuIRecy.setAdapter(commonAdapter);
+
+        if (mList.size() == 0)
+        {
+            idErrorPage.setGravity(View.VISIBLE);
+        } else
+        {
+            commonAdapter = new CommonAdapter(mList, getContext());
+            idGuanzhuIRecy.setAdapter(commonAdapter);
+        }
+
 
         return view;
     }

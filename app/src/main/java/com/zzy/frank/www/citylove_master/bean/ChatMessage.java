@@ -7,6 +7,7 @@ public class ChatMessage
 {
     private String message;
     private String pic_msg;
+    private int record_timelength;
     private String record_path;
     private boolean isComing;
     private Date date;
@@ -26,6 +27,16 @@ public class ChatMessage
     public String getPic_msg()
     {
         return pic_msg;
+    }
+
+    public int getRecord_timelength()
+    {
+        return record_timelength;
+    }
+
+    public void setRecord_timelength(int record_timelength)
+    {
+        this.record_timelength = record_timelength;
     }
 
     public void setPic_msg(String pic_msg)
@@ -58,13 +69,14 @@ public class ChatMessage
     }
 
     public ChatMessage(
-            String message, String pic_msg, String record_path, boolean isComing,
+            String message, String pic_msg, int record_timelength, String record_path, boolean isComing,
             String userId, int icon, String msgType, String nickname, boolean readed,
             String dateStr)
     {
         super();
         this.message = message;
         this.pic_msg = pic_msg;
+        this.record_timelength = record_timelength;
         this.record_path = record_path;
         this.isComing = isComing;
         this.userId = userId;

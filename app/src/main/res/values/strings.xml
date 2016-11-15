@@ -4,8 +4,12 @@
     <string name="welcome">您好,很高兴为您服务,请问有什么可以帮您的?</string>
 
     <array name="delete">
-
         <item>删除</item>
-
     </array>
+
+
+    <string name="str_recorder_normal">按住 说话</string>
+    <string name="str_recorder_recording">松开 结束</string>
+    <string name="str_recorder_want_cancel">松开手指，取消发送</string>
+
 </resources>

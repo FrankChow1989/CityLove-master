@@ -20,6 +20,7 @@ public class MessageDB
      */
     private static final String COL_MESSAGE = "message";
     private static final String COL_PIC_MESSAGE = "pic_msg";
+    private static final String COL_RECORD_TIME = "record_time";
     private static final String COL_RECORD_MESSAGE = "record_msg";
     // // 1：from ; 0:to
     private static final String COL_IS_COMING = "is_coming";
@@ -54,12 +55,12 @@ public class MessageDB
         int readed = chatMessage.isReaded() ? 1 : 0;
         mDb.execSQL(
                 "insert into _" + userId + " (" + COL_USER_ID + "," + COL_ICON
-                        + "," + COL_IS_COMING + "," + COL_MESSAGE + "," + COL_PIC_MESSAGE
+                        + "," + COL_IS_COMING + "," + COL_MESSAGE + "," + COL_PIC_MESSAGE + "," + COL_RECORD_TIME
                         + "," + COL_RECORD_MESSAGE + "," + COL_MESSAGE_TYPE + ","
                         + COL_NICKNAME + "," + COL_READED + "," + COL_DATE
-                        + ") values(?,?,?,?,?,?,?,?,?,?)",
+                        + ") values(?,?,?,?,?,?,?,?,?,?,?)",
                 new Object[]{chatMessage.getUserId(), chatMessage.getIcon(),
-                        isComing, chatMessage.getMessage(), chatMessage.getPic_msg(), chatMessage.getRecord_path(),
+                        isComing, chatMessage.getMessage(), chatMessage.getPic_msg(), chatMessage.getRecord_timelength(), chatMessage.getRecord_path(),
                         chatMessage.getMsgType(), chatMessage.getNickname(), readed,
                         chatMessage.getDateStr()});
     }
@@ -82,13 +83,14 @@ public class MessageDB
             int isComingVal = c.getInt(c.getColumnIndex(COL_IS_COMING));
             String message = c.getString(c.getColumnIndex(COL_MESSAGE));
             String pic_msg = c.getString(c.getColumnIndex(COL_PIC_MESSAGE));
+            int record_time = c.getInt(c.getColumnIndex(COL_RECORD_TIME));
             String record_msg = c.getString(c.getColumnIndex(COL_RECORD_MESSAGE));
             String type = c.getString(c.getColumnIndex(COL_MESSAGE_TYPE));
             String nickname = c.getString(c.getColumnIndex(COL_NICKNAME));
             int readedVal = c.getInt(c.getColumnIndex(COL_READED));
             String dateStr = c.getString(c.getColumnIndex(COL_DATE));
 
-            chatMessage = new ChatMessage(message, pic_msg, record_msg, isComingVal == 1, _userId,
+            chatMessage = new ChatMessage(message, pic_msg, record_time, record_msg, isComingVal == 1, _userId,
                     icon, type, nickname, readedVal == 1, dateStr);
 
             chatMessages.add(chatMessage);
@@ -142,6 +144,7 @@ public class MessageDB
                 + COL_IS_COMING + " integer ,"//
                 + COL_MESSAGE + " text , " //
                 + COL_PIC_MESSAGE + " text , "
+                + COL_RECORD_TIME + " integer , "
                 + COL_RECORD_MESSAGE + " text , "
                 + COL_MESSAGE_TYPE + " text , "
                 + COL_NICKNAME + " text , " //

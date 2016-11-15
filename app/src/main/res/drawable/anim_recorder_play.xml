@@ -2,15 +2,15 @@
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:drawable="@drawable/anim1"
+        android:drawable="@drawable/rc_ic_voice_receive_play1"
         android:duration="300">
     </item>
     <item
-        android:drawable="@drawable/anim2"
+        android:drawable="@drawable/rc_ic_voice_receive_play2"
         android:duration="300">
     </item>
     <item
-        android:drawable="@drawable/anim3"
+        android:drawable="@drawable/rc_ic_voice_receive_play3"
         android:duration="300">
     </item>
 

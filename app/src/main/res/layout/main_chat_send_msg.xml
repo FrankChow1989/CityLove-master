@@ -15,10 +15,12 @@
         android:text="2012-09-01 18:30:21"/>
 
     <RelativeLayout
+        android:id="@+id/chat_send_relative"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="right|center"
         android:layout_marginTop="10dp"
+        android:visibility="gone"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -35,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
-                android:background="@drawable/wel_rb_selector"
+                android:background="@drawable/to_send_txt_bg"
                 android:clickable="true"
                 android:focusable="true"
                 android:gravity="center_vertical"
@@ -54,6 +56,67 @@
                 android:layout_height="49dp"
                 android:src="@drawable/h7"
                 />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/chat_send_relative_record"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:id="@+id/chat_send_content_record"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginRight="5dp">
+
+                <FrameLayout
+                    android:id="@+id/id_recorder_length_send"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginBottom="10dp"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/from_send_txt_bg"
+                    >
+                    <View
+                        android:id="@+id/id_recorder_anim_send"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center_vertical|right"
+                        android:background="@drawable/rc_ic_voice_sent"
+                        />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/id_recorder_time_send"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@id/id_recorder_length"
+                    android:text=""
+                    android:layout_marginRight="3dp"
+                    android:textColor="#ff777777"
+                    />
+            </RelativeLayout>
+
+            <com.zzy.frank.www.citylove_master.ui.RoundImageView
+                android:id="@+id/chat_send_icon_record"
+                android:layout_width="49dp"
+                android:layout_height="49dp"
+                android:src="@drawable/h7"/>
         </LinearLayout>
     </RelativeLayout>
 
