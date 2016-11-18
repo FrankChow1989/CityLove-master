@@ -55,7 +55,6 @@ public class VisitActivity extends AppCompatActivity
         initView();
 
         commonAdapter = new CommonAdapter(mList, this);
-
         visitRecy.setAdapter(commonAdapter);
 
     }
@@ -72,7 +71,6 @@ public class VisitActivity extends AppCompatActivity
                 DividerItemDecoration.VERTICAL_LIST);
         visitRecy.addItemDecoration(decor);
 
-
         for (int i = 0; i < 8; i++)
         {
             VisitCommon visitCommon = new VisitCommon();
@@ -80,7 +78,6 @@ public class VisitActivity extends AppCompatActivity
             visitCommon.setName("思思");
             visitCommon.setContent("20岁.上海市.163cm");
             visitCommon.setFrom("3.12km");
-
             mList.add(visitCommon);
         }
     }

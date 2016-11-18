@@ -1,14 +1,20 @@
 package com.zzy.frank.www.citylove_master.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.zzy.frank.www.citylove_master.R;
+import com.zzy.frank.www.citylove_master.util.StackBlurManager;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -20,6 +26,8 @@ public class VedioAdapter extends RecyclerView.Adapter
 {
     private String[] mList;
     private Context context;
+
+    private StackBlurManager mStackBlurManager;
 
     //Onclik接口
     public interface OnItemClickListener
@@ -53,17 +61,22 @@ public class VedioAdapter extends RecyclerView.Adapter
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position)
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position)
     {
-        VedioHolder viewHolder = (VedioHolder) holder;
+        final VedioHolder viewHolder = (VedioHolder) holder;
 
-//        Glide.with(context)
-//                .load(mList[position])
-//                .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                .into(viewHolder.idItemGirlspic);
+        Glide.with(context).load(mList[position]).asBitmap().into(new SimpleTarget<Bitmap>()
+        {
+            @Override
+            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation)
+            {
+                //从第三张照片开始模糊
+                mStackBlurManager = new StackBlurManager(resource);
+                mStackBlurManager.process(20);
+                viewHolder.idItemGirlsVedio.setImageBitmap(mStackBlurManager.returnBlurredImage());
 
-        Uri uri = Uri.parse(mList[position]);
-        viewHolder.idItemGirlsVedio.setImageURI(uri);
+            }
+        });
 
         setUpItemEvent(viewHolder);
     }
@@ -109,7 +122,7 @@ public class VedioAdapter extends RecyclerView.Adapter
     static class VedioHolder extends RecyclerView.ViewHolder
     {
         @Bind(R.id.id_item_girlsvedio)
-        SimpleDraweeView idItemGirlsVedio;
+        ImageView idItemGirlsVedio;
 
         public VedioHolder(View view)
         {

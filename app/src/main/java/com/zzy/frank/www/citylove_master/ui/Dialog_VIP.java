@@ -52,7 +52,7 @@ public class Dialog_VIP
 
 
         dialog.show();
-        dialog.getWindow().setLayout(width / 2 + 180, height / 2 + 50);
+        dialog.getWindow().setLayout(width / 2 + 220, height / 2 + 50);
     }
 
 }

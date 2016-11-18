@@ -5,10 +5,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.zzy.frank.www.citylove_master.MainActivity;
 import com.zzy.frank.www.citylove_master.R;
+import com.zzy.frank.www.citylove_master.ui.RoundImageView;
 
 import java.text.DecimalFormat;
 import java.util.Random;
@@ -58,7 +62,9 @@ public class TellThemActivity extends AppCompatActivity
     Random random = new Random();
     Random r = new Random();
 
-    DecimalFormat df = new DecimalFormat("#.00");//保留2位小数
+    DecimalFormat df = new DecimalFormat("#0.00");//保留2位小数
+    @Bind(R.id.id_tellthem_pic)
+    RoundImageView idTellthemPic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -83,6 +89,12 @@ public class TellThemActivity extends AppCompatActivity
 
     private void initData()
     {
+
+        Glide.with(this)
+                .load(R.drawable.h7)
+                .diskCacheStrategy(DiskCacheStrategy.ALL).error(R.drawable.rc_ic_def_coversation_portrait)
+                .into(idTellthemPic);
+
         idTellthemAge1.setText(random.nextInt(28) % (28 - 17 + 1) + 17 + "岁");
         idTellthemAge2.setText(random.nextInt(28) % (28 - 17 + 1) + 17 + "岁");
         idTellthemAge3.setText(random.nextInt(28) % (28 - 17 + 1) + 17 + "岁");

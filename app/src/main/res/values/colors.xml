@@ -16,6 +16,7 @@
     <color name="red">#e12003</color>
     <color name="brown">#8D6E63</color>
     <color name="blue">#60a8e1</color>
+    <color name="blue_edit">#0195ff</color>
     <color name="blue_light">#1cb0fa</color>
     <color name="blue_normal">#91c6f1</color>
     <color name="blue_pressed">#548ab4</color>
@@ -28,6 +29,7 @@
     <color name="line_bg">#CDCDCD</color>
     <color name="dialog_bg_normal">#d0d4dc</color>
     <color name="bg_from_txt">#ebebeb</color>
+    <color name="bg_pinglun">#e4e4e4</color>
 
     <color name="livstview_item_bg">#dfdfdf</color>
     <color name="txtcoloc">#ffffff</color>

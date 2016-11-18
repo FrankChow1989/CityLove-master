@@ -95,6 +95,7 @@
         </activity>
         <activity android:name=".activity.PhoneVerifyActivity">
         </activity>
+        <activity android:name=".activity.PLVideoTextureActivity"></activity>
     </application>
 
 </manifest>

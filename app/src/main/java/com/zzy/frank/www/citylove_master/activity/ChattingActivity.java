@@ -262,8 +262,14 @@ public class ChattingActivity extends AppCompatActivity
             case R.id.id_chat_img:
                 etSendmessageFram.setVisibility(View.GONE);
                 idChatImg.setVisibility(View.GONE);
+                btnSend.setVisibility(View.GONE);
+                idExtendImg.setVisibility(View.VISIBLE);
                 idChatImgVoice.setVisibility(View.VISIBLE);
                 idBtChatVoice.setVisibility(View.VISIBLE);
+
+                InputMethodManager imm1 = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm1.hideSoftInputFromWindow(idChattingEdit.getWindowToken(), 0);
+
                 break;
             case R.id.id_chat_img_voice:
                 etSendmessageFram.setVisibility(View.VISIBLE);

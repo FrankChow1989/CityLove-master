@@ -1,19 +1,29 @@
 package com.zzy.frank.www.citylove_master.adapter;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
+import android.renderscript.Allocation;
+import android.renderscript.RenderScript;
+import android.renderscript.ScriptIntrinsicBlur;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.zzy.frank.www.citylove_master.R;
-
-import java.util.List;
+import com.zzy.frank.www.citylove_master.util.StackBlurManager;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -26,6 +36,8 @@ public class GirlsPhotoAdapter extends RecyclerView.Adapter
 
     private String[] mList;
     private Context context;
+
+    private StackBlurManager mStackBlurManager;
 
     //Onclik接口
     public interface OnItemClickListener
@@ -50,6 +62,7 @@ public class GirlsPhotoAdapter extends RecyclerView.Adapter
         this.context = context;
 
         System.out.println("---------size---------" + mList.length);
+
     }
 
     @Override
@@ -61,18 +74,37 @@ public class GirlsPhotoAdapter extends RecyclerView.Adapter
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position)
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position)
     {
-        GirlsPhotoViewHolder viewHolder = (GirlsPhotoViewHolder) holder;
+        final GirlsPhotoViewHolder viewHolder = (GirlsPhotoViewHolder) holder;
 
 //        Glide.with(context)
 //                .load(mList[position])
 //                .diskCacheStrategy(DiskCacheStrategy.ALL)
 //                .into(viewHolder.idItemGirlspic);
 
-        Uri uri = Uri.parse(mList[position]);
-        viewHolder.idItemGirlspic.setImageURI(uri);
+        Glide.with(context).load(mList[position]).asBitmap().into(new SimpleTarget<Bitmap>()
+        {
+            @Override
+            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation)
+            {
+                //从第三张照片开始模糊
+                if (position > 1)
+                {
+                    mStackBlurManager = new StackBlurManager(resource);
+                    mStackBlurManager.process(20);
+                    viewHolder.idItemGirlspic.setImageBitmap(mStackBlurManager.returnBlurredImage());
+                }else {
+                    viewHolder.idItemGirlspic.setImageBitmap(resource);
+                }
 
+
+            }
+        });
+
+
+//        Uri uri = Uri.parse(mList[position]);
+//        viewHolder.idItemGirlspic.setImageURI(uri);
 
         setUpItemEvent(viewHolder);
     }
@@ -99,7 +131,6 @@ public class GirlsPhotoAdapter extends RecyclerView.Adapter
             });
 
             //longclick
-
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener()
             {
                 @Override
@@ -118,7 +149,7 @@ public class GirlsPhotoAdapter extends RecyclerView.Adapter
     static class GirlsPhotoViewHolder extends RecyclerView.ViewHolder
     {
         @Bind(R.id.id_item_girlspic)
-        SimpleDraweeView idItemGirlspic;
+        ImageView idItemGirlspic;
 
         public GirlsPhotoViewHolder(View view)
         {

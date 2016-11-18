@@ -1,5 +1,7 @@
 package com.zzy.frank.www.citylove_master.bean;
 
+import java.util.List;
+
 /**
  * Created by pc on 2016/11/8.
  */
@@ -14,7 +16,18 @@ public class ScretItem
     String message;
     String pic;
     String remand;
-    String[] msgs;
+
+    public List<ScretMsg> getMsgs()
+    {
+        return msgs;
+    }
+
+    public void setMsgs(List<ScretMsg> msgs)
+    {
+        this.msgs = msgs;
+    }
+
+    List<ScretMsg> msgs;
 
     public String getIcon()
     {
@@ -96,13 +109,4 @@ public class ScretItem
         this.remand = remand;
     }
 
-    public String[] getMsgs()
-    {
-        return msgs;
-    }
-
-    public void setMsgs(String[] msgs)
-    {
-        this.msgs = msgs;
-    }
 }

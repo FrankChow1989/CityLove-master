@@ -122,7 +122,7 @@ public class HomemmItemActivity extends AppCompatActivity
         idHomemmNickname.setText(name);
         idHomemmLocal.setText(addr);
         idHomemmPhoto.setText("相册 " + photos.length);
-        idHomemmDate.setText(TimeUtil.getTime(System.currentTimeMillis() - 30000));
+        idHomemmDate.setText(TimeUtil.getTime(System.currentTimeMillis() - 50000));
         idHomemmFocus.setText("关注 " + focus);
         idHomemmLong.setText(distance);
 
@@ -173,8 +173,6 @@ public class HomemmItemActivity extends AppCompatActivity
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         idHomemmPhotos.setLayoutManager(linearLayoutManager);
-//        idHomemmVedio.setLayoutManager(linearLayoutManager);
-//        idHomemmVedio.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
 
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(this);
         linearLayoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);

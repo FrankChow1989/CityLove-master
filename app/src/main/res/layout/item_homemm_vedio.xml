@@ -76,7 +76,12 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:gravity="right|center"
+                android:paddingRight="15dp"
+                android:text="拍摄于：2016-11-15"
+                android:textSize="12dp"
+                />
 
             <TextView
                 android:layout_width="match_parent"
@@ -90,7 +95,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1.3"
+        android:layout_weight="1.6"
         android:orientation="vertical">
 
         <TextView
@@ -103,21 +108,42 @@
             android:textSize="16dp"
             />
 
-        <ImageView
-            android:id="@+id/id_homemm_secrt_photo"
+        <FrameLayout
             android:layout_width="200dp"
             android:layout_height="170dp"
             android:layout_marginLeft="60dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/h7"
-            />
+            >
+
+            <ImageView
+                android:id="@+id/picture"
+                android:layout_width="200dp"
+                android:layout_height="170dp"
+                android:scaleType="centerCrop"/>
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="200dp"
+                android:layout_height="170dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="18sp"/>
+
+            <ImageView
+                android:id="@+id/id_homemm_secrt_photo"
+                android:layout_width="200dp"
+                android:layout_height="170dp"
+                android:padding="65dp"
+                android:src="@drawable/ic_play_circle_stoken"
+                />
+        </FrameLayout>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="1.5"
         android:orientation="vertical"
         >
 
@@ -130,14 +156,16 @@
             android:text="186解锁了该视频，获得了4599613朵鲜花"
             android:textColor="@color/red"/>
 
-        <TextView
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/id_homemm_secrt_msgs"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="left|center"
-            android:paddingLeft="60dp"
-            />
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="2"
+            android:background="@color/bg_pinglun"
+            android:scrollbars="none"
+            ></android.support.v7.widget.RecyclerView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -183,7 +211,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:padding="10dp"
+                    android:padding="12dp"
                     android:src="@drawable/toshow_ic_insert_comment_black_18dp"/>
 
                 <TextView
@@ -197,8 +225,11 @@
             </LinearLayout>
 
         </LinearLayout>
-
-
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2.2"></LinearLayout>
 
 </LinearLayout>

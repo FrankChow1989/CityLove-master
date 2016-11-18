@@ -5,7 +5,7 @@ android {
 
     defaultConfig {
         applicationId "com.zzy.frank.www.citylove_master"
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -32,7 +32,6 @@ dependencies {
     compile 'com.facebook.fresco:fresco:0.13.0'
     compile project(':frescoimageviewer')
     compile project(':takephoto_library')
-
     //gson
     compile 'com.google.code.gson:gson:2.6.2'
     //retrofit2
@@ -45,4 +44,5 @@ dependencies {
     //okhttp
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
+    compile files('libs/pldroid-player-1.2.2.jar')
 }
