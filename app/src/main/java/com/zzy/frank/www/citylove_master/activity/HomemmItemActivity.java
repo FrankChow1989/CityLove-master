@@ -280,12 +280,10 @@ public class HomemmItemActivity extends AppCompatActivity
                 }
                 break;
             case R.id.id_homemm_phone:
-                Dialog_VIP dialog = new Dialog_VIP();
-                dialog.show(this);
+                Dialog_VIP.show(this);
                 break;
             case R.id.id_homemm_weixincheck:
-                Dialog_VIP dialogVip = new Dialog_VIP();
-                dialogVip.show(this);
+                Dialog_VIP.show(this);
                 break;
         }
     }

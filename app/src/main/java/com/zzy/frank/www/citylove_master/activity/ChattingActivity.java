@@ -70,7 +70,6 @@ public class ChattingActivity extends AppCompatActivity
     @Bind(R.id.id_extend_img)
     ImageButton idExtendImg;
 
-
     List<ChatMessage> mData = new ArrayList<ChatMessage>();
     String userId;
     private ChatMessageAdapter mAdapter;
@@ -248,16 +247,13 @@ public class ChattingActivity extends AppCompatActivity
                 lyChatBottom1.setVisibility(View.VISIBLE);
                 break;
             case R.id.id_chatting_checkweixin:
-                Dialog_VIP dialog_vip = new Dialog_VIP();
-                dialog_vip.show(this);
+                Dialog_VIP.show(this);
                 break;
             case R.id.ly_chat_bottom1:
-                Dialog_VIP dialogVip = new Dialog_VIP();
-                dialogVip.show(this);
+                Dialog_VIP.show(this);
                 break;
             case R.id.chatting_zengsong:
-                Dialog_VIP dialogVip1 = new Dialog_VIP();
-                dialogVip1.show(this);
+                Dialog_VIP.show(this);
                 break;
             case R.id.id_chat_img:
                 etSendmessageFram.setVisibility(View.GONE);

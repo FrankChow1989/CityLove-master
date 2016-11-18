@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.stfalcon.frescoimageviewer.ImageViewer;
 import com.zzy.frank.www.citylove_master.R;
 import com.zzy.frank.www.citylove_master.bean.MyPhoto;
@@ -76,16 +77,27 @@ public class PhotoAdapter extends RecyclerView.Adapter
 
         if (position == 0)
         {
-            photoViewHolder.idItemPhoto.setBackgroundResource(R.drawable.take_photo_bt);
+            Uri uri = Uri.parse("res://com.zzy.frank.www.citylove_master/" + R.drawable.take_photo_bt);
+            photoViewHolder.idItemPhoto.setImageURI(uri);
+        } else if (!"".equals(photos.get(position).getLocal_photo()))
+        {
+            Uri uri = Uri.parse("file://" + photos.get(position).getLocal_photo());
+            photoViewHolder.idItemPhoto.setImageURI(uri);
         }
 
         System.out.println("------loacal------" + photos.get(position).getLocal_photo());
 
 
-        Glide.with(context)
-                .load(photos.get(position).getLocal_photo())
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(photoViewHolder.idItemPhoto);
+//        Glide.with(context)
+//                .load(photos.get(position).getLocal_photo())
+//                .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                .into(photoViewHolder.idItemPhoto);
+
+//        if (!"".equals(photos.get(position).getLocal_photo()))
+//        {
+//            Uri uri = Uri.parse(photos.get(position).getLocal_photo());
+//            photoViewHolder.idItemPhoto.setImageURI(uri);
+//        }
 
         setUpItemEvent(photoViewHolder);
     }
@@ -131,7 +143,7 @@ public class PhotoAdapter extends RecyclerView.Adapter
     static class PhotoViewHolder extends RecyclerView.ViewHolder
     {
         @Bind(R.id.id_item_photo)
-        ImageView idItemPhoto;
+        SimpleDraweeView idItemPhoto;
 
         public PhotoViewHolder(View view)
         {

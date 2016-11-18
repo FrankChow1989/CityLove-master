@@ -24,7 +24,9 @@ import com.jph.takephoto.compress.CompressConfig;
 import com.jph.takephoto.model.CropOptions;
 import com.jph.takephoto.model.TImage;
 import com.jph.takephoto.model.TResult;
+import com.stfalcon.frescoimageviewer.ImageViewer;
 import com.zzy.frank.www.citylove_master.R;
+import com.zzy.frank.www.citylove_master.adapter.GirlsPhotoAdapter;
 import com.zzy.frank.www.citylove_master.adapter.PhotoAdapter;
 import com.zzy.frank.www.citylove_master.bean.MyPhoto;
 import com.zzy.frank.www.citylove_master.util.T;
@@ -74,6 +76,13 @@ public class PhotoActivity extends TakePhotoActivity
                 if (position == 0)
                 {
                     ShowDialog();
+                } else
+                {
+                    System.out.println(user_pics.length);
+
+                    new ImageViewer.Builder(PhotoActivity.this, user_pics)
+                            .setStartPosition(position)
+                            .show();
                 }
             }
 

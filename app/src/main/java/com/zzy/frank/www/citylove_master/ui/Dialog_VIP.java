@@ -17,39 +17,32 @@ import com.zzy.frank.www.citylove_master.R;
  */
 public class Dialog_VIP
 {
+    public static void show(Activity activity)
+    {
 
-    AlertDialog dialog;
-    WindowManager m;
-    Display d;
-
-    LinearLayout button1, button2;
-    Button button;
-
-    public void show(Activity activity){
-
-        m = activity.getWindowManager();
-        d = m.getDefaultDisplay();
+        WindowManager m = activity.getWindowManager();
+        Display d = m.getDefaultDisplay();
 
         int width = d.getWidth();
         int height = d.getHeight();
 
-        dialog = new AlertDialog.Builder(activity).create();
+        AlertDialog dialog = new AlertDialog.Builder(activity).create();
         LayoutInflater inflater = activity.getLayoutInflater();
         View view1 = inflater.inflate(R.layout.dialog_custem, null);
         dialog.setView(view1, 0, 0, 0, 0);
 
-        button1 = (LinearLayout) view1.findViewById(R.id.id_dialog_year);
-        button2 = (LinearLayout) view1.findViewById(R.id.id_dialog_month);
-        button = (Button) view1.findViewById(R.id.id_dialog_button);
+        LinearLayout button1 = (LinearLayout) view1.findViewById(R.id.id_dialog_year);
+        LinearLayout button2 = (LinearLayout) view1.findViewById(R.id.id_dialog_month);
+        Button button = (Button) view1.findViewById(R.id.id_dialog_button);
 
         button.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
+
             }
         });
-
 
         dialog.show();
         dialog.getWindow().setLayout(width / 2 + 220, height / 2 + 50);

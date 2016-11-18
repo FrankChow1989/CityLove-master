@@ -35,12 +35,6 @@ public class ChattingSeePicActivity extends AppCompatActivity
         Intent intent = getIntent();
         mPicUrl = intent.getStringExtra("pic");
 
-
-//        Glide.with(this)
-//                .load(mPicUrl)
-//                .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                .into(idChatSeepic);
-
         Uri uri = Uri.parse(mPicUrl);
         idChatSeepic.setImageURI(uri);
 

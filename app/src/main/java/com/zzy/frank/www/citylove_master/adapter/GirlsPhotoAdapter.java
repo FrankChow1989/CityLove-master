@@ -97,11 +97,8 @@ public class GirlsPhotoAdapter extends RecyclerView.Adapter
                 }else {
                     viewHolder.idItemGirlspic.setImageBitmap(resource);
                 }
-
-
             }
         });
-
 
 //        Uri uri = Uri.parse(mList[position]);
 //        viewHolder.idItemGirlspic.setImageURI(uri);
