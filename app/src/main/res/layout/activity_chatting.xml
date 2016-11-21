@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -48,13 +49,23 @@
         android:orientation="horizontal"
         >
 
-        <com.zzy.frank.www.citylove_master.ui.RoundImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/id_chat_round"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/h7"/>
+            fresco:actualImageScaleType="focusCrop"
+            fresco:fadeDuration="300"
+            fresco:failureImage="@drawable/rc_grid_image_error"
+            fresco:failureImageScaleType="centerInside"
+            fresco:placeholderImage="@drawable/rc_grid_image_default"
+            fresco:placeholderImageScaleType="fitCenter"
+            fresco:progressBarImage="@drawable/jiazai_ing"
+            fresco:retryImage="@drawable/icon_retry"
+            fresco:retryImageScaleType="centerCrop"
+            fresco:roundAsCircle="true"
+            fresco:roundedCornerRadius="1dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"

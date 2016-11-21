@@ -3,6 +3,7 @@ package com.zzy.frank.www.citylove_master.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -21,6 +22,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.zzy.frank.www.citylove_master.PushApplication;
 import com.zzy.frank.www.citylove_master.R;
 import com.zzy.frank.www.citylove_master.Recorder.AudioRecorderButton;
@@ -69,6 +71,8 @@ public class ChattingActivity extends AppCompatActivity
     ImageButton idChatImg;
     @Bind(R.id.id_extend_img)
     ImageButton idExtendImg;
+    @Bind(R.id.id_chat_round)
+    SimpleDraweeView id_chat_round;
 
     List<ChatMessage> mData = new ArrayList<ChatMessage>();
     String userId;
@@ -167,6 +171,9 @@ public class ChattingActivity extends AppCompatActivity
                 lyChatBottom1.setVisibility(View.VISIBLE);
             }
         });
+
+        Uri uri = Uri.parse(mFromUser.getHeadIcon());
+        id_chat_round.setImageURI(uri);
     }
 
 

@@ -6,12 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.stfalcon.frescoimageviewer.ImageViewer;
 import com.zzy.frank.www.citylove_master.R;
 import com.zzy.frank.www.citylove_master.bean.MyPhoto;
 
@@ -86,18 +82,6 @@ public class PhotoAdapter extends RecyclerView.Adapter
         }
 
         System.out.println("------loacal------" + photos.get(position).getLocal_photo());
-
-
-//        Glide.with(context)
-//                .load(photos.get(position).getLocal_photo())
-//                .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                .into(photoViewHolder.idItemPhoto);
-
-//        if (!"".equals(photos.get(position).getLocal_photo()))
-//        {
-//            Uri uri = Uri.parse(photos.get(position).getLocal_photo());
-//            photoViewHolder.idItemPhoto.setImageURI(uri);
-//        }
 
         setUpItemEvent(photoViewHolder);
     }

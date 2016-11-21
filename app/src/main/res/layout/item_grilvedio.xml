@@ -6,13 +6,13 @@
     android:layout_centerInParent="true">
     >
 
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/id_item_girlsvedio"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_centerInParent="true"
         android:layout_marginLeft="5dp"
         >
-    </ImageView>
+    </com.facebook.drawee.view.SimpleDraweeView>
 
 </RelativeLayout>

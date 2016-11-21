@@ -18,7 +18,7 @@
 -dontwarn org.apache.**
 -dontwarn com.qq.e.**
 -dontwarn com.androidquery.**
-
+-dontwarn com.android.**
 #-libraryjars libs/SocialSDK_QQZone_2.jar   # 注意,这条会报重复混淆,要注释掉
 
 -keepattributes Exceptions,InnerClasses,Signature

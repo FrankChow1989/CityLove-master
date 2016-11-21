@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="70dp"
+              xmlns:fresco="http://schemas.android.com/apk/res-auto"
               android:layout_marginTop="10dp"
               android:orientation="vertical">
 
@@ -50,11 +51,21 @@
                 android:textSize="18sp"
                 />
 
-            <com.zzy.frank.www.citylove_master.ui.RoundImageView
+            <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/chat_send_icon"
                 android:layout_width="49dp"
                 android:layout_height="49dp"
-                android:src="@drawable/h7"
+                fresco:actualImageScaleType="focusCrop"
+                fresco:fadeDuration="300"
+                fresco:failureImage="@drawable/rc_grid_image_error"
+                fresco:failureImageScaleType="centerInside"
+                fresco:placeholderImage="@drawable/rc_grid_image_default"
+                fresco:placeholderImageScaleType="fitCenter"
+                fresco:progressBarImage="@drawable/jiazai_ing"
+                fresco:retryImage="@drawable/icon_retry"
+                fresco:retryImageScaleType="centerCrop"
+                fresco:roundAsCircle="false"
+                fresco:roundedCornerRadius="1dp"
                 />
         </LinearLayout>
     </RelativeLayout>
@@ -112,11 +123,21 @@
                     />
             </RelativeLayout>
 
-            <com.zzy.frank.www.citylove_master.ui.RoundImageView
+            <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/chat_send_icon_record"
                 android:layout_width="49dp"
                 android:layout_height="49dp"
-                android:src="@drawable/h7"/>
+                fresco:actualImageScaleType="focusCrop"
+                fresco:fadeDuration="300"
+                fresco:failureImage="@drawable/rc_grid_image_error"
+                fresco:failureImageScaleType="centerInside"
+                fresco:placeholderImage="@drawable/rc_grid_image_default"
+                fresco:placeholderImageScaleType="fitCenter"
+                fresco:progressBarImage="@drawable/jiazai_ing"
+                fresco:retryImage="@drawable/icon_retry"
+                fresco:retryImageScaleType="centerCrop"
+                fresco:roundAsCircle="true"
+                fresco:roundedCornerRadius="1dp"/>
         </LinearLayout>
     </RelativeLayout>
 

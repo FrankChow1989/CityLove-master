@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jauker.widget.BadgeView;
 import com.zzy.frank.www.citylove_master.activity.ChattingActivity;
 import com.zzy.frank.www.citylove_master.face.FaceConversionUtil;
@@ -28,7 +29,6 @@ import com.zzy.frank.www.citylove_master.fragment.FujinFragment;
 import com.zzy.frank.www.citylove_master.fragment.HomeFragment;
 import com.zzy.frank.www.citylove_master.fragment.MSGFragment;
 import com.zzy.frank.www.citylove_master.fragment.PersonFragment;
-import com.zzy.frank.www.citylove_master.ui.RoundImageView;
 import com.zzy.frank.www.citylove_master.util.T;
 
 import butterknife.Bind;
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements MSGFragment.OnUnR
     @Bind(R.id.id_mian_timeup)
     LinearLayout idMianTimeup;
     @Bind(R.id.id_mian_timeup_pic)
-    RoundImageView idMianTimeupPic;
+    SimpleDraweeView idMianTimeupPic;
     @Bind(R.id.activity_group_radioGroup)
     RadioGroup mRadioGroup;
 

@@ -1,6 +1,7 @@
 package com.zzy.frank.www.citylove_master.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.zzy.frank.www.citylove_master.R;
 import com.zzy.frank.www.citylove_master.fragment.ChongzhiVIPScrollFragment;
 import com.zzy.frank.www.citylove_master.fragment.HuafeiVIPScrollFragment;
@@ -29,6 +31,8 @@ public class StartVIPActivity extends AppCompatActivity
     ViewPager idStartvipViewpager;
     @Bind(R.id.id_startvip_tablayout)
     TabLayout idStartvipTablayout;
+    @Bind(R.id.id_startvip_kefu)
+    SimpleDraweeView idStartvipKefu;
 
 
     @Override
@@ -53,6 +57,9 @@ public class StartVIPActivity extends AppCompatActivity
         idStartvipViewpager.setAdapter(mMainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager()));
 
         idStartvipTablayout.setupWithViewPager(idStartvipViewpager);
+
+        Uri uri = Uri.parse("res://com.zzy.frank.www.citylove_master/" + R.drawable.button_kf);
+        idStartvipKefu.setImageURI(uri);
     }
 
     @OnClick({R.id.id_open_s, R.id.id_open_month, R.id.id_startvip_kefu})

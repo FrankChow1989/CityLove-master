@@ -9,7 +9,7 @@ public class User implements Serializable
     private String channelId;
     private String lastMSG;
     private String nick;//
-    private int headIcon;//
+    private String headIcon;//
     private int group;
 
     public String getLastMSG()
@@ -23,7 +23,7 @@ public class User implements Serializable
     }
 
     public User(
-            String UserId, String channelId, String lastMSG, String nick, int headIcon,
+            String UserId, String channelId, String lastMSG, String nick, String headIcon,
             int group)
     {
         // TODO Auto-generated constructor stub
@@ -69,12 +69,12 @@ public class User implements Serializable
         this.nick = nick;
     }
 
-    public int getHeadIcon()
+    public String getHeadIcon()
     {
         return headIcon;
     }
 
-    public void setHeadIcon(int headIcon)
+    public void setHeadIcon(String headIcon)
     {
         this.headIcon = headIcon;
     }

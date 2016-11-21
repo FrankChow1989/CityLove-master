@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:background="@color/lightgrey"
     android:orientation="vertical">
 
@@ -141,12 +142,23 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
 
-            <com.zzy.frank.www.citylove_master.ui.RoundImageView
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/id_vipup_xc"
                 android:layout_width="38dp"
                 android:layout_height="38dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
-                android:src="@drawable/icon_vip_xc"/>
+                fresco:actualImageScaleType="focusCrop"
+                fresco:fadeDuration="300"
+                fresco:failureImage="@drawable/rc_grid_image_error"
+                fresco:failureImageScaleType="centerInside"
+                fresco:placeholderImage="@drawable/rc_grid_image_default"
+                fresco:placeholderImageScaleType="fitCenter"
+                fresco:progressBarImage="@drawable/jiazai_ing"
+                fresco:retryImage="@drawable/icon_retry"
+                fresco:retryImageScaleType="centerCrop"
+                fresco:roundAsCircle="true"
+                fresco:roundedCornerRadius="1dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -165,14 +177,25 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
 
-            <com.zzy.frank.www.citylove_master.ui.RoundImageView
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/id_vipup_zl"
                 android:layout_width="38dp"
                 android:layout_height="38dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="2dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="2dp"
-                android:src="@drawable/icon_vip_zl"
+                fresco:actualImageScaleType="focusCrop"
+                fresco:fadeDuration="300"
+                fresco:failureImage="@drawable/rc_grid_image_error"
+                fresco:failureImageScaleType="centerInside"
+                fresco:placeholderImage="@drawable/rc_grid_image_default"
+                fresco:placeholderImageScaleType="fitCenter"
+                fresco:progressBarImage="@drawable/jiazai_ing"
+                fresco:retryImage="@drawable/icon_retry"
+                fresco:retryImageScaleType="centerCrop"
+                fresco:roundAsCircle="true"
+                fresco:roundedCornerRadius="1dp"
                 />
 
             <TextView
@@ -192,14 +215,25 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
 
-            <com.zzy.frank.www.citylove_master.ui.RoundImageView
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/id_vipup_dt"
                 android:layout_width="38dp"
                 android:layout_height="38dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="2dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="2dp"
-                android:src="@drawable/icon_vip_dt"/>
+                fresco:actualImageScaleType="focusCrop"
+                fresco:fadeDuration="300"
+                fresco:failureImage="@drawable/rc_grid_image_error"
+                fresco:failureImageScaleType="centerInside"
+                fresco:placeholderImage="@drawable/rc_grid_image_default"
+                fresco:placeholderImageScaleType="fitCenter"
+                fresco:progressBarImage="@drawable/jiazai_ing"
+                fresco:retryImage="@drawable/icon_retry"
+                fresco:retryImageScaleType="centerCrop"
+                fresco:roundAsCircle="true"
+                fresco:roundedCornerRadius="1dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -218,14 +252,25 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
 
-            <com.zzy.frank.www.citylove_master.ui.RoundImageView
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/id_vipup_msg"
                 android:layout_width="38dp"
                 android:layout_height="38dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="2dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="2dp"
-                android:src="@drawable/icon_vip_msg"/>
+                fresco:actualImageScaleType="focusCrop"
+                fresco:fadeDuration="300"
+                fresco:failureImage="@drawable/rc_grid_image_error"
+                fresco:failureImageScaleType="centerInside"
+                fresco:placeholderImage="@drawable/rc_grid_image_default"
+                fresco:placeholderImageScaleType="fitCenter"
+                fresco:progressBarImage="@drawable/jiazai_ing"
+                fresco:retryImage="@drawable/icon_retry"
+                fresco:retryImageScaleType="centerCrop"
+                fresco:roundAsCircle="true"
+                fresco:roundedCornerRadius="1dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -255,13 +300,24 @@
             android:layout_weight="1">
         </ListView>
 
-        <com.zzy.frank.www.citylove_master.ui.RoundImageView
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/id_vipup_kf"
             android:layout_width="65dp"
             android:layout_height="65dp"
             android:layout_gravity="bottom"
             android:layout_marginBottom="20dp"
             android:layout_marginRight="20dp"
-            android:src="@drawable/button_kf"
+            fresco:actualImageScaleType="focusCrop"
+            fresco:fadeDuration="300"
+            fresco:failureImage="@drawable/rc_grid_image_error"
+            fresco:failureImageScaleType="centerInside"
+            fresco:placeholderImage="@drawable/rc_grid_image_default"
+            fresco:placeholderImageScaleType="fitCenter"
+            fresco:progressBarImage="@drawable/jiazai_ing"
+            fresco:retryImage="@drawable/icon_retry"
+            fresco:retryImageScaleType="centerCrop"
+            fresco:roundAsCircle="true"
+            fresco:roundedCornerRadius="1dp"
             />
 
     </LinearLayout>

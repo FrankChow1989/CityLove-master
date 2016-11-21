@@ -34,36 +34,43 @@ import java.util.ArrayList;
 /*
  * Created by Alexander Krol (troy379) on 29.08.16.
  */
-class ImageViewerAdapter extends PagerAdapter {
+class ImageViewerAdapter extends PagerAdapter
+{
 
     private Context context;
     private ArrayList<String> urls;
     private ArrayList<ZoomableDraweeView> drawees;
 
-    public ImageViewerAdapter(Context context, ArrayList<String> urls) {
+    public ImageViewerAdapter(Context context, ArrayList<String> urls)
+    {
         this.context = context;
         this.urls = urls;
         generateDrawees();
     }
 
     @Override
-    public int getCount() {
+    public int getCount()
+    {
         return urls.size();
     }
 
     @Override
-    public boolean isViewFromObject(View view, Object object) {
+    public boolean isViewFromObject(View view, Object object)
+    {
         return view == object;
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, int position)
+    {
         ZoomableDraweeView photoDraweeView = drawees.get(position);
 
-        try {
+        try
+        {
             container.addView(photoDraweeView, ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT);
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             e.printStackTrace();
         }
 
@@ -71,21 +78,26 @@ class ImageViewerAdapter extends PagerAdapter {
     }
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
+    public void destroyItem(ViewGroup container, int position, Object object)
+    {
         container.removeView((SimpleDraweeView) object);
     }
 
-    public boolean isScaled(int index) {
+    public boolean isScaled(int index)
+    {
         return drawees.get(index).getScale() > 1.0f;
     }
 
-    public void resetScale(int index) {
+    public void resetScale(int index)
+    {
         drawees.get(index).setScale(1.0f, true);
     }
 
-    private void generateDrawees() {
+    private void generateDrawees()
+    {
         drawees = new ArrayList<>();
-        for (String url : urls) {
+        for (String url : urls)
+        {
             final ZoomableDraweeView drawee = new ZoomableDraweeView(context);
             PipelineDraweeControllerBuilder controller = Fresco.newDraweeControllerBuilder();
             controller.setUri(url);
@@ -98,12 +110,16 @@ class ImageViewerAdapter extends PagerAdapter {
     }
 
     private BaseControllerListener<ImageInfo>
-    getDraweeControllerListener(final ZoomableDraweeView drawee) {
-        return new BaseControllerListener<ImageInfo>() {
+    getDraweeControllerListener(final ZoomableDraweeView drawee)
+    {
+        return new BaseControllerListener<ImageInfo>()
+        {
             @Override
-            public void onFinalImageSet(String id, ImageInfo imageInfo, Animatable animatable) {
+            public void onFinalImageSet(String id, ImageInfo imageInfo, Animatable animatable)
+            {
                 super.onFinalImageSet(id, imageInfo, animatable);
-                if (imageInfo == null) {
+                if (imageInfo == null)
+                {
                     return;
                 }
                 drawee.update(imageInfo.getWidth(), imageInfo.getHeight());

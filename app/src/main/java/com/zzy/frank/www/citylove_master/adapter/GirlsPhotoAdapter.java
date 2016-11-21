@@ -1,27 +1,24 @@
 package com.zzy.frank.www.citylove_master.adapter;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.Build;
-import android.renderscript.Allocation;
-import android.renderscript.RenderScript;
-import android.renderscript.ScriptIntrinsicBlur;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
+import com.facebook.common.executors.CallerThreadExecutor;
+import com.facebook.common.references.CloseableReference;
+import com.facebook.datasource.DataSource;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.core.ImagePipeline;
+import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber;
+import com.facebook.imagepipeline.image.CloseableImage;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.zzy.frank.www.citylove_master.R;
 import com.zzy.frank.www.citylove_master.util.StackBlurManager;
 
@@ -83,22 +80,46 @@ public class GirlsPhotoAdapter extends RecyclerView.Adapter
 //                .diskCacheStrategy(DiskCacheStrategy.ALL)
 //                .into(viewHolder.idItemGirlspic);
 
-        Glide.with(context).load(mList[position]).asBitmap().into(new SimpleTarget<Bitmap>()
-        {
+//        Glide.with(context).load(mList[position]).asBitmap().into(new SimpleTarget<Bitmap>()
+//        {
+//            @Override
+//            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation)
+//            {
+//                //从第三张照片开始模糊
+//                if (position > 1)
+//                {
+//                    mStackBlurManager = new StackBlurManager(resource);
+//                    mStackBlurManager.process(20);
+//                    viewHolder.idItemGirlspic.setImageBitmap(mStackBlurManager.returnBlurredImage());
+//                }else {
+//                    viewHolder.idItemGirlspic.setImageBitmap(resource);
+//                }
+//            }
+//        });
+
+        ImageRequest imageRequest = ImageRequestBuilder.newBuilderWithSource(Uri.parse(mList[position])).setProgressiveRenderingEnabled(true).build();
+        ImagePipeline imagePipeline = Fresco.getImagePipeline();
+        DataSource<CloseableReference<CloseableImage>> dataSource = imagePipeline.fetchDecodedImage(imageRequest, context);
+        dataSource.subscribe(new BaseBitmapDataSubscriber() {
             @Override
-            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation)
-            {
-                //从第三张照片开始模糊
+            public void onNewResultImpl(@Nullable Bitmap bitmap) {
+                // You can use the bitmap in only limited ways
+                // No need to do any cleanup.
                 if (position > 1)
                 {
-                    mStackBlurManager = new StackBlurManager(resource);
+                    mStackBlurManager = new StackBlurManager(bitmap);
                     mStackBlurManager.process(20);
                     viewHolder.idItemGirlspic.setImageBitmap(mStackBlurManager.returnBlurredImage());
                 }else {
-                    viewHolder.idItemGirlspic.setImageBitmap(resource);
+                    viewHolder.idItemGirlspic.setImageBitmap(bitmap);
                 }
+
             }
-        });
+            @Override
+            public void onFailureImpl(DataSource dataSource) {
+                // No cleanup required here.
+            }
+        }, CallerThreadExecutor.getInstance());
 
 //        Uri uri = Uri.parse(mList[position]);
 //        viewHolder.idItemGirlspic.setImageURI(uri);
@@ -146,7 +167,7 @@ public class GirlsPhotoAdapter extends RecyclerView.Adapter
     static class GirlsPhotoViewHolder extends RecyclerView.ViewHolder
     {
         @Bind(R.id.id_item_girlspic)
-        ImageView idItemGirlspic;
+        SimpleDraweeView idItemGirlspic;
 
         public GirlsPhotoViewHolder(View view)
         {

@@ -16,20 +16,20 @@
         "source": "I:\\MyStudioWork\\CityLove-master\\frescoimageviewer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_list_menu_item_radio.xml"
     },
     {
-        "merged": "I:\\MyStudioWork\\CityLove-master\\frescoimageviewer\\build\\intermediates\\res\\merged\\debug\\layout\\notification_media_cancel_action.xml",
-        "source": "I:\\MyStudioWork\\CityLove-master\\frescoimageviewer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_media_cancel_action.xml"
-    },
-    {
         "merged": "I:\\MyStudioWork\\CityLove-master\\frescoimageviewer\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_item_layout.xml",
         "source": "I:\\MyStudioWork\\CityLove-master\\frescoimageviewer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_action_menu_item_layout.xml"
     },
     {
-        "merged": "I:\\MyStudioWork\\CityLove-master\\frescoimageviewer\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_big_media.xml",
-        "source": "I:\\MyStudioWork\\CityLove-master\\frescoimageviewer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_template_big_media.xml"
+        "merged": "I:\\MyStudioWork\\CityLove-master\\frescoimageviewer\\build\\intermediates\\res\\merged\\debug\\layout\\notification_media_cancel_action.xml",
+        "source": "I:\\MyStudioWork\\CityLove-master\\frescoimageviewer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_media_cancel_action.xml"
     },
     {
         "merged": "I:\\MyStudioWork\\CityLove-master\\frescoimageviewer\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_layout.xml",
         "source": "I:\\MyStudioWork\\CityLove-master\\frescoimageviewer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "I:\\MyStudioWork\\CityLove-master\\frescoimageviewer\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_big_media.xml",
+        "source": "I:\\MyStudioWork\\CityLove-master\\frescoimageviewer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_template_big_media.xml"
     },
     {
         "merged": "I:\\MyStudioWork\\CityLove-master\\frescoimageviewer\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",

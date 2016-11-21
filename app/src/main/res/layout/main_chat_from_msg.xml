@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:fresco="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_marginTop="10dp"
@@ -20,8 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right|center"
         android:layout_marginTop="10dp"
-        android:visibility="visible"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -31,11 +32,21 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1">
 
-            <com.zzy.frank.www.citylove_master.ui.RoundImageView
+            <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/chat_from_icon"
                 android:layout_width="49dp"
                 android:layout_height="49dp"
-                android:src="@drawable/h7"/>
+                fresco:actualImageScaleType="focusCrop"
+                fresco:fadeDuration="300"
+                fresco:failureImage="@drawable/rc_grid_image_error"
+                fresco:failureImageScaleType="centerInside"
+                fresco:placeholderImage="@drawable/rc_grid_image_default"
+                fresco:placeholderImageScaleType="fitCenter"
+                fresco:progressBarImage="@drawable/jiazai_ing"
+                fresco:retryImage="@drawable/icon_retry"
+                fresco:retryImageScaleType="centerCrop"
+                fresco:roundAsCircle="true"
+                fresco:roundedCornerRadius="1dp"/>
 
             <TextView
                 android:id="@+id/chat_from_content"
@@ -62,8 +73,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right|center"
         android:layout_marginTop="10dp"
-        android:visibility="gone"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -73,20 +84,39 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1">
 
-            <com.zzy.frank.www.citylove_master.ui.RoundImageView
+            <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/chat_from_icon_pic"
                 android:layout_width="49dp"
                 android:layout_height="49dp"
-                android:src="@drawable/h7"/>
+                fresco:actualImageScaleType="focusCrop"
+                fresco:fadeDuration="300"
+                fresco:failureImage="@drawable/rc_grid_image_error"
+                fresco:failureImageScaleType="centerInside"
+                fresco:placeholderImage="@drawable/rc_grid_image_default"
+                fresco:placeholderImageScaleType="fitCenter"
+                fresco:progressBarImage="@drawable/jiazai_ing"
+                fresco:retryImage="@drawable/icon_retry"
+                fresco:retryImageScaleType="centerCrop"
+                fresco:roundAsCircle="true"
+                fresco:roundedCornerRadius="1dp"/>
 
-            <ImageView
+            <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/chat_from_content_pic"
                 android:layout_width="120dp"
                 android:layout_height="190dp"
                 android:layout_marginLeft="5dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center_vertical"/>
+                android:gravity="center_vertical"
+                fresco:actualImageScaleType="focusCrop"
+                fresco:fadeDuration="300"
+                fresco:failureImage="@drawable/rc_grid_image_error"
+                fresco:failureImageScaleType="centerInside"
+                fresco:placeholderImage="@drawable/rc_grid_image_default"
+                fresco:placeholderImageScaleType="fitCenter"
+                fresco:progressBarImage="@drawable/jiazai_ing"
+                fresco:retryImage="@drawable/icon_retry"
+                fresco:retryImageScaleType="centerCrop"
+                fresco:roundAsCircle="false"
+                fresco:roundedCornerRadius="1dp"/>
         </LinearLayout>
     </RelativeLayout>
 
@@ -96,8 +126,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right|center"
         android:layout_marginTop="10dp"
-        android:visibility="gone"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -107,11 +137,21 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1">
 
-            <com.zzy.frank.www.citylove_master.ui.RoundImageView
+            <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/chat_from_icon_record"
                 android:layout_width="49dp"
                 android:layout_height="49dp"
-                android:src="@drawable/h7"/>
+                fresco:actualImageScaleType="focusCrop"
+                fresco:fadeDuration="300"
+                fresco:failureImage="@drawable/rc_grid_image_error"
+                fresco:failureImageScaleType="centerInside"
+                fresco:placeholderImage="@drawable/rc_grid_image_default"
+                fresco:placeholderImageScaleType="fitCenter"
+                fresco:progressBarImage="@drawable/jiazai_ing"
+                fresco:retryImage="@drawable/icon_retry"
+                fresco:retryImageScaleType="centerCrop"
+                fresco:roundAsCircle="true"
+                fresco:roundedCornerRadius="1dp"/>
 
             <RelativeLayout
                 android:id="@+id/chat_from_content_record"
@@ -123,11 +163,12 @@
                     android:id="@+id/id_recorder_length"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="10dip"
-                    android:layout_marginBottom="10dp"
                     android:layout_centerVertical="true"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dip"
                     android:background="@drawable/from_send_txt_bg"
                     >
+
                     <View
                         android:id="@+id/id_recorder_anim"
                         android:layout_width="25dp"
@@ -143,9 +184,9 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
+                    android:layout_marginRight="3dp"
                     android:layout_toRightOf="@id/id_recorder_length"
                     android:text=""
-                    android:layout_marginRight="3dp"
                     android:textColor="#ff777777"
                     />
             </RelativeLayout>

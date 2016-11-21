@@ -1,13 +1,13 @@
 package com.zzy.frank.www.citylove_master.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.zzy.frank.www.citylove_master.R;
 
 import butterknife.Bind;
@@ -19,6 +19,8 @@ public class VIPActivity extends AppCompatActivity
 
     @Bind(R.id.toolBar)
     Toolbar toolBar;
+    @Bind(R.id.id_vip_crown)
+    SimpleDraweeView idVipCrown;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -38,6 +40,9 @@ public class VIPActivity extends AppCompatActivity
                 onBackPressed();
             }
         });
+
+        Uri uri = Uri.parse("res://com.zzy.frank.www.citylove_master/" + R.drawable.crown);
+        idVipCrown.setImageURI(uri);
     }
 
     @OnClick({R.id.liner_vip, R.id.id_bt_kefu})

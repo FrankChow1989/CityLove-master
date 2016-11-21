@@ -1,24 +1,22 @@
 package com.zzy.frank.www.citylove_master.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.stfalcon.frescoimageviewer.ImageViewer;
 import com.zzy.frank.www.citylove_master.R;
 import com.zzy.frank.www.citylove_master.adapter.GirlsPhotoAdapter;
 import com.zzy.frank.www.citylove_master.adapter.VedioAdapter;
 import com.zzy.frank.www.citylove_master.ui.Dialog_VIP;
-import com.zzy.frank.www.citylove_master.ui.RoundImageView;
-import com.zzy.frank.www.citylove_master.util.DividerItemDecoration;
 import com.zzy.frank.www.citylove_master.util.TimeUtil;
 
 import butterknife.Bind;
@@ -41,10 +39,11 @@ public class HomemmItemActivity extends AppCompatActivity
     @Bind(R.id.id_homemm_photo)
     TextView idHomemmPhoto;
     @Bind(R.id.id_homemm_sayhi)
-    RoundImageView idHomemmSayhi;
+    SimpleDraweeView idHomemmSayhi;
     @Bind(R.id.id_homemm_guanzhu)
-    RoundImageView idHomemmGuanzhu;
-
+    SimpleDraweeView idHomemmGuanzhu;
+    @Bind(R.id.id_homemm_sendletter)
+    SimpleDraweeView id_homemm_sendletter;
     boolean isGuanZhu = false;
     @Bind(R.id.id_homemm_scroll)
     ScrollView idHomemmScroll;
@@ -53,7 +52,7 @@ public class HomemmItemActivity extends AppCompatActivity
     String[] photos, space, data, info, condition;
 
     @Bind(R.id.id_homemm_pic)
-    ImageView idHomemmPic;
+    SimpleDraweeView idHomemmPic;
     @Bind(R.id.id_homemm_date)
     TextView idHomemmDate;
     @Bind(R.id.id_homemm_focus)
@@ -151,10 +150,18 @@ public class HomemmItemActivity extends AppCompatActivity
         idHomemmFriendxueli.setText(condition[3]);
         idHomemmFriendshouru.setText(condition[4]);
 
-        Glide.with(this)
-                .load(pic)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(idHomemmPic);
+        Uri uri3 = Uri.parse(pic);
+        idHomemmPic.setImageURI(uri3);
+
+        Uri uri = Uri.parse("res://com.zzy.frank.www.citylove_master/" + R.drawable.hi);
+        idHomemmSayhi.setImageURI(uri);
+
+        Uri uri1 = Uri.parse("res://com.zzy.frank.www.citylove_master/" + R.drawable.watch);
+        idHomemmGuanzhu.setImageURI(uri1);
+
+        Uri uri2 = Uri.parse("res://com.zzy.frank.www.citylove_master/" + R.drawable.letter);
+        id_homemm_sendletter.setImageURI(uri2);
+
     }
 
     private void initView()
@@ -210,8 +217,12 @@ public class HomemmItemActivity extends AppCompatActivity
             @Override
             public void onItemClick(View view, int position)
             {
-                Dialog_VIP dialogVip = new Dialog_VIP();
-                dialogVip.show(HomemmItemActivity.this);
+//                Dialog_VIP dialogVip = new Dialog_VIP();
+//                dialogVip.show(HomemmItemActivity.this);
+
+                new ImageViewer.Builder(HomemmItemActivity.this, photos)
+                        .setStartPosition(position)
+                        .show();
             }
 
             @Override

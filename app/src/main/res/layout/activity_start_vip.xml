@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -177,14 +178,24 @@
             app:tabTextColor="@color/blacklight"/>
 
 
-        <com.zzy.frank.www.citylove_master.ui.RoundImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/id_startvip_kefu"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="right|bottom"
-            android:src="@drawable/button_kf"
             android:layout_marginBottom="20dp"
             android:layout_marginRight="20dp"
+            fresco:actualImageScaleType="focusCrop"
+            fresco:fadeDuration="300"
+            fresco:failureImage="@drawable/rc_grid_image_error"
+            fresco:failureImageScaleType="centerInside"
+            fresco:placeholderImage="@drawable/rc_grid_image_default"
+            fresco:placeholderImageScaleType="fitCenter"
+            fresco:progressBarImage="@drawable/jiazai_ing"
+            fresco:retryImage="@drawable/icon_retry"
+            fresco:retryImageScaleType="centerCrop"
+            fresco:roundAsCircle="true"
+            fresco:roundedCornerRadius="1dp"
             />
     </FrameLayout>
 

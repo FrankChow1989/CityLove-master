@@ -1,41 +1,33 @@
 package com.zzy.frank.www.citylove_master.adapter;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.drawable.BitmapDrawable;
-import android.os.Build;
-import android.renderscript.Allocation;
-import android.renderscript.RenderScript;
-import android.renderscript.ScriptIntrinsicBlur;
+import android.net.Uri;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
+import com.facebook.common.executors.CallerThreadExecutor;
+import com.facebook.common.references.CloseableReference;
+import com.facebook.datasource.DataSource;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.core.ImagePipeline;
+import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber;
+import com.facebook.imagepipeline.image.CloseableImage;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.zzy.frank.www.citylove_master.R;
-import com.zzy.frank.www.citylove_master.activity.PLVideoTextureActivity;
 import com.zzy.frank.www.citylove_master.bean.ScretItem;
-import com.zzy.frank.www.citylove_master.bean.ScretMsg;
-import com.zzy.frank.www.citylove_master.ui.Dialog_VIP;
-import com.zzy.frank.www.citylove_master.ui.RoundImageView;
 import com.zzy.frank.www.citylove_master.util.StackBlurManager;
 
 import java.util.List;
-
-import retrofit2.http.POST;
 
 /**
  * Created by pc on 2016/11/8.
@@ -83,7 +75,7 @@ public class ScretAdapter extends BaseAdapter
             holder = new VedioItemHolder();
             convertView = mInflater.inflate(R.layout.item_homemm_vedio, parent, false);
 
-            holder.idHomemmSecrtIcon = (RoundImageView) convertView.findViewById(R.id.id_homemm_secrt_icon);
+            holder.idHomemmSecrtIcon = (SimpleDraweeView) convertView.findViewById(R.id.id_homemm_secrt_icon);
             holder.idHomemmSecrtName = (TextView) convertView.findViewById(R.id.id_homemm_secrt_name);
             holder.idHomemmSecrtLocal = (TextView) convertView.findViewById(R.id.id_homemm_secrt_local);
             holder.idHomemmSecrtMessage = (TextView) convertView.findViewById(R.id.id_homemm_secrt_message);
@@ -91,7 +83,7 @@ public class ScretAdapter extends BaseAdapter
             holder.idHomemmSecrtMsg = (TextView) convertView.findViewById(R.id.id_homemm_secrt_msg);
             holder.idHomemmSecrtMsgs = (RecyclerView) convertView.findViewById(R.id.id_homemm_secrt_msgs);
             holder.idHomemmSecrtLinearMsg = (LinearLayout) convertView.findViewById(R.id.id_homemm_secrt_linear_msg);
-            holder.picture = (ImageView) convertView.findViewById(R.id.picture);
+            holder.picture = (SimpleDraweeView) convertView.findViewById(R.id.picture);
             holder.text = (TextView) convertView.findViewById(R.id.text);
 
             convertView.setTag(holder);
@@ -100,10 +92,8 @@ public class ScretAdapter extends BaseAdapter
             holder = (VedioItemHolder) convertView.getTag();
         }
 
-        Glide.with(mContext)
-                .load(mList.get(position).getIcon())
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(holder.idHomemmSecrtIcon);
+        Uri uri = Uri.parse(mList.get(position).getIcon());
+        holder.idHomemmSecrtIcon.setImageURI(uri);
 
         System.out.println("------------------------------:" + mList.get(position).getNickname());
 
@@ -117,33 +107,51 @@ public class ScretAdapter extends BaseAdapter
 //                Dialog_VIP dialogVip = new Dialog_VIP();
 //                dialogVip.show(mContext);
 
-                Intent intent = new Intent();
-                intent.putExtra("videoPath","http://c.tv778.com//videos//1478593540957.mp4");
-                intent.putExtra("mediaCodec", 0);
-                intent.setClass(mContext, PLVideoTextureActivity.class);
-                mContext.startActivity(intent);
+//                Intent intent = new Intent();
+//                intent.putExtra("videoPath","http://c.tv778.com//videos//1478593540957.mp4");
+//                intent.putExtra("mediaCodec", 0);
+//                intent.setClass(mContext, PLVideoTextureActivity.class);
+//                mContext.startActivity(intent);
             }
         });
 
-        Glide.with(mContext).load(mList.get(position).getPic()).asBitmap().into(new SimpleTarget<Bitmap>()
-        {
+//        Glide.with(mContext).load(mList.get(position).getPic()).asBitmap().into(new SimpleTarget<Bitmap>()
+//        {
+//            @Override
+//            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation)
+//            {
+//                //从第三张照片开始模糊
+//                mStackBlurManager = new StackBlurManager(resource);
+//                mStackBlurManager.process(20);
+//                holder.picture.setImageBitmap(mStackBlurManager.returnBlurredImage());
+//            }
+//        });
+
+        ImageRequest imageRequest = ImageRequestBuilder.newBuilderWithSource(Uri.parse(mList.get(position).getPic())).setProgressiveRenderingEnabled(true).build();
+        ImagePipeline imagePipeline = Fresco.getImagePipeline();
+        DataSource<CloseableReference<CloseableImage>> dataSource = imagePipeline.fetchDecodedImage(imageRequest, mContext);
+        dataSource.subscribe(new BaseBitmapDataSubscriber() {
             @Override
-            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation)
-            {
-                //从第三张照片开始模糊
-                mStackBlurManager = new StackBlurManager(resource);
+            public void onNewResultImpl(@Nullable Bitmap bitmap) {
+                // You can use the bitmap in only limited ways
+                // No need to do any cleanup.
+                mStackBlurManager = new StackBlurManager(bitmap);
                 mStackBlurManager.process(20);
                 holder.picture.setImageBitmap(mStackBlurManager.returnBlurredImage());
-            }
-        });
 
+            }
+            @Override
+            public void onFailureImpl(DataSource dataSource) {
+                // No cleanup required here.
+            }
+        }, CallerThreadExecutor.getInstance());
 
         return convertView;
     }
 
     class VedioItemHolder
     {
-        RoundImageView idHomemmSecrtIcon;
+        SimpleDraweeView idHomemmSecrtIcon;
         TextView idHomemmSecrtName;
         TextView idHomemmSecrtLocal;
         TextView idHomemmSecrtMessage;
@@ -151,7 +159,7 @@ public class ScretAdapter extends BaseAdapter
         TextView idHomemmSecrtMsg;
         RecyclerView idHomemmSecrtMsgs;
         LinearLayout idHomemmSecrtLinearMsg;
-        ImageView picture;
+        SimpleDraweeView picture;
         TextView text;
     }
 }

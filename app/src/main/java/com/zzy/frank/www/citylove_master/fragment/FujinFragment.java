@@ -13,10 +13,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.zzy.frank.www.citylove_master.R;
 import com.zzy.frank.www.citylove_master.activity.VIPActivity;
 import com.zzy.frank.www.citylove_master.bean.FuJinMM;
-import com.zzy.frank.www.citylove_master.ui.RoundImageView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -186,7 +186,7 @@ public class FujinFragment extends Fragment
         {
             TextView name;
             TextView content;
-            RoundImageView pic;
+            SimpleDraweeView pic;
             TextView from;
             Button sayhi;
         }

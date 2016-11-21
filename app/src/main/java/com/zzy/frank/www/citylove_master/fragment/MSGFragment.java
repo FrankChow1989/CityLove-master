@@ -2,6 +2,7 @@ package com.zzy.frank.www.citylove_master.fragment;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,12 +13,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jauker.widget.BadgeView;
 import com.zzy.frank.www.citylove_master.PushApplication;
 import com.zzy.frank.www.citylove_master.R;
@@ -28,7 +27,6 @@ import com.zzy.frank.www.citylove_master.activity.VisitActivity;
 import com.zzy.frank.www.citylove_master.bean.ChatMessage;
 import com.zzy.frank.www.citylove_master.bean.User;
 import com.zzy.frank.www.citylove_master.server.SendMsgORAddFriends;
-import com.zzy.frank.www.citylove_master.ui.RoundImageView;
 import com.zzy.frank.www.citylove_master.ui.SwipeListView;
 
 import java.util.HashMap;
@@ -226,6 +224,17 @@ public class MSGFragment extends Fragment implements SendMsgORAddFriends.onNewFr
         LinearLayout ly_visit = (LinearLayout) v.findViewById(R.id.id_chat_visit);
         LinearLayout ly_guanzhu = (LinearLayout) v.findViewById(R.id.id_chat_guanzhu);
 
+        SimpleDraweeView headview_kefu = (SimpleDraweeView) v.findViewById(R.id.id_chathead_kefu);
+        SimpleDraweeView headview_visit = (SimpleDraweeView) v.findViewById(R.id.id_chathead_visit);
+        SimpleDraweeView headview_guanzhu = (SimpleDraweeView) v.findViewById(R.id.id_chathead_guanzhu);
+
+        Uri uri = Uri.parse("res://com.zzy.frank.www.citylove_master/" + R.drawable.icon_msg_hn);
+        Uri uri1 = Uri.parse("res://com.zzy.frank.www.citylove_master/" + R.drawable.icon_near_lf);
+        Uri uri2 = Uri.parse("res://com.zzy.frank.www.citylove_master/" + R.drawable.icon_msg_attention_me);
+        headview_kefu.setImageURI(uri);
+        headview_visit.setImageURI(uri1);
+        headview_guanzhu.setImageURI(uri2);
+
         ly_hongniang.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -323,10 +332,8 @@ public class MSGFragment extends Fragment implements SendMsgORAddFriends.onNewFr
                 viewHolder = (ViewHolder) convertView.getTag();
             }
 
-            Glide.with(getContext())
-                    .load(mList.get(position).getHeadIcon())
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(viewHolder.imageView);
+            Uri uri = Uri.parse(mList.get(position).getHeadIcon());
+            viewHolder.imageView.setImageURI(uri);
 
             viewHolder.tv_title.setText(mList.get(position).getNick());
             viewHolder.tv_msg.setText(mList.get(position).getLastMSG());
@@ -368,7 +375,7 @@ public class MSGFragment extends Fragment implements SendMsgORAddFriends.onNewFr
 
         class ViewHolder
         {
-            RoundImageView imageView;
+            SimpleDraweeView imageView;
             LinearLayout item_left;
             LinearLayout item_right;
 
@@ -381,7 +388,7 @@ public class MSGFragment extends Fragment implements SendMsgORAddFriends.onNewFr
 
             public ViewHolder(View view)
             {
-                imageView = (RoundImageView) view.findViewById(R.id.iv_icon);
+                imageView = (SimpleDraweeView) view.findViewById(R.id.iv_icon);
                 item_left = (LinearLayout)view.findViewById(R.id.item_left);
                 item_right = (LinearLayout)view.findViewById(R.id.item_right);
 

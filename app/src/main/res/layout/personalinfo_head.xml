@@ -2,16 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="150dp"
+              xmlns:fresco="http://schemas.android.com/apk/res-auto"
               android:background="@color/colorPrimary">
 
-    <com.zzy.frank.www.citylove_master.ui.RoundImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/personal_info_pic"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
         android:layout_margin="10dp"
         android:layout_weight="2"
-        android:src="@drawable/h7"/>
+        fresco:actualImageScaleType="focusCrop"
+        fresco:fadeDuration="300"
+        fresco:failureImage="@drawable/rc_grid_image_error"
+        fresco:failureImageScaleType="centerInside"
+        fresco:placeholderImage="@drawable/rc_grid_image_default"
+        fresco:placeholderImageScaleType="fitCenter"
+        fresco:progressBarImage="@drawable/jiazai_ing"
+        fresco:retryImage="@drawable/icon_retry"
+        fresco:retryImageScaleType="centerCrop"
+        fresco:roundAsCircle="true"
+        fresco:roundedCornerRadius="1dp"
+        />
 
     <TextView
         android:layout_width="120dp"

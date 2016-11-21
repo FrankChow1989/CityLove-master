@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.text.SpannableString;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -11,13 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.stfalcon.frescoimageviewer.ImageViewer;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.zzy.frank.www.citylove_master.R;
 import com.zzy.frank.www.citylove_master.Recorder.MediaManager;
 import com.zzy.frank.www.citylove_master.activity.ChattingSeePicActivity;
@@ -106,7 +104,7 @@ public class ChatMessageAdapter extends BaseAdapter
                         .findViewById(R.id.chat_from_createDate);
                 viewHolder.content = (TextView) convertView
                         .findViewById(R.id.chat_from_content);
-                viewHolder.imageView = (ImageView) convertView.findViewById(R.id.chat_from_content_pic);
+                viewHolder.imageView = (SimpleDraweeView) convertView.findViewById(R.id.chat_from_content_pic);
                 viewHolder.relativeLayout = (RelativeLayout) convertView.findViewById(R.id.chat_from_relative);
                 viewHolder.relativeLayout_pic = (RelativeLayout) convertView.findViewById(R.id.chat_from_relative_pic);
                 viewHolder.relativeLayout_record = (RelativeLayout) convertView.findViewById(R.id.chat_from_relative_record);
@@ -128,11 +126,8 @@ public class ChatMessageAdapter extends BaseAdapter
                     viewHolder.relativeLayout_pic.setVisibility(View.VISIBLE);
                     viewHolder.relativeLayout_record.setVisibility(View.GONE);
 
-                    System.out.println("-------position--------:" + position);
-                    Glide.with(context)
-                            .load(mDatas.get(position).getPic_msg())
-                            .diskCacheStrategy(DiskCacheStrategy.ALL)
-                            .into(viewHolder.imageView);
+                    Uri uri = Uri.parse(mDatas.get(position).getPic_msg());
+                    viewHolder.imageView.setImageURI(uri);
 
                     viewHolder.imageView.setOnClickListener(new View.OnClickListener()
                     {
@@ -276,7 +271,7 @@ public class ChatMessageAdapter extends BaseAdapter
         public RelativeLayout relativeLayout_record;
         public TextView createDate;
         public TextView content;
-        public ImageView imageView;
+        public SimpleDraweeView imageView;
         TextView seconds;
 
         View length;

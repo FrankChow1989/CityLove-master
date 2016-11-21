@@ -113,7 +113,7 @@ public class SendMsgORAddFriends extends Service
                 // 漏网之鱼
                 if (user == null)
                 {
-                    user = new User("000" + id, "1", "", "媚儿", R.drawable.h7, 1);
+                    user = new User("000" + id, "1", "", "媚儿", "https://oetlj49uy.qnssl.com/ce.jpg", 1);
                     userDB.addUser(user);
                     // 将新来的消息进行存储
                     msgs = new ChatMessage("哈哈", "https://oetlj49uy.qnssl.com/ce.jpg", 4, "", true, "000" + id, R.drawable.h7, "" + random.nextInt(3), "媚儿", false, TimeUtil.getTime(System.currentTimeMillis()));

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -23,13 +24,23 @@
             android:layout_weight="1.8"
             android:orientation="vertical">
 
-            <com.zzy.frank.www.citylove_master.ui.RoundImageView
+            <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/id_tellthem_pic"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:src="@drawable/h7"
+                fresco:actualImageScaleType="focusCrop"
+                fresco:fadeDuration="300"
+                fresco:failureImage="@drawable/rc_grid_image_error"
+                fresco:failureImageScaleType="centerInside"
+                fresco:placeholderImage="@drawable/rc_grid_image_default"
+                fresco:placeholderImageScaleType="fitCenter"
+                fresco:progressBarImage="@drawable/jiazai_ing"
+                fresco:retryImage="@drawable/icon_retry"
+                fresco:retryImageScaleType="centerCrop"
+                fresco:roundAsCircle="true"
+                fresco:roundedCornerRadius="1dp"
                 />
 
             <TextView
@@ -69,11 +80,21 @@
                 android:layout_weight="1"
                 >
 
-                <com.zzy.frank.www.citylove_master.ui.RoundImageView
+                <com.facebook.drawee.view.SimpleDraweeView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/h7"
+                    fresco:actualImageScaleType="focusCrop"
+                    fresco:fadeDuration="300"
+                    fresco:failureImage="@drawable/rc_grid_image_error"
+                    fresco:failureImageScaleType="centerInside"
+                    fresco:placeholderImage="@drawable/rc_grid_image_default"
+                    fresco:placeholderImageScaleType="fitCenter"
+                    fresco:progressBarImage="@drawable/jiazai_ing"
+                    fresco:retryImage="@drawable/icon_retry"
+                    fresco:retryImageScaleType="centerCrop"
+                    fresco:roundAsCircle="true"
+                    fresco:roundedCornerRadius="1dp"
                     />
 
                 <LinearLayout
@@ -179,11 +200,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="40dp"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="5dp"
                         android:layout_weight="2"
                         android:background="@drawable/bg_tellthem4"
-                        android:gravity="top|center"
-                        android:paddingTop="4dp"
+                        android:gravity="center"
                         android:text="在线"
                         android:textColor="@android:color/white"
                         android:textSize="10dp"
@@ -203,11 +223,21 @@
                 android:layout_weight="1"
                 >
 
-                <com.zzy.frank.www.citylove_master.ui.RoundImageView
+                <com.facebook.drawee.view.SimpleDraweeView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/h7"
+                    fresco:actualImageScaleType="focusCrop"
+                    fresco:fadeDuration="300"
+                    fresco:failureImage="@drawable/rc_grid_image_error"
+                    fresco:failureImageScaleType="centerInside"
+                    fresco:placeholderImage="@drawable/rc_grid_image_default"
+                    fresco:placeholderImageScaleType="fitCenter"
+                    fresco:progressBarImage="@drawable/jiazai_ing"
+                    fresco:retryImage="@drawable/icon_retry"
+                    fresco:retryImageScaleType="centerCrop"
+                    fresco:roundAsCircle="true"
+                    fresco:roundedCornerRadius="1dp"
                     />
 
                 <LinearLayout
@@ -313,11 +343,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="40dp"
-                        android:layout_marginTop="3dp"
+                        android:layout_marginTop="5dp"
                         android:layout_weight="2"
                         android:background="@drawable/bg_tellthem4"
-                        android:gravity="top|center"
-                        android:paddingTop="4dp"
+                        android:gravity="center"
                         android:text="在线"
                         android:textColor="@android:color/white"
                         android:textSize="10dp"
@@ -337,11 +366,21 @@
                 android:layout_weight="1"
                 >
 
-                <com.zzy.frank.www.citylove_master.ui.RoundImageView
+                <com.facebook.drawee.view.SimpleDraweeView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/h7"
+                    fresco:actualImageScaleType="focusCrop"
+                    fresco:fadeDuration="300"
+                    fresco:failureImage="@drawable/rc_grid_image_error"
+                    fresco:failureImageScaleType="centerInside"
+                    fresco:placeholderImage="@drawable/rc_grid_image_default"
+                    fresco:placeholderImageScaleType="fitCenter"
+                    fresco:progressBarImage="@drawable/jiazai_ing"
+                    fresco:retryImage="@drawable/icon_retry"
+                    fresco:retryImageScaleType="centerCrop"
+                    fresco:roundAsCircle="true"
+                    fresco:roundedCornerRadius="1dp"
                     />
 
                 <LinearLayout
@@ -447,11 +486,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="40dp"
-                        android:layout_marginTop="3dp"
+                        android:layout_marginTop="5dp"
                         android:layout_weight="2"
                         android:background="@drawable/bg_tellthem4"
-                        android:gravity="top|center"
-                        android:paddingTop="4dp"
+                        android:gravity="center"
                         android:text="在线"
                         android:textColor="@android:color/white"
                         android:textSize="10dp"
@@ -471,11 +509,21 @@
                 android:layout_weight="1"
                 >
 
-                <com.zzy.frank.www.citylove_master.ui.RoundImageView
+                <com.facebook.drawee.view.SimpleDraweeView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/h7"
+                    fresco:actualImageScaleType="focusCrop"
+                    fresco:fadeDuration="300"
+                    fresco:failureImage="@drawable/rc_grid_image_error"
+                    fresco:failureImageScaleType="centerInside"
+                    fresco:placeholderImage="@drawable/rc_grid_image_default"
+                    fresco:placeholderImageScaleType="fitCenter"
+                    fresco:progressBarImage="@drawable/jiazai_ing"
+                    fresco:retryImage="@drawable/icon_retry"
+                    fresco:retryImageScaleType="centerCrop"
+                    fresco:roundAsCircle="true"
+                    fresco:roundedCornerRadius="1dp"
                     />
 
                 <LinearLayout
@@ -581,11 +629,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="40dp"
-                        android:layout_marginTop="3dp"
+                        android:layout_marginTop="5dp"
                         android:layout_weight="2"
                         android:background="@drawable/bg_tellthem4"
-                        android:gravity="top|center"
-                        android:paddingTop="4dp"
+                        android:gravity="center"
                         android:text="在线"
                         android:textColor="@android:color/white"
                         android:textSize="10dp"

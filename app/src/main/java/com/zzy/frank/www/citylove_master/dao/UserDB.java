@@ -26,7 +26,7 @@ public class UserDB
                 new String[]{userId + ""});
         if (c.moveToFirst())
         {
-            u.setHeadIcon(c.getInt(c.getColumnIndex("img")));
+            u.setHeadIcon(c.getString(c.getColumnIndex("img")));
             u.setNick(c.getString(c.getColumnIndex("nick")));
             u.setLastMSG(c.getString(c.getColumnIndex("lastmsg")));
             u.setChannelId(c.getString(c.getColumnIndex("channelId")));
@@ -78,7 +78,7 @@ public class UserDB
             u.setUserId(c.getString(c.getColumnIndex("userId")));
             u.setNick(c.getString(c.getColumnIndex("nick")));
             u.setLastMSG(c.getString(c.getColumnIndex("lastmsg")));
-            u.setHeadIcon(c.getInt(c.getColumnIndex("img")));
+            u.setHeadIcon(c.getString(c.getColumnIndex("img")));
             u.setChannelId(c.getString(c.getColumnIndex("channelId")));
             u.setGroup(c.getInt(c.getColumnIndex("_group")));
         }
@@ -105,7 +105,7 @@ public class UserDB
             u.setUserId(c.getString(c.getColumnIndex("userId")));
             u.setNick(c.getString(c.getColumnIndex("nick")));
             u.setLastMSG(c.getString(c.getColumnIndex("lastmsg")));
-            u.setHeadIcon(c.getInt(c.getColumnIndex("img")));
+            u.setHeadIcon(c.getString(c.getColumnIndex("img")));
             u.setChannelId(c.getString(c.getColumnIndex("channelId")));
             u.setGroup(c.getInt(c.getColumnIndex("_group")));
             list.add(u);
@@ -150,7 +150,7 @@ public class UserDB
             u.setUserId(c.getString(c.getColumnIndex("userId")));
             u.setNick(c.getString(c.getColumnIndex("nick")));
             u.setLastMSG(c.getString(c.getColumnIndex("lastmsg")));
-            u.setHeadIcon(c.getInt(c.getColumnIndex("img")));
+            u.setHeadIcon(c.getString(c.getColumnIndex("img")));
             u.setChannelId(c.getString(c.getColumnIndex("channelId")));
             u.setGroup(c.getInt(c.getColumnIndex("_group")));
         }

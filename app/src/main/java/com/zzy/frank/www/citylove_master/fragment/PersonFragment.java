@@ -15,8 +15,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jph.takephoto.app.TakePhoto;
 import com.jph.takephoto.app.TakePhotoFragment;
 import com.jph.takephoto.compress.CompressConfig;
@@ -33,7 +32,6 @@ import com.zzy.frank.www.citylove_master.activity.VIPActivity;
 import com.zzy.frank.www.citylove_master.activity.VIPUpdateActivity;
 import com.zzy.frank.www.citylove_master.activity.VisitActivity;
 import com.zzy.frank.www.citylove_master.activity.ZhengyouIfActivity;
-import com.zzy.frank.www.citylove_master.ui.RoundImageView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -47,7 +45,7 @@ import butterknife.OnClick;
 public class PersonFragment extends TakePhotoFragment implements View.OnClickListener
 {
     View view;
-    RoundImageView imageView;
+    SimpleDraweeView imageView;
     Uri imageUri;
 
     AlertDialog dialog;
@@ -70,12 +68,10 @@ public class PersonFragment extends TakePhotoFragment implements View.OnClickLis
         sp = getActivity().getSharedPreferences("user", getActivity().MODE_PRIVATE);
         editor = sp.edit();
         String pic = sp.getString("headpic", "");
-        imageView = (RoundImageView) view.findViewById(R.id.id_per_head);
-        Glide.with(this)
-                .load(pic)
-                .error(R.drawable.icon_center_header)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(imageView);
+        imageView = (SimpleDraweeView) view.findViewById(R.id.id_per_head);
+
+        Uri uri = Uri.parse(pic);
+        imageView.setImageURI(uri);
 
         File file = new File(Environment.getExternalStorageDirectory(), "/temp/" + System.currentTimeMillis() + ".jpg");
         if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
@@ -95,10 +91,8 @@ public class PersonFragment extends TakePhotoFragment implements View.OnClickLis
 
     private void showImg(ArrayList<TImage> images)
     {
-        Glide.with(this)
-                .load(images.get(0).getPath())
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(imageView);
+        Uri uri = Uri.parse(images.get(0).getPath());
+        imageView.setImageURI(uri);
 
         editor.putString("headpic", images.get(0).getPath());
         editor.commit();

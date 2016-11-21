@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:fresco="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -59,13 +60,23 @@
                 android:orientation="horizontal"
                 >
 
-                <com.zzy.frank.www.citylove_master.ui.RoundImageView
+                <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/id_per_head"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="20dp"
-                    android:src="@drawable/icon_center_header"/>
+                    fresco:actualImageScaleType="focusCrop"
+                    fresco:fadeDuration="300"
+                    fresco:failureImage="@drawable/icon_center_header"
+                    fresco:failureImageScaleType="centerInside"
+                    fresco:placeholderImage="@drawable/icon_center_header"
+                    fresco:placeholderImageScaleType="fitCenter"
+                    fresco:progressBarImage="@drawable/jiazai_ing"
+                    fresco:retryImage="@drawable/icon_retry"
+                    fresco:retryImageScaleType="centerCrop"
+                    fresco:roundAsCircle="true"
+                    fresco:roundedCornerRadius="1dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -91,8 +102,8 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="left|center"
-                        android:paddingLeft="10dp"
                         android:paddingBottom="20dp"
+                        android:paddingLeft="10dp"
                         android:text="ID 11410"
                         android:textSize="16dp"
                         />

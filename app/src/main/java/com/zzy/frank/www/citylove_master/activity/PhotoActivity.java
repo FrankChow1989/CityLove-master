@@ -76,13 +76,6 @@ public class PhotoActivity extends TakePhotoActivity
                 if (position == 0)
                 {
                     ShowDialog();
-                } else
-                {
-                    System.out.println(user_pics.length);
-
-                    new ImageViewer.Builder(PhotoActivity.this, user_pics)
-                            .setStartPosition(position)
-                            .show();
                 }
             }
 

@@ -8,12 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.zzy.frank.www.citylove_master.R;
 import com.zzy.frank.www.citylove_master.bean.Grils;
-import com.zzy.frank.www.citylove_master.ui.RoundImageView;
 
 import java.util.List;
 
@@ -64,11 +61,6 @@ public class HomeAdapter extends RecyclerView.Adapter
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position)
     {
         HomemmViewHolder homemmViewHolder = (HomemmViewHolder) holder;
-
-//        Glide.with(context)
-//                .load(mList.get(position).getIcon())
-//                .diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.jiazai_ing).crossFade()
-//                .into(homemmViewHolder.idItemHomemmPic);
 
         Uri uri = Uri.parse(mList.get(position).getIcon());
         homemmViewHolder.idItemHomemmPic.setImageURI(uri);
