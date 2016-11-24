@@ -105,8 +105,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1.6"
+        android:layout_height="220dp"
         android:orientation="vertical">
 
         <TextView
@@ -165,7 +164,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1.5"
         android:orientation="vertical"
         >
 
@@ -178,16 +176,16 @@
             android:text="186解锁了该视频，获得了4599613朵鲜花"
             android:textColor="@color/red"/>
 
-        <android.support.v7.widget.RecyclerView
+        <ListView
             android:id="@+id/id_homemm_secrt_msgs"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="200dp"
             android:layout_marginLeft="60dp"
             android:layout_marginRight="20dp"
-            android:layout_weight="2"
             android:background="@color/bg_pinglun"
             android:scrollbars="none"
-            ></android.support.v7.widget.RecyclerView>
+            android:divider="#00000000"
+            ></ListView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -249,9 +247,5 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="2.2"></LinearLayout>
 
 </LinearLayout>

@@ -4,13 +4,13 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.facebook.common.executors.CallerThreadExecutor;
@@ -29,6 +29,9 @@ import com.zzy.frank.www.citylove_master.util.StackBlurManager;
 
 import java.util.List;
 
+import fm.jiecao.jcvideoplayer_lib.JCFullScreenActivity;
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
+
 /**
  * Created by pc on 2016/11/8.
  */
@@ -38,12 +41,15 @@ public class ScretAdapter extends BaseAdapter
     private Activity mContext;
     private LayoutInflater mInflater;
     private StackBlurManager mStackBlurManager;
+    private CommentAdapter mCommentAdapter;
 
     public ScretAdapter(List<ScretItem> mList, Activity mContext)
     {
         this.mList = mList;
         this.mContext = mContext;
         this.mInflater = LayoutInflater.from(mContext);
+
+        System.out.println("----------msgs----------:"+mList.get(2).getMsgs().size());
     }
 
     @Override
@@ -81,9 +87,9 @@ public class ScretAdapter extends BaseAdapter
             holder.idHomemmSecrtMessage = (TextView) convertView.findViewById(R.id.id_homemm_secrt_message);
             holder.idHomemmSecrtPhoto = (ImageView) convertView.findViewById(R.id.id_homemm_secrt_photo);
             holder.idHomemmSecrtMsg = (TextView) convertView.findViewById(R.id.id_homemm_secrt_msg);
-            holder.idHomemmSecrtMsgs = (RecyclerView) convertView.findViewById(R.id.id_homemm_secrt_msgs);
             holder.idHomemmSecrtLinearMsg = (LinearLayout) convertView.findViewById(R.id.id_homemm_secrt_linear_msg);
             holder.picture = (SimpleDraweeView) convertView.findViewById(R.id.picture);
+            holder.mScrollDisabledListView = (ListView) convertView.findViewById(R.id.id_homemm_secrt_msgs);
             holder.text = (TextView) convertView.findViewById(R.id.text);
 
             convertView.setTag(holder);
@@ -104,17 +110,22 @@ public class ScretAdapter extends BaseAdapter
             @Override
             public void onClick(View v)
             {
+
 //                Dialog_VIP dialogVip = new Dialog_VIP();
 //                dialogVip.show(mContext);
 
 //                Intent intent = new Intent();
 //                intent.putExtra("videoPath","http://c.tv778.com//videos//1478593540957.mp4");
-//                intent.putExtra("mediaCodec", 0);
-//                intent.setClass(mContext, PLVideoTextureActivity.class);
+//                intent.setClass(mContext, PLVideoScretActivity.class);
 //                mContext.startActivity(intent);
+
+                JCFullScreenActivity.startActivity(mContext,
+                        "http://c.tv778.com//videos//1478593540957.mp4",
+                        JCVideoPlayerStandard.class, "嫂子真牛逼");
+
+
             }
         });
-
 //        Glide.with(mContext).load(mList.get(position).getPic()).asBitmap().into(new SimpleTarget<Bitmap>()
 //        {
 //            @Override
@@ -146,18 +157,21 @@ public class ScretAdapter extends BaseAdapter
             }
         }, CallerThreadExecutor.getInstance());
 
+        mCommentAdapter = new CommentAdapter(mContext,mList.get(position).getMsgs());
+        holder.mScrollDisabledListView.setAdapter(mCommentAdapter);
+
         return convertView;
     }
 
     class VedioItemHolder
     {
+        ListView mScrollDisabledListView;
         SimpleDraweeView idHomemmSecrtIcon;
         TextView idHomemmSecrtName;
         TextView idHomemmSecrtLocal;
         TextView idHomemmSecrtMessage;
         ImageView idHomemmSecrtPhoto;
         TextView idHomemmSecrtMsg;
-        RecyclerView idHomemmSecrtMsgs;
         LinearLayout idHomemmSecrtLinearMsg;
         SimpleDraweeView picture;
         TextView text;

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="25dp">
+
+    <TextView
+        android:id="@+id/id_scret_comment_name"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:gravity="left|center"
+        android:paddingLeft="8dp"
+        android:text="骚年别哭，站着撸"
+        android:textColor="@color/blue_light"
+        android:textSize="12dp"/>
+
+    <TextView
+        android:id="@+id/id_scret_comment_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_toRightOf="@id/id_scret_comment_name"
+        android:gravity="left|center"
+        android:singleLine="true"
+        android:text=":雅蠛蝶雅蠛蝶雅蠛蝶雅蠛蝶雅蠛蝶雅蠛蝶雅蠛蝶雅蠛蝶"
+        android:textColor="@android:color/black"
+        android:textSize="12dp"
+        />
+
+</RelativeLayout>

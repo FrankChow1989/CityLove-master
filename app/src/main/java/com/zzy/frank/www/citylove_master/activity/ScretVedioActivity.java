@@ -60,15 +60,6 @@ public class ScretVedioActivity extends AppCompatActivity
         Intent intent = getIntent();
 
         mList = new ArrayList<>();
-        scretMsgs = new ArrayList<>();
-
-        for (int i = 0; i < 4; i++)
-        {
-            ScretMsg scretMsg = new ScretMsg();
-            scretMsg.setSectname("日后再说");
-            scretMsg.setSectmsg("出来吗？我就在你附近");
-            scretMsgs.add(scretMsg);
-        }
 
         for (int i = 0; i < 4; i++)
         {
@@ -78,6 +69,14 @@ public class ScretVedioActivity extends AppCompatActivity
             scretItem.setAddr(intent.getStringExtra("addr"));
             scretItem.setAge(intent.getStringExtra("age"));
             scretItem.setPic("https://oetlj49uy.qnssl.com/001.jpg");
+            scretMsgs = new ArrayList<>();
+            for (int j = 0; j < 10; j++)
+            {
+                ScretMsg scretMsg = new ScretMsg();
+                scretMsg.setSectname("日后再说");
+                scretMsg.setSectmsg(":出来吗？我就在你附近");
+                scretMsgs.add(scretMsg);
+            }
             scretItem.setMsgs(scretMsgs);
             mList.add(scretItem);
         }

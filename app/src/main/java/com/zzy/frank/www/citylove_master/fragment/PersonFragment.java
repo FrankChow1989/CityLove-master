@@ -70,7 +70,7 @@ public class PersonFragment extends TakePhotoFragment implements View.OnClickLis
         String pic = sp.getString("headpic", "");
         imageView = (SimpleDraweeView) view.findViewById(R.id.id_per_head);
 
-        Uri uri = Uri.parse(pic);
+        Uri uri = Uri.parse("file://" + pic);
         imageView.setImageURI(uri);
 
         File file = new File(Environment.getExternalStorageDirectory(), "/temp/" + System.currentTimeMillis() + ".jpg");
@@ -91,7 +91,7 @@ public class PersonFragment extends TakePhotoFragment implements View.OnClickLis
 
     private void showImg(ArrayList<TImage> images)
     {
-        Uri uri = Uri.parse(images.get(0).getPath());
+        Uri uri = Uri.parse("file://" + images.get(0).getPath());
         imageView.setImageURI(uri);
 
         editor.putString("headpic", images.get(0).getPath());

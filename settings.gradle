@@ -1,2 +1,2 @@
-include ':app', ':frescoimageviewer', ':takephoto_library'
+include ':app', ':frescoimageviewer', ':takephoto_library', ':jcvideoplayer-lib'
 include ':badgeView'
