@@ -29,11 +29,8 @@ public class PhotoAdapter extends RecyclerView.Adapter
     //Onclik接口
     public interface OnItemClickListener
     {
-
         void onItemClick(View view, int position);
-
         void onItemLongClick(View view, int position);
-
     }
 
     private OnItemClickListener mOnItemClickListener;
@@ -80,9 +77,6 @@ public class PhotoAdapter extends RecyclerView.Adapter
             Uri uri = Uri.parse("file://" + photos.get(position).getLocal_photo());
             photoViewHolder.idItemPhoto.setImageURI(uri);
         }
-
-        System.out.println("------loacal------" + photos.get(position).getLocal_photo());
-
         setUpItemEvent(photoViewHolder);
     }
 
@@ -101,14 +95,12 @@ public class PhotoAdapter extends RecyclerView.Adapter
                 @Override
                 public void onClick(View v)
                 {
-
                     int layoutpostion = holder.getLayoutPosition();
                     mOnItemClickListener.onItemClick(holder.itemView, layoutpostion);
                 }
             });
 
             //longclick
-
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener()
             {
                 @Override
