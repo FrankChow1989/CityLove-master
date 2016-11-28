@@ -13,6 +13,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RxService
 {
     private static final String BASETESTURL = "https://oetlj49uy.qnssl.com/";
+    private static final String KEFUURL = "http://www.tuling123.com/";
+
+
    /* private static OkHttpClient okHttpClient = new OkHttpClient();
     private static Retrofit retrofit = new Retrofit.Builder().baseUrl(BASETESTURL).client(okHttpClient)
             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())//RxJava适配器
@@ -35,6 +38,7 @@ public class RxService
     }*/
 
     private static GrilsApi mGrilsApi;
+    private static KeFuApi mKeFuApi;
     private static OkHttpClient okHttpClient = new OkHttpClient();
     private static Converter.Factory gsonConverterFactory = GsonConverterFactory.create();
     private static CallAdapter.Factory rxJavaCallAdapterFactory = RxJavaCallAdapterFactory.create();
@@ -54,5 +58,21 @@ public class RxService
             mGrilsApi = retrofit.create(GrilsApi.class);
         }
         return mGrilsApi;
+    }
+
+    public static KeFuApi getKefuApi()
+    {
+
+        if (mKeFuApi == null)
+        {
+            Retrofit retrofit = new Retrofit.Builder()
+                    .client(okHttpClient)
+                    .baseUrl(KEFUURL)
+                    .addConverterFactory(gsonConverterFactory)
+                    .addCallAdapterFactory(rxJavaCallAdapterFactory)
+                    .build();
+            mKeFuApi = retrofit.create(KeFuApi.class);
+        }
+        return mKeFuApi;
     }
 }

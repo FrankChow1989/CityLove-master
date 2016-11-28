@@ -109,7 +109,6 @@ public class PhotoAdapter extends RecyclerView.Adapter
 
                     int layoutpostion = holder.getLayoutPosition();
                     mOnItemClickListener.onItemLongClick(holder.itemView, layoutpostion);
-
                     return false;
                 }
             });

@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right|center"
         android:layout_marginTop="10dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -64,7 +64,7 @@
                 fresco:progressBarImage="@drawable/jiazai_ing"
                 fresco:retryImage="@drawable/icon_retry"
                 fresco:retryImageScaleType="centerCrop"
-                fresco:roundAsCircle="false"
+                fresco:roundAsCircle="true"
                 fresco:roundedCornerRadius="1dp"
                 />
         </LinearLayout>
@@ -75,6 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="right|center"
+        android:visibility="gone"
         android:orientation="horizontal">
 
         <LinearLayout

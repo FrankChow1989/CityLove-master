@@ -1,6 +1,8 @@
 package com.zzy.frank.www.citylove_master.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,11 +28,15 @@ public class KefuChattingAdpter extends BaseAdapter
     private LayoutInflater layoutInflater;
     private int tid;
 
+    SharedPreferences sp;
+
     public KefuChattingAdpter(List<KeFuBean> mList, Context context)
     {
         this.mList = mList;
         this.context = context;
         layoutInflater = LayoutInflater.from(context);
+
+        sp = context.getSharedPreferences("user", context.MODE_PRIVATE);
     }
 
     @Override
@@ -66,6 +72,9 @@ public class KefuChattingAdpter extends BaseAdapter
                     .findViewById(R.id.chat_from_content);
             holder.imageView = (ImageView) convertView.findViewById(R.id.chat_from_icon);
 
+            Uri uri = Uri.parse("res://com.zzy.frank.www.citylove_master/" + R.drawable.button_kf);
+            holder.imageView.setImageURI(uri);
+
             convertView.setTag(holder);
 
         } else
@@ -78,8 +87,11 @@ public class KefuChattingAdpter extends BaseAdapter
                     .findViewById(R.id.chat_send_content);
             holder.imageView = (ImageView) convertView.findViewById(R.id.chat_send_icon);
 
-            convertView.setTag(holder);
+            String pic = sp.getString("headpic", "");
+            Uri uri = Uri.parse("file://" + pic);
+            holder.imageView.setImageURI(uri);
 
+            convertView.setTag(holder);
         }
 
         holder.time.setText(mList.get(position).getDateStr());

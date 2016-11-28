@@ -1,5 +1,6 @@
 package com.zzy.frank.www.citylove_master.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,8 +16,12 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.zzy.frank.www.citylove_master.R;
+import com.zzy.frank.www.citylove_master.adapter.HomeAdapter;
 import com.zzy.frank.www.citylove_master.adapter.KefuChattingAdpter;
+import com.zzy.frank.www.citylove_master.api.RxService;
+import com.zzy.frank.www.citylove_master.bean.Grils;
 import com.zzy.frank.www.citylove_master.bean.KeFuBean;
+import com.zzy.frank.www.citylove_master.bean.KeFuCode;
 import com.zzy.frank.www.citylove_master.face.FaceRelativeLayout;
 import com.zzy.frank.www.citylove_master.face.FaceRelativeLayoutKeFu;
 import com.zzy.frank.www.citylove_master.util.T;
@@ -34,6 +39,9 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class KefuChattingActivity extends AppCompatActivity
 {
@@ -192,41 +200,49 @@ public class KefuChattingActivity extends AppCompatActivity
      */
     public void getDataFromServer()
     {
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("key", KEY_STRING);
-        params.put("info", sendMessage);
+//        Map<String, String> params = new HashMap<String, String>();
+//        params.put("key", KEY_STRING);
+//        params.put("info", sendMessage);
+//
+//        VolleyRequest.RequestPost(this, API, "abcPost", params, new VolleyInterface(this,
+//                VolleyInterface.mSuccessListener, VolleyInterface.mErrorListener)
+//        {
+//            @Override
+//            public void onMySuccess(String result)
+//            {
+//                paresData(result);
+//            }
+//
+//            @Override
+//            public void onMyError(VolleyError error)
+//            {
+//                showData("主人，您的网络有问题哦");
+//            }
+//        });
 
-        VolleyRequest.RequestPost(this, API, "abcPost", params, new VolleyInterface(this,
-                VolleyInterface.mSuccessListener, VolleyInterface.mErrorListener)
-        {
-            @Override
-            public void onMySuccess(String result)
-            {
-                paresData(result);
-            }
+        RxService.getKefuApi().getKefu(KEY_STRING, sendMessage)
+                .subscribeOn(Schedulers.io())//在非UI线程中获取数据
+                .observeOn(AndroidSchedulers.mainThread())//在UI线程中执行更新UI
+                .subscribe(new Observer<KeFuCode>()
+                {
+                    @Override
+                    public void onCompleted()
+                    {
 
-            @Override
-            public void onMyError(VolleyError error)
-            {
-                showData("主人，您的网络有问题哦");
-            }
-        });
-    }
+                    }
 
+                    @Override
+                    public void onError(Throwable e)
+                    {
+                        showData("主人，你的网络不好哦");
+                    }
 
-    private void paresData(String jb)
-    {  //解析返回的json数据
-        try
-        {
-            JSONObject jsonObject = new JSONObject(jb);
-            String content = jsonObject.getString("text"); //获取的机器人信息
-            int code = jsonObject.getInt("code");//服务器状态码
-            updateView(code, content); //更新界面
-        } catch (JSONException e)
-        {
-            e.printStackTrace();
-            showData("主人，你的网络不好哦");
-        }
+                    @Override
+                    public void onNext(KeFuCode keFuCode)
+                    {
+                        updateView(keFuCode.getCode(), keFuCode.getText());
+                    }
+                });
     }
 
     private void showData(String message)

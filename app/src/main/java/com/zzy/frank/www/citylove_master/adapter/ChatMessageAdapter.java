@@ -2,6 +2,7 @@ package com.zzy.frank.www.citylove_master.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -39,6 +40,8 @@ public class ChatMessageAdapter extends BaseAdapter
     private int mMinItemWidth;
     private int mMaxItemWidth;
 
+    SharedPreferences sp;
+
     public ChatMessageAdapter(Context context, List<ChatMessage> datas)
     {
         this.context = context;
@@ -54,6 +57,8 @@ public class ChatMessageAdapter extends BaseAdapter
 
         mMaxItemWidth = (int) (outMetrics.widthPixels * 0.7f);
         mMinItemWidth = (int) (outMetrics.widthPixels * 0.15f);
+
+        sp = context.getSharedPreferences("user", context.MODE_PRIVATE);
     }
 
     @Override
@@ -108,6 +113,9 @@ public class ChatMessageAdapter extends BaseAdapter
                 viewHolder.relativeLayout = (RelativeLayout) convertView.findViewById(R.id.chat_from_relative);
                 viewHolder.relativeLayout_pic = (RelativeLayout) convertView.findViewById(R.id.chat_from_relative_pic);
                 viewHolder.relativeLayout_record = (RelativeLayout) convertView.findViewById(R.id.chat_from_relative_record);
+                viewHolder.head_pic1 = (SimpleDraweeView) convertView.findViewById(R.id.chat_from_icon);
+                viewHolder.head_pic2 = (SimpleDraweeView) convertView.findViewById(R.id.chat_from_icon_pic);
+                viewHolder.head_pic3 = (SimpleDraweeView) convertView.findViewById(R.id.chat_from_icon_record);
 
                 viewHolder.seconds = (TextView) convertView.findViewById(R.id.id_recorder_time);
                 viewHolder.length = convertView.findViewById(R.id.id_recorder_length);
@@ -118,6 +126,8 @@ public class ChatMessageAdapter extends BaseAdapter
                     viewHolder.relativeLayout_pic.setVisibility(View.GONE);
                     viewHolder.relativeLayout_record.setVisibility(View.GONE);
 
+                    Uri uri = Uri.parse("res://com.zzy.frank.www.citylove_master/" + mDatas.get(position).getIcon());
+                    viewHolder.head_pic1.setImageURI(uri);
                     viewHolder.content.setText(chatMessage.getMessage());
                     viewHolder.createDate.setText(chatMessage.getDateStr());
                 } else if ("1".equals(mDatas.get(position).getMsgType()))
@@ -125,6 +135,9 @@ public class ChatMessageAdapter extends BaseAdapter
                     viewHolder.relativeLayout.setVisibility(View.GONE);
                     viewHolder.relativeLayout_pic.setVisibility(View.VISIBLE);
                     viewHolder.relativeLayout_record.setVisibility(View.GONE);
+
+                    Uri uri1 = Uri.parse("res://com.zzy.frank.www.citylove_master/" + mDatas.get(position).getIcon());
+                    viewHolder.head_pic2.setImageURI(uri1);
 
                     Uri uri = Uri.parse(mDatas.get(position).getPic_msg());
                     viewHolder.imageView.setImageURI(uri);
@@ -149,6 +162,8 @@ public class ChatMessageAdapter extends BaseAdapter
                     viewHolder.relativeLayout_pic.setVisibility(View.GONE);
                     viewHolder.relativeLayout_record.setVisibility(View.VISIBLE);
 
+                    Uri uri = Uri.parse("res://com.zzy.frank.www.citylove_master/" + mDatas.get(position).getIcon());
+                    viewHolder.head_pic3.setImageURI(uri);
 
                     viewHolder.seconds.setText(3 + "\"");
                     ViewGroup.LayoutParams lp = viewHolder.length.getLayoutParams();
@@ -200,9 +215,10 @@ public class ChatMessageAdapter extends BaseAdapter
                 viewHolder.relativeLayout_record = (RelativeLayout) convertView.findViewById(R.id.chat_send_relative_record);
                 viewHolder.seconds = (TextView) convertView.findViewById(R.id.id_recorder_time_send);
                 viewHolder.length = convertView.findViewById(R.id.id_recorder_length_send);
+                viewHolder.head_pic4 = (SimpleDraweeView) convertView.findViewById(R.id.chat_send_icon);
 
-
-                System.out.println("---------size----------:" + mDatas.size());
+                Uri uri = Uri.parse("file://" + sp.getString("headpic", ""));
+                viewHolder.head_pic4.setImageURI(uri);
 
                 if ("0".equals(mDatas.get(position).getMsgType()))
                 {
@@ -269,6 +285,10 @@ public class ChatMessageAdapter extends BaseAdapter
         public RelativeLayout relativeLayout;
         public RelativeLayout relativeLayout_pic;
         public RelativeLayout relativeLayout_record;
+        public SimpleDraweeView head_pic1;
+        public SimpleDraweeView head_pic2;
+        public SimpleDraweeView head_pic3;
+        public SimpleDraweeView head_pic4;
         public TextView createDate;
         public TextView content;
         public SimpleDraweeView imageView;
